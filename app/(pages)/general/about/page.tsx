@@ -153,7 +153,7 @@ function AboutProgram() {
   } | null>(null);
 
   const openFellowModal = (leader: (typeof leadersData)[0]) => {
-    // @ts-ignore
+    // @ts-error
     setSelectedLeader(leader);
     setBecomeFellowModal(true);
   };

@@ -180,7 +180,7 @@ const SignUp = () => {
       if (navigator?.serviceWorker) {
         requestPermission();
       }
-      //@ts-ignore
+      //@ts-error
     }, [navigator?.serviceWorker]);
   }
 
@@ -214,7 +214,7 @@ const SignUp = () => {
             />
           )}
           <CustomButton
-            // @ts-ignore
+            // @ts-error
             onClick={handleSubmit}
             title={step === 1 ? "Continue" : "Signup"}
             containerStyle="w-full maxHeighted_btn bg-blue"

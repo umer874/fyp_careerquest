@@ -91,7 +91,7 @@ function DashboardHeader({ openMobile }: Props) {
       if (navigator?.serviceWorker) {
         requestPermission();
       }
-      //@ts-ignore
+      //@ts-error
     }, [navigator?.serviceWorker]);
   }
 

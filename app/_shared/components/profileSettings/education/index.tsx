@@ -141,9 +141,9 @@ const Education = () => {
                 onChange={handleChange("educations." + index + ".institute")}
                 error={
                   touched.educations?.[index]?.institute &&
-                  // @ts-ignore
+                  // @ts-error
                   errors.educations?.[index]?.institute
-                    ? // @ts-ignore
+                    ? // @ts-error
                       errors.educations?.[index]?.institute
                     : ""
                 }
@@ -170,9 +170,9 @@ const Education = () => {
                 onChange={handleChange("educations." + index + ".degree")}
                 error={
                   touched.educations?.[index]?.degree &&
-                  // @ts-ignore
+                  // @ts-error
                   errors.educations?.[index]?.degree
-                    ? // @ts-ignore
+                    ? // @ts-error
                       errors.educations?.[index]?.degree
                     : ""
                 }
@@ -195,9 +195,9 @@ const Education = () => {
                 )}
                 error={
                   touched.educations?.[index]?.completion_date &&
-                  // @ts-ignore
+                  // @ts-error
                   errors.educations?.[index]?.completion_date
-                    ? // @ts-ignore
+                    ? // @ts-error
                       errors.educations?.[index]?.completion_date
                     : ""
                 }

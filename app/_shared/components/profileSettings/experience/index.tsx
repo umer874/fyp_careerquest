@@ -30,9 +30,9 @@ const Experience = () => {
             {
               institute: "",
               designation: "",
-              // @ts-ignore
+              // @ts-error
               from: new Date(),
-              // @ts-ignore
+              // @ts-error
               to: new Date(),
             },
           ],
@@ -152,9 +152,9 @@ const Experience = () => {
                 onChange={handleChange("exps." + index + ".institute")}
                 error={
                   touched.exps?.[index]?.institute &&
-                  // @ts-ignore
+                  // @ts-error
                   errors.exps?.[index]?.institute
-                    ? // @ts-ignore
+                    ? // @ts-error
                       errors.exps?.[index]?.institute
                     : ""
                 }
@@ -181,9 +181,9 @@ const Experience = () => {
                 onChange={handleChange("exps." + index + ".designation")}
                 error={
                   touched.exps?.[index]?.designation &&
-                  // @ts-ignore
+                  // @ts-error
                   errors.exps?.[index]?.designation
-                    ? // @ts-ignore
+                    ? // @ts-error
                       errors.exps?.[index]?.designation
                     : ""
                 }
@@ -204,9 +204,9 @@ const Experience = () => {
                 onChange={handleChange("exps." + index + ".from")}
                 error={
                   touched.exps?.[index]?.from &&
-                  // @ts-ignore
+                  // @ts-error
                   errors.exps?.[index]?.from
-                    ? // @ts-ignore
+                    ? // @ts-error
                       errors.exps?.[index]?.from
                     : ""
                 }
@@ -227,9 +227,9 @@ const Experience = () => {
                 onChange={handleChange("exps." + index + ".to")}
                 error={
                   touched.exps?.[index]?.to &&
-                  // @ts-ignore
+                  // @ts-error
                   errors.exps?.[index]?.to
-                    ? // @ts-ignore
+                    ? // @ts-error
                       errors.exps?.[index]?.to
                     : ""
                 }

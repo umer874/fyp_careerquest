@@ -91,7 +91,7 @@ const Header = ({ userCookie }: HeaderProps) => {
       if (navigator?.serviceWorker && auth?.isLoggedIn) {
         requestPermission();
       }
-      //@ts-ignore
+      //@ts-error
     }, [navigator?.serviceWorker, auth?.isLoggedIn]);
   }
 

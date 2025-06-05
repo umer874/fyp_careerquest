@@ -116,7 +116,7 @@ function DashboardSidebar({ sidebarArr }: Props) {
         </div>
       </div>
       <ConfirmationModal
-        // @ts-ignore
+        // @ts-error
         show={openConfirmationModal}
         handleClose={handleCloseConfirmationModal}
         subtitle="Are you sure you want to logout?"

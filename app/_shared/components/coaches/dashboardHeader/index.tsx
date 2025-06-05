@@ -106,7 +106,7 @@ function DashboardHeader({ openMobile, userCookie }: Props) {
       if (navigator?.serviceWorker) {
         requestPermission();
       }
-      //@ts-ignore
+      //@ts-error
     }, [navigator?.serviceWorker]);
   }
 

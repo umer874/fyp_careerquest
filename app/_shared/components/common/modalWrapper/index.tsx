@@ -6,26 +6,26 @@ import styles from "./style.module.scss";
 export default class ModalWrapper extends React.Component {
   constructor(props: any) {
     super(props);
-    //@ts-ignore
+    //@ts-error
     this.el = document.createElement("div");
-    //@ts-ignore
+    //@ts-error
     this.el.className = styles.modalDropContainer;
   }
 
   componentDidMount() {
-    //@ts-ignore
+    //@ts-error
     document.body.appendChild(this.el);
     document.body.style.overflow = "hidden";
   }
 
   componentWillUnmount() {
-    //@ts-ignore
+    //@ts-error
     document.body.removeChild(this.el);
     document.body.style.overflow = "auto";
   }
 
   render() {
-    //@ts-ignore
+    //@ts-error
     return ReactDOM.createPortal(this.props.children, this.el);
   }
 }

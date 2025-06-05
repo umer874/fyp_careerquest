@@ -113,11 +113,11 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
           startAccessor="start"
           endAccessor="end"
           views={[Views.MONTH, Views.WEEK, Views.DAY]}
-          // @ts-ignore
+          // @ts-error
           defaultView={currentView as Views}
           components={{
             toolbar: (props) => <CustomToolbar {...props} />,
-            // @ts-ignore
+            // @ts-error
             event: ({ event }: CustomEventProps) => (
               <CustomToolTip
                 label={
@@ -136,7 +136,7 @@ const CustomCalendar: React.FC<CustomCalendarProps> = ({
               >
                 <CustomEventComponent
                   event={event}
-                  // @ts-ignore
+                  // @ts-error
                   view={currentView}
                 />
               </CustomToolTip>

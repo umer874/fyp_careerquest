@@ -105,7 +105,7 @@ const CustomToolbar = (props: any) => {
               title: monthWithYear,
               action: () => handleMonthChange(monthWithYear),
             }))}
-            // @ts-ignore
+            // @ts-error
             activeItem={`${months[props.date.getMonth()]} ${currentYear}`}
           />
         </div>
@@ -119,7 +119,7 @@ const CustomToolbar = (props: any) => {
             title: view,
             action: () => handleViewChange(view),
           }))}
-          // @ts-ignore
+          // @ts-error
           activeItem={props.view.charAt(0).toUpperCase() + props.view.slice(1)}
         />
       </div>

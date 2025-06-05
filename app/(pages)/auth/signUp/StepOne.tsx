@@ -106,7 +106,7 @@ const StepOne = ({
           value={values.dob}
           onChange={(e) =>
             handleChange({
-              // @ts-ignore
+              // @ts-error
               target: { name: "dob", value: e.target.value },
             } as React.ChangeEvent<HTMLInputElement>)
           }
