@@ -1,4 +1,4 @@
-import CareerChatsClient from "components/fellow/chat/chatClient";
+//import CareerChatsClient from "components/fellow/chat/chatClient";
 import { GetConversationsServerCall } from "services/chat";
 import { GetTokensFromCookies } from "utils/server-side-helper";
 
@@ -11,10 +11,11 @@ const CareerChats = async () => {
 
   return (
     <>
-      <CareerChatsClient
+      {/* <CareerChatsClient
         data={response?.data?.data}
-        updatedToken={updatedToken}
-      />
+        updatedToken={updatedToken} */}
+      
+      
     </>
   );
 };

@@ -1,4 +1,4 @@
-import CoachChatClient from "components/coaches/chat/chatClient";
+//import CoachChatClient from "components/coaches/chat/chatClient";
 import { GetConversationsServerCall } from "services/chat";
 import { GetTokensFromCookies } from "utils/server-side-helper";
 
@@ -13,11 +13,13 @@ const CareerChats = async ({ searchParams }: any) => {
   });
 
   return (
-    <CoachChatClient
-      data={response?.data?.data}
-      updatedToken={updatedToken}
-      meta={response?.data?.meta}
-    />
+    // <CoachChatClient
+    //   data={response?.data?.data}
+    //   updatedToken={updatedToken}
+    //   meta={response?.data?.meta}
+    // />
+  <>
+  </>
   );
 };
 
