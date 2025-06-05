@@ -3,17 +3,8 @@ import { HTTP_METHODS } from "utils/enum";
 import { refreshTokenWrapper } from "utils/helper";
 import { HTTP_CLIENT } from "utils/interceptor";
 
-// const LoginService = (payload: LoginType) => {
-//   return HTTP_CLIENT.post(Endpoint.auth.login, payload);
-// };
-
-// const LoginService = (payload: LoginType) => {
-//   return HTTP_CLIENT.post("/api/auth/login", payload); // Now points to your own route
-// };
-
-
 const LoginService = (payload: LoginType) => {
-  return HTTP_CLIENT.post("https://localhost:3000/api/auth/login", payload);
+  return HTTP_CLIENT.post(Endpoint.auth.login, payload);
 };
 
 const RegisterService = (payload: any) => {
