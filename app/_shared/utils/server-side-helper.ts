@@ -150,7 +150,7 @@ async function GetTokensFromCookies() {
 
 export {
   redirectBasedOnRole,
-  //apiCallWithToken,
+  apiCallWithToken,
   refreshServerToken,
   GetCookieUser,
   GetTokensFromCookies,
