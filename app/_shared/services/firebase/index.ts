@@ -3,12 +3,13 @@ import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCwwtt7vN1iDD8IEfiCUQkFl9D9J-9ML_E",
-  authDomain: "career-labs-86167.firebaseapp.com",
-  projectId: "career-labs-86167",
-  storageBucket: "career-labs-86167.firebasestorage.app",
-  messagingSenderId: "404276747527",
-  appId: "1:404276747527:web:becd3d0f749887a9ee79a2",
+   apiKey: "AIzaSyDq7gsDGpPFRGWmRtIHBb8Rc-OpGB2QPos",
+  authDomain: "career-4b68b.firebaseapp.com",
+  projectId: "career-4b68b",
+  storageBucket: "career-4b68b.firebasestorage.app",
+  messagingSenderId: "1031296996702",
+  appId: "1:1031296996702:web:fad7335e503b72d691abcf",
+  measurementId: "G-VJBN1F63HK"
 };
 
 const app = initializeApp(firebaseConfig);

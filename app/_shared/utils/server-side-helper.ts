@@ -49,44 +49,44 @@ const RefreshTokensService = (payload: { refreshToken: string }) => {
   });
 };
 
-// async function apiCallWithToken(
-//   url: string,
-//   token: string,
-//   refreshToken: string,
-//   options: RequestInit = {}
-// ) {
-//   let updatedToken = token,
-//     updatedRefreshToken = refreshToken,
-//     is_token_updated = false,
-//     status = 200;
-//   if (token) {
-//     const response = await refreshServerToken(token, refreshToken);
-//     updatedToken = response.updatedToken;
-//     updatedRefreshToken = response.updatedRefreshToken;
-//     is_token_updated = response.is_token_updated;
-//     status = response.status;
-//   }
+async function apiCallWithToken(
+  url: string,
+  token: string,
+  refreshToken: string,
+  options: RequestInit = {}
+) {
+  let updatedToken = token,
+    updatedRefreshToken = refreshToken,
+    is_token_updated = false,
+    status = 200;
+  if (token) {
+    const response = await refreshServerToken(token, refreshToken);
+    updatedToken = response.updatedToken;
+    updatedRefreshToken = response.updatedRefreshToken;
+    is_token_updated = response.is_token_updated;
+    status = response.status;
+  }
 
-//   const res = await fetch(url, {
-//     ...options,
-//     headers: {
-//       ...options.headers,
-//       Authorization: `Bearer ${updatedToken}`,
-//     },
-//   });
+  const res = await fetch(url, {
+    ...options,
+    headers: {
+      ...options.headers,
+      Authorization: `Bearer ${updatedToken}`,
+    },
+  });
 
-//   //const responseJson = await res.json();
+  const responseJson = await res.json();
 
-//   return {
-//     updatedToken: {
-//       token: updatedToken,
-//       refreshToken: updatedRefreshToken,
-//       is_token_updated,
-//       status,
-//     },
-//     response: responseJson,
-//   };
-// }
+  return {
+    updatedToken: {
+      token: updatedToken,
+      refreshToken: updatedRefreshToken,
+      is_token_updated,
+      status,
+    },
+    response: responseJson,
+  };
+}
 
 const refreshServerToken = async (token: string, refreshToken: string) => {
   let decodedToken: any = jwtDecode(token);

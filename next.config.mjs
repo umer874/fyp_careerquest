@@ -37,7 +37,7 @@ const nextConfig = {
     return [
       {
         source: '/api/auth/:path*',
-        destination: 'https://dev-career-labs.upworkdeveloper.com/api/auth/:path*',
+        destination: 'https://localhost/3000/api/auth/:path*',
       },
     ];
   },

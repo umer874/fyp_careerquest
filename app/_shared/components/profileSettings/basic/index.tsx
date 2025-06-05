@@ -14,7 +14,7 @@ import { UpdateProfileService } from "services/user";
 import { toastMessage } from "components/common/toast";
 import { handleErrors } from "utils/helper";
 import { setAuthReducer } from "redux/reducers/authSlice";
-import CustomAutoComplete from "components/common/customAutoComplete";
+//import CustomAutoComplete from "components/common/customAutoComplete";
 import { useCookies } from "react-cookie";
 import moment from "moment";
 
@@ -214,7 +214,7 @@ const BasicSettings = ({ userCookie }: BasicSettingsProps) => {
           />
         </div>
 
-        <div className={"col-span-6"}>
+        {/* <div className={"col-span-6"}>
           <CustomAutoComplete
             customInputStyle="white-bg-input"
             customInputContainer="white-bg-input-max-height"
@@ -236,7 +236,7 @@ const BasicSettings = ({ userCookie }: BasicSettingsProps) => {
             setFieldValue={setFieldValue}
             addressKey="coordinates"
           />
-        </div>
+        </div> */}
         <div
           className={classNames(
             styles.buttonContainer,

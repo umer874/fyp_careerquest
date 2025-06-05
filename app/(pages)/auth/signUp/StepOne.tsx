@@ -2,7 +2,7 @@
 import { Icons } from "assets";
 import classNames from "classnames";
 import AuthPageHeading from "components/auth/authPageHeading";
-import CustomAutoComplete from "components/common/customAutoComplete";
+//import CustomAutoComplete from "components/common/customAutoComplete";
 import CustomCheckbox from "components/common/customCheckbox";
 import CustomInput from "components/common/customInput";
 import CustomPhoneInput from "components/common/customPhoneInput";
@@ -128,27 +128,7 @@ const StepOne = ({
           }
         />
 
-        <CustomAutoComplete
-          required
-          label="Your Address"
-          type="text"
-          name="address"
-          placeholder="e.g. 123 Main Street"
-          customInputStyle="white-bg-input"
-          customInputContainer="white-bg-input-max-height"
-          Icon={Icons.LocationPin}
-          value={values.address}
-          error={
-            touched.address && errors.address
-              ? errors.address
-              : touched.coordinates && errors.coordinates
-              ? String(errors.coordinates)
-              : ""
-          }
-          formikKey="address"
-          setFieldValue={setFieldValue}
-          addressKey="coordinates"
-        />
+  
 
         <div
           className=" flex items-center"

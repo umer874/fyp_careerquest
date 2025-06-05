@@ -13,7 +13,7 @@ import { HTTP_CLIENT } from "utils/interceptor";
 
 
 const LoginService = (payload: LoginType) => {
-  return HTTP_CLIENT.post("https://dev-career-labs.upworkdeveloper.com/api/auth/login", payload);
+  return HTTP_CLIENT.post("https://localhost:3000/api/auth/login", payload);
 };
 
 const RegisterService = (payload: any) => {

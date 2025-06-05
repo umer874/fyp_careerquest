@@ -1,6 +1,6 @@
-const BaseURL = "https://dev-career-labs.upworkdeveloper.com/";
+const BaseURL = "";
 
-const GoogleKey = "AIzaSyBkeQHjXywcpZDwMRxmAozUOkTkRNIvMiQ";
+const GoogleKey = "";
 
 const Endpoint = {
   auth: {

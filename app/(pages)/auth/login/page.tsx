@@ -16,8 +16,6 @@ import { LoginVS } from "utils/validation";
 import AuthPageHeading from "components/auth/authPageHeading";
 import { LoginService } from "services/auth";
 import { handleErrors } from "utils/helper";
-import axios from "axios";
-
 //import { UserType } from "utils/enum";
 
 const initialValues: LoginType = {
@@ -49,75 +47,58 @@ const Login = () => {
     setSubmitting,
   } = formik;
 
- 
-const handleLogin = (values: LoginType) => {
-  setSubmitting(true);
+  const handleLogin = (values: LoginType) => {
+    setSubmitting(true);
+    LoginService(values)
+      .then(({ data: { data }, status }) => {
+        if (status) {
+          dispatch(
+            setAuthReducer({
+              isLoggedIn: true,
+              user: data?.user,
+              token: data?.accessToken,
+              refreshToken: data?.refreshToken,
+            })
+          );
+          setCookie(
+            "user",
+            JSON.stringify({
+              isLoggedIn: true,
+              id: data?.user?.id,
+              first_name: data?.user?.first_name,
+              last_name: data?.user?.last_name,
+              email: data?.user?.email,
+              role: data?.user?.type,
+              profile_asset: data?.user?.profile_asset?.full_path ?? "",
+              resume_asset: data?.user?.resume_asset?.full_path ?? "",
+            }),
+            {
+              path: "/fellow/dashbaord",
+              maxAge: 3600 * 24 * 30,
+              sameSite: true,
+            }
+          );
+          setCookie("token", data?.accessToken, {
+            path: "/fellow/dashboard",
+            maxAge: 3600 * 24 * 30,
+            sameSite: true,
+          });
 
-  // Simulated/fake user data
-  const mockUser = {
-    id: "123",
-    first_name: "John",
-    last_name: "Doe",
-    email: "john.doe@example.com",
-    type: "fellow",
-    profile_asset: { full_path: "/images/profile.jpg" },
-    resume_asset: { full_path: "/docs/resume.pdf" },
-  };
-
-  const mockAccessToken = "fakeAccessToken123";
-  const mockRefreshToken = "fakeRefreshToken456";
-
-  // Fake authentication check
-  if (values.email === "anashamid992@gmail.com" && values.password === "#punjabians123") {
-    dispatch(
-      setAuthReducer({
-        isLoggedIn: true,
-        user: mockUser,
-        token: mockAccessToken,
-        refreshToken: mockRefreshToken,
+          setCookie("refreshToken", data?.refreshToken, {
+            path: "/fellow/dashboard",
+            maxAge: 3600 * 24 * 30,
+            sameSite: true,
+          });
+         
+            router.push(routeConstant.fellow.dashboard.path);
+          }
+        
       })
-    );
-
-    setCookie(
-      "user",
-      JSON.stringify({
-        isLoggedIn: true,
-        id: mockUser.id,
-        first_name: mockUser.first_name,
-        last_name: mockUser.last_name,
-        email: mockUser.email,
-        role: mockUser.type,
-        profile_asset: mockUser.profile_asset.full_path,
-        resume_asset: mockUser.resume_asset.full_path,
-      }),
-      {
-        path: "/test",
-        maxAge: 3600 * 24 * 30,
-        sameSite: true,
-      }
-    );
-
-    setCookie("token", mockAccessToken, {
-      path: "/test",
-      maxAge: 3600 * 24 * 30,
-      sameSite: true,
-    });
-
-    setCookie("refreshToken", mockRefreshToken, {
-      path: "/test",
-      maxAge: 3600 * 24 * 30,
-      sameSite: true,
-    });
-
-    router.push(routeConstant.test.path);
-  } else {
-    handleErrors({ message: "Invalid email or password." });
-  }
-
-  setSubmitting(false);
-};
-
-
+      .catch((err) => {
+        handleErrors(err);
+        setSubmitting(false);
+      });
+  };
 
   return (
     <div className={classNames(styles.auth_page_container, "h-full")}>
@@ -177,7 +158,6 @@ const handleLogin = (values: LoginType) => {
           <div className={classNames(styles.link_container)}>
             <p>Don’t have an account?</p>
             <Link href={routeConstant.signUp.path}>Sign Up</Link>
-             
           </div>
         </div>
       </div>
