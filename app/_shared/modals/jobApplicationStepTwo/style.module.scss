@@ -1,0 +1,114 @@
+@use "global.scss" as *;
+
+.modalContentContainer {
+  // border-top: 1px solid $BORDER;
+  @include RP(
+    (
+      "border-radius": 24,
+    )
+  );
+  .content {
+    .portfolioWrapper {
+      @include RP(
+        (
+          "margin-top": 15,
+        )
+      );
+      .toggle {
+        @include RP(
+          (
+            "padding-top": 14,
+            "padding-bottom": 14,
+          )
+        );
+        p {
+          color: #5f5b5b;
+          font-weight: 500;
+          @include RP(
+            (
+              "font-size": 14,
+            )
+          );
+        }
+      }
+      .portfolioContent {
+        .section {
+          .heading {
+            color: #5f5b5b;
+            font-weight: 500;
+            @include RP(
+              (
+                "font-size": 14,
+                "margin-bottom": 10,
+              )
+            );
+          }
+        }
+        .itemContainer {
+          max-height: 200px;
+          overflow-y: auto;
+          .portfolioItem {
+            @include RP(
+              (
+                "height": 94,
+                "padding-top": 12,
+                "padding-bottom": 12,
+                "padding-left": 12,
+                "padding-right": 12,
+                "border-radius": 16,
+              )
+            );
+            background-color: #f2f7fb;
+            .imgContainer {
+              border-radius: 8px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              @include RP(
+                (
+                  "width": 70,
+                  "height": 70,
+                )
+              );
+              img {
+                border-radius: 8px;
+                width: 100%;
+                height: 100%;
+              }
+            }
+            p {
+              color: $SECONDARY;
+              font-family: var(--font-urbanist-semi-md);
+              margin: 0 !important;
+              @include RP(
+                (
+                  "font-size": 14,
+                )
+              );
+            }
+            .check {
+              cursor: pointer;
+              svg {
+                @include RP(
+                  (
+                    "width": 18,
+                    "height": 18,
+                  ),
+                  1
+                );
+              }
+            }
+          }
+          .toggle {
+            @include RP(
+              (
+                "margin-top": 30,
+                "margin-bottom": 20,
+              )
+            );
+          }
+        }
+      }
+    }
+  }
+}

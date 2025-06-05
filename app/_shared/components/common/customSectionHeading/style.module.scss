@@ -1,0 +1,24 @@
+@use "global.scss" as *;
+
+.sectionHeading {
+  text-align: center;
+  max-width: 80%;
+
+  @media screen and (max-width: 640px) {
+    max-width: 100%;
+  }
+
+  h2 {
+    color: $PRIMARY;
+  }
+
+  p {
+    color: $DESC;
+    margin-top: 10px;
+    @include RP(("font-size": 18,
+      ));
+  }
+
+  @include RP(("margin-bottom": 50,
+    ));
+}

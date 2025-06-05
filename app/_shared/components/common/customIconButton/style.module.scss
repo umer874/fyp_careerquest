@@ -1,0 +1,43 @@
+@use "global.scss" as *;
+
+.customBtnContainer {
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 0 !important;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  @include RP(
+    (
+      "height": 30,
+      "width": 30,
+    )
+  );
+
+  // &:focus,
+  &:hover {
+    background-color: #e4e1e1;
+  }
+
+  svg {
+    path {
+      stroke: $BLUE;
+      fill: $BLUE;
+    }
+    @include RP(
+      (
+        "height": 18,
+        "width": 18,
+      )
+    );
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .customBtnContainer {
+    font-size: 13px;
+    padding: 10px;
+  }
+}

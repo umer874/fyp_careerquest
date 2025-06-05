@@ -1,0 +1,24 @@
+@use "global.scss" as *;
+
+.pageHeader {
+  max-width: 80%;
+  @include RP(("padding-top": 40,
+      "padding-bottom": 10,
+    ));
+
+  .email {
+    text-align: center;
+  }
+
+  @media screen and (max-width: 992px) {
+    max-width: 80%;
+  }
+
+  @media screen and (max-width: 768px) {
+    max-width: 92%;
+  }
+
+  @media screen and (max-width: 640px) {
+    max-width: 100%;
+  }
+}

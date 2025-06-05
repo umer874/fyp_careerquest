@@ -1,0 +1,64 @@
+@use "global.scss" as *;
+
+.authSliderWrapper {
+  .itemContainer {
+    position: relative;
+    img {
+      object-fit: cover;
+      height: calc(100vh - 40px);
+      @include RP(
+        (
+          "border-radius": 28,
+        )
+      );
+    }
+    .itemContent {
+      color: $WHITE;
+      bottom: 0;
+      position: absolute;
+      @include RP(
+        (
+          "padding-left": 20,
+          "padding-right": 20,
+          "padding-bottom": 20,
+        )
+      );
+      .descContainer {
+        @include RP(
+          (
+            "margin-bottom": 30,
+          )
+        );
+        svg {
+          @include RP(
+            (
+              "width": 38,
+            )
+          );
+        }
+        p {
+          color: $WHITE;
+          font-family: var(--font-montserrat) !important;
+          @include RP(
+            (
+              "font-size": 20,
+            )
+          );
+        }
+      }
+      h6 {
+        font-weight: 500;
+      }
+      span {
+        font-family: var(--font-montserrat);
+        color: $WHITE;
+        @include RP(
+          (
+            "font-size": 14,
+          ),
+          1
+        );
+      }
+    }
+  }
+}

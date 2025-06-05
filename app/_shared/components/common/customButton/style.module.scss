@@ -1,0 +1,48 @@
+@use "global.scss" as *;
+
+.customBtnContainer {
+  background-color: $PRIMARY;
+  font-family: var(--font-montserrat) !important;
+  font-weight: 600;
+  justify-content: center;
+  text-wrap: nowrap !important;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  @include RP(("font-size": 14,
+      "padding-left": 32,
+      "padding-right": 32,
+      "padding-top": 13.5,
+      "padding-bottom": 13.5,
+      "max-height": 44,
+    ));
+  border-radius: 100px;
+  outline: 0px;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    opacity: 0.65 !important;
+  }
+
+  svg {
+    @include RP(("height": 18,
+        "width": 18,
+      ));
+  }
+
+  span {
+    line-height: normal;
+    @include RP(
+      (
+        "font-size": 14,
+      )
+    );
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .customBtnContainer {
+    font-size: 13px;
+    line-height: 16px;
+  }
+}

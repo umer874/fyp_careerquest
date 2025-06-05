@@ -1,0 +1,90 @@
+@use "global.scss" as *;
+
+.jobsWrapper {
+  background-color: $LIGHT_BLUE;
+  height: 100%;
+  @include RP(
+    (
+      "padding-top": 60,
+      "padding-bottom": 60,
+    )
+  );
+}
+
+.jobsContainer {
+  @include RP(
+    (
+      "margin-left": 200,
+      "margin-right": 200,
+    )
+  );
+  .imgContainer {
+    background-image: url("../../../_assets/images/jobs-banner.png");
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    background-size: cover;
+    background-repeat: no-repeat;
+    @include RP(
+      (
+        "border-radius": 24,
+        "padding-top": 50,
+        "padding-bottom": 60,
+        "padding-left": 50,
+        "padding-right": 20,
+      )
+    );
+    .imgContent {
+      color: $WHITE;
+      max-width: 355px;
+      h4 {
+        text-transform: capitalize;
+      }
+      p {
+        color: $WHITE;
+        margin-top: 8px;
+        text-align: justify;
+        @include RP(
+          (
+            "line-height": 28,
+            "margin-bottom": 14,
+          )
+        );
+      }
+      .buttonContainer {
+        @include RP(
+          (
+            "margin-top": 30,
+          )
+        );
+      }
+    }
+    img {
+      @include RP(
+        (
+          "border-radius": 24,
+        )
+      );
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    @include RP(
+      (
+        "margin-left": 100,
+        "margin-right": 100,
+      )
+    );
+  }
+  @media screen and (max-width: 768px) {
+    @include RP(
+      (
+        "margin-left": 60,
+        "margin-right": 60,
+      )
+    );
+  }
+  @media screen and (max-width: 425px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

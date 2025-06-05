@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "typeRoots": ["index.d.ts", "./node_modules/@types"],
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": "./app",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "assets": ["./_assets"],
+      "assets/*": ["./_assets/*"],
+      "components": ["./_shared/components"],
+      "components/*": ["./_shared/components/*"],
+      "hooks": ["./_shared/hooks"],
+      "hooks/*": ["./_shared/hooks/*"],
+      "redux": ["./_shared/redux"],
+      "redux/*": ["./_shared/redux/*"],
+      "routes": ["./_shared/routes"],
+      "routes/*": ["./_shared/routes/*"],
+      "services": ["./_shared/services"],
+      "services/*": ["./_shared/services/*"],
+      "utils": ["./_shared/utils"],
+      "utils/*": ["./_shared/utils/*"],
+      "modals": ["./_shared/modals"],
+      "modals/*": ["./_shared/modals/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

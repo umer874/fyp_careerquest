@@ -1,0 +1,61 @@
+@use "global.scss" as *;
+
+.settingsWrapper {
+  .settingsContainer {
+    background-color: $WHITE;
+    h4,
+    h6 {
+      color: $DARK;
+      font-weight: 700;
+    }
+
+    @include RP(
+      (
+        "padding-right": 32,
+        "border-radius": 24,
+      )
+    );
+  }
+}
+
+.sectionContainer {
+  border-top: 1px solid $BORDER;
+
+  @include RP(
+    (
+      "padding-top": 30,
+      "margin-top": 20,
+    )
+  );
+  label {
+    font-weight: 500;
+    color: $DARK;
+    @include RP(
+      (
+        "font-size": 14,
+      )
+    );
+  }
+  .profileForm {
+    .buttonContainer {
+      button {
+        @media screen and (max-width: 509px) {
+          width: 100%;
+        }
+      }
+      @media screen and (max-width: 509px) {
+        width: 100%;
+      }
+      // width: fit-content;
+    }
+  }
+}
+
+.trashIcon {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+
+

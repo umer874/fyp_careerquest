@@ -1,0 +1,300 @@
+@use "global.scss" as *;
+
+.pageDetailWrapper {
+
+    padding-top: 20px;
+    width: 100%;
+
+    .box {
+        padding-top: 10px;
+
+        .text {
+
+            h3 {
+                color: #18417e;
+            }
+
+            /* src/App.module.css */
+            .quizContainer {
+                max-width: 800px;
+                margin: 50px auto;
+                padding: 20px;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                background-color: #f8f9fa;
+                border-radius: 12px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            }
+
+            .progressWrapper {
+                margin-bottom: 40px;
+            }
+
+            .progressContainer {
+                width: 100%;
+                height: 16px;
+                background-color: #e9ecef;
+                border-radius: 8px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .progressBar {
+                height: 100%;
+                background: linear-gradient(90deg, #4CAF50, #8BC34A);
+                border-radius: 8px;
+                transition: width 0.4s cubic-bezier(0.65, 0, 0.35, 1);
+                box-shadow: 0 2px 4px rgba(76, 175, 80, 0.3);
+            }
+
+            .progressLabel {
+                text-align: right;
+                font-size: 16px;
+                color: #495057;
+                margin-top: 10px;
+                font-weight: 600;
+            }
+
+            .questionContainer {
+                background-color: white;
+                padding: 30px;
+                border-radius: 12px;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            }
+
+            .questionContainer h2 {
+                color: #2c3e50;
+                margin-bottom: 10px;
+                font-size: 22px;
+            }
+
+            .questionContainer h3 {
+                color: #34495e;
+                margin-bottom: 30px;
+                font-size: 20px;
+                line-height: 1.5;
+                font-weight: 500;
+            }
+
+            .optionsContainer {
+                margin-bottom: 35px;
+            }
+
+            .option {
+                display: flex;
+                align-items: center;
+                padding: 16px 20px;
+                margin-bottom: 15px;
+                background-color: #f8f9fa;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: all 0.25s;
+                border: 2px solid #e9ecef;
+            }
+
+            .option:hover {
+                background-color: #e9ecef;
+                transform: translateY(-3px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            }
+
+            .option.selected {
+                background-color: #e1f5fe;
+                border-left: 6px solid #039be5;
+                box-shadow: 0 4px 10px rgba(3, 155, 229, 0.15);
+                transform: translateY(-3px);
+            }
+
+            .optionId {
+                font-weight: bold;
+                margin-right: 18px;
+                color: #039be5;
+                font-size: 20px;
+                min-width: 30px;
+                text-align: center;
+            }
+
+            .optionText {
+                font-size: 18px;
+                color: #495057;
+                line-height: 1.4;
+            }
+
+            .buttonContainer {
+                display: flex;
+                justify-content: center;
+                margin-top: 30px;
+            }
+
+            .continueBtn {
+                display: inline-block;
+                padding: 16px 50px;
+                background: linear-gradient(135deg, #039be5, #0277bd);
+                color: white;
+                border: none;
+                border-radius: 8px;
+                font-size: 18px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s;
+                box-shadow: 0 6px 15px rgba(3, 155, 229, 0.4);
+                letter-spacing: 0.5px;
+            }
+
+            .continueBtn:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 8px 20px rgba(3, 155, 229, 0.5);
+            }
+
+            .continueBtn:active {
+                transform: translateY(0);
+            }
+
+            .continueBtn.disabled {
+                background: linear-gradient(135deg, #b0bec5, #90a4ae);
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
+
+            /* Result Page Styles */
+
+        }
+    }
+}
+
+
+.resultContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px;
+}
+
+.resultCard {
+    background: white;
+    border-radius: 20px;
+    padding: 50px;
+    text-align: center;
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.confetti {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.confettiPiece {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #ffd700;
+    opacity: 0.7;
+    animation: confetti-fall 5s linear infinite;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+    }
+}
+
+.congratulations {
+    color: #2c3e50;
+    font-size: 42px;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.matchTitle {
+    color: #7e57c2;
+    font-size: 28px;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.careerIcon {
+    font-size: 100px;
+    margin: 30px 0;
+    position: relative;
+    z-index: 2;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.careerTitle {
+    color: #039be5;
+    font-size: 48px;
+    margin: 20px 0;
+    font-weight: 700;
+    position: relative;
+    z-index: 2;
+}
+
+.careerDescription {
+    color: #495057;
+    font-size: 22px;
+    line-height: 1.6;
+    margin: 30px 0 40px;
+    position: relative;
+    z-index: 2;
+}
+
+.restartButton {
+    padding: 16px 50px;
+    background: linear-gradient(135deg, #4CAF50, #8BC34A);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 6px 15px rgba(76, 175, 80, 0.4);
+    position: relative;
+    z-index: 2;
+}
+
+.restartButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(76, 175, 80, 0.6);
+}
+
+.dashboardButton {
+     padding: 16px 50px;
+    //margin-top: 10px;
+    background-color: #6c757d;
+    /* Different color for distinction */
+}
+
+.dashboardButton:hover {
+    background-color: #5a6268;
+}

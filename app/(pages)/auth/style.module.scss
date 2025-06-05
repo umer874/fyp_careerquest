@@ -1,0 +1,23 @@
+@use "global.scss" as *;
+
+.auth_layout_wrapper {
+  min-height: calc(100vh - 40px);
+  background-color: $LIGHT_BLUE;
+  display: flex;
+  align-items: center;
+  @include RP(
+    (
+      "padding-top": 20,
+      "padding-bottom": 20,
+      // "border-radius": 28,
+    )
+  );
+  .auth_layout_content {
+    @include RP(
+      (
+        "border-radius": 28,
+      )
+    );
+  }
+}
+

@@ -1,0 +1,109 @@
+@use "global.scss" as *;
+.eventItem {
+  background-color: $WHITE;
+  box-shadow: 0px 4px 44px 0px #00162b12;
+  @include RP(
+    (
+      "border-radius": 16,
+      "padding-bottom": 32,
+      "max-height": 420,
+    )
+  );
+  img {
+    @media screen and (max-width: 640px) {
+      width: 100%;
+    }
+    @include RP(
+      (
+        "height": 200,
+        "border-radius": 16,
+      )
+    );
+    object-fit: cover;
+  }
+  .cardContent {
+    background-color: $WHITE;
+    transition: all 0.2s ease-in-out;
+    position: relative;
+    @include RP(
+      (
+        "padding": 24,
+      )
+    );
+    .iconContainer {
+      background-color: $BLUE;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include RP(
+        (
+          "width": 80,
+          "height": 80,
+          "margin-bottom": 30,
+        )
+      );
+      h2 {
+        font-family: var(--font-red-hat-display);
+        color: $WHITE;
+        font-weight: 550;
+      }
+    }
+    .itemContent {
+      .title {
+        margin-top: 10px;
+        h6 {
+          color: $PRIMARY;
+          line-height: normal;
+        }
+        svg {
+          @include RP(
+            (
+              "width": 14,
+              "height": 14,
+            )
+          );
+        }
+      }
+      p {
+        color: $DESC;
+        font-weight: 500;
+        @include RP(
+          (
+            "font-size": 14,
+          )
+        );
+        margin-top: 10px;
+        @include elipsis(2);
+      }
+    }
+    .date {
+      span {
+        color: $BLUE;
+        font-weight: 500;
+        @include RP(
+          (
+            "font-size": 14,
+          )
+        );
+      }
+      svg {
+        @include RP(
+          (
+            "height": 20,
+            "width": 20,
+          )
+        );
+      }
+    }
+  }
+  .buttonContainer {
+    background-color: $WHITE;
+    @include RP(
+      (
+        "padding-left": 24,
+        "padding-right": 24,
+      )
+    );
+  }
+}

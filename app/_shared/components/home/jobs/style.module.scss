@@ -1,0 +1,71 @@
+@use "global.scss" as *;
+
+.sectionContainer {
+  // @include RP(("padding-top": 60,
+  //     "padding-bottom": 60,
+  //   ));
+
+  .content {
+    .jobItem {
+      background-color: $LIGHT_GRAY;
+      border-radius: 12px;
+      border: 1px solid $BORDER;
+      position: relative;
+      transition: all 0.2s ease-in-out;
+      @include RP(("padding-left": 14,
+          "padding-right": 14,
+          "padding-top": 14,
+          "padding-bottom": 14,
+        ));
+
+      .itemContent {
+        h4 {
+          color: $PRIMARY;
+        }
+
+        p {
+          color: $DESC;
+          font-weight: 500;
+          @include RP(("font-size": 14,
+            ));
+        }
+
+        .timeStamp {
+          color: $BLUE;
+          margin-bottom: 8px;
+
+          span {
+            font-weight: 500;
+            @include RP(("font-size": 14,
+              ));
+          }
+
+          svg {
+            path {
+              stroke: $BLUE;
+            }
+          }
+        }
+      }
+
+      .iconContainer {
+        img {
+          @include RP(("width": 88,
+              "height": 88,
+            ));
+
+          @media screen and (max-width: 992px) {}
+        }
+      }
+
+      &:hover {
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      }
+    }
+
+    .buttonContainer {
+      @include RP(("margin-top": 50,
+        ));
+    }
+  }
+}

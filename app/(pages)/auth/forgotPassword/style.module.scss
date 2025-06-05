@@ -1,0 +1,74 @@
+@use "global.scss" as *;
+
+.auth_page_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  a {
+    &:hover {
+      text-decoration: underline !important;
+    }
+  }
+  @media screen and (max-width: 425px) {
+    padding: 0 !important;
+  }
+  .auth_page_heading {
+    p {
+      @include RP(
+        (
+          "font-size": 16,
+        )
+      );
+    }
+  }
+  .auth_content_container {
+    @include RP(
+      (
+        "margin-top": 25,
+      )
+    );
+    a {
+      color: $WHITE;
+      font-weight: 500;
+      @include RP(
+        (
+          "font-size": 14,
+        )
+      );
+    }
+  }
+  .backLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    @include RP(
+      (
+        "margin-top": 20,
+        "margin-bottom": 20,
+      )
+    );
+    a {
+      color: $BLUE;
+      font-weight: 500;
+      @include RP(
+        (
+          "font-size": 16,
+        )
+      );
+      svg {
+        path {
+          stroke: $BLUE;
+          fill: $BLUE;
+        }
+        @include RP(
+          (
+            "width": 24,
+          )
+        );
+      }
+    }
+  }
+}

@@ -1,0 +1,184 @@
+@use "global.scss" as *;
+
+.pageDetailWrapper {
+
+  padding-top: 30px;
+  width:100%;
+
+  .box {
+   
+    //flex-grow: 1;
+
+    .stepItem {
+      background-color: $WHITE;
+      box-shadow: 0px 4px 44px 0px #00162b12;
+      @include RP(("padding-left": 32,
+          "padding-right": 32,
+          "padding-top": 32,
+          "padding-bottom": 32,
+          "border-radius": 16,
+        ));
+
+      .iconContainer {
+
+        align-items: center;
+        justify-content: center;
+        @include RP(("width": 40,
+            "height": 40,
+            "margin-bottom": 60
+          ));
+
+        @media screen and (max-width: 640px) {
+          @include RP(("width": 50,
+              "height": 50,
+            ));
+        }
+
+        h2 {
+          font-family: var(--font-red-hat-display);
+          font-weight: 550;
+          @include RP(("font-size": 24,
+            ));
+          color: #0043CE;
+        }
+      }
+
+      .itemContent {
+        h2 {
+          color: #0043CE;
+          @include RP(("font-size": 64,
+            ));
+        }
+
+        p {
+          color: $DESC;
+          margin-top: 10px;
+          display: inline-block;
+          white-space: nowrap;
+          
+          @include RP(("font-size": 16,
+            ));
+        }
+      }
+    }
+
+    .chart {
+      margin-top:30px;
+     
+      background-color: $WHITE;
+      box-shadow: 0px 4px 44px 0px #00162b12;
+      @include RP(("padding-left": 32,
+          "padding-right": 32,
+          "padding-top": 32,
+          "padding-bottom": 32,
+          "border-radius": 16,
+        ));
+    }
+  }
+
+  .user {
+
+    //flex-grow: 1;
+  
+    background-color: $WHITE;
+    box-shadow: 0px 4px 44px 0px #00162b12;
+    @include RP(("padding-left": 32,
+        "padding-right": 32,
+        "padding-top": 32,
+        "padding-bottom": 32,
+        "border-radius": 16,
+      ));
+
+      .main{
+        .box{
+
+        }
+        .content{
+          padding-top:60px;
+
+          p{
+            font-size:12px;
+          }
+        }
+        .text{
+          padding-top:30px;
+
+          
+        }
+      }
+
+  }
+
+  .jobs{
+    .stepItem {
+      
+      background-color: $WHITE;
+      box-shadow: 0px 4px 44px 0px #00162b12;
+      @include RP(("padding-left": 32,
+          "padding-right": 32,
+          "padding-top": 32,
+          "padding-bottom": 32,
+          "border-radius": 16,
+        ));
+
+      .iconContainer {
+
+        align-items: center;
+        justify-content: center;
+        @include RP(("width": 90,
+            "height": 90,
+            
+          ));
+
+        @media screen and (max-width: 640px) {
+          @include RP(("width": 50,
+              "height": 50,
+            ));
+        }
+
+        h2 {
+          font-family: var(--font-red-hat-display);
+          font-weight: 550;
+          @include RP(("font-size": 24,
+            ));
+          color: #0043CE;
+        }
+      }
+
+      .itemContent {
+        h6 {
+         
+          @include RP(("font-size": 16,
+            ));
+        }
+
+        p {
+          color: $DESC;
+          margin-top: 10px;
+          display: inline-block;
+          white-space: nowrap;
+          
+          @include RP(("font-size": 12,
+            ));
+        }
+      }
+      .line {
+        border: 0.1px solid rgba(gray,0.5);
+        width: 100%; 
+        opacity: 0.8;
+      }
+      .description{
+      button{
+        border:1px solid #EEF3F8;
+        background-color: #EEF3F8;
+        border-radius: 24px;
+        color:#0A66C2;
+        font-weight: 500;
+        padding:10px;
+      }
+    }
+    }
+
+  }
+
+}

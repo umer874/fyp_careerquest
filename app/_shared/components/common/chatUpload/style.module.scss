@@ -1,0 +1,159 @@
+@use "global.scss" as *;
+.uploadContainer {
+  background-color: #e7e6e6;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  @include RP(
+    (
+      "width": 34,
+      "height": 34,
+    )
+  );
+  svg {
+    @include RP(
+      (
+        "height": 24,
+        "width": 24,
+      )
+    );
+  }
+}
+
+.uploadArea {
+  background-color: #e7e6e6;
+  border: 1px solid $BORDER;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  @include RP(
+    (
+      "width": 32,
+      "height": 32,
+    )
+  );
+  svg {
+    @include RP(
+      (
+        "width": 14,
+      )
+    );
+  }
+
+  .uploadLabel {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    height: 100% !important;
+    cursor: pointer;
+    font-family: var(--font-urbanist-bold);
+    display: inline-block;
+    .uploadText {
+      display: flex;
+      align-items: center;
+      flex-direction: column !important;
+      justify-content: center;
+      height: 100% !important;
+      font-family: var(--font-urbanist-regular);
+      @include RP(
+        (
+          "font-size": 14,
+        )
+      );
+      p {
+        color: $RED;
+      }
+      span {
+        color: $LIGHT_GRAY2;
+      }
+      svg {
+        path {
+          stroke: #8a8686;
+        }
+        @include RP(
+          (
+            "width": 17,
+          )
+        );
+      }
+    }
+  }
+
+  .fileInput {
+    display: none;
+  }
+
+  .previewContainer {
+    display: flex;
+    align-items: center;
+    // margin-top: 10px;
+    position: relative;
+    border: 0.7px solid $RED;
+    padding: 5px;
+    border-radius: 8px;
+    @include RP(
+      (
+        "width": 4,
+        "height": 4,
+      ),
+      1
+    );
+
+    .previewItem {
+      height: 100% !important;
+      margin: 0 auto !important;
+      .previewImage {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: contain !important;
+        border-radius: 3px;
+      }
+    }
+  }
+
+  .removeButton {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: $RED;
+    border: none;
+    border-radius: 50%;
+    @include RP(
+      (
+        "width": 16,
+        "height": 16,
+      )
+    );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin-left: 8px;
+    position: absolute;
+    top: -7px;
+    right: -7px;
+
+    svg {
+      width: 10px;
+      stroke: $WHITE;
+    }
+    svg path {
+      fill: $WHITE;
+    }
+  }
+
+  .dragActive {
+    border-color: green !important;
+  }
+
+  .dragReject {
+    border-color: $RED !important;
+  }
+}

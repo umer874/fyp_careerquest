@@ -1,0 +1,10 @@
+@use "global.scss" as *;
+
+.tableHead {
+  font-size: 12px;
+  text-align: center;
+  background-color: $PRIMARY !important;
+  color: $BLACK !important;
+  vertical-align: middle;
+  border: 1px solid $BLACK;
+}

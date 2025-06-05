@@ -1,0 +1,115 @@
+@use "global.scss" as *;
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.uploadArea {
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  text-align: center;
+  @include RP(
+    (
+      "height": 100,
+      "width": 100,
+      "margin-bottom": 30,
+    )
+  );
+
+  .uploadIcon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: $BLUE;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    @include RP(
+      (
+        "height": 36,
+        "width": 36,
+      )
+    );
+
+    svg {
+      @include RP(
+        (
+          "height": 18.33,
+          "width": 18.33,
+        )
+      );
+      path {
+        stroke: $WHITE;
+      }
+    }
+  }
+}
+
+.fileInput {
+  display: none;
+}
+
+.previewContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 100px;
+  @include RP(
+    (
+      "width": 100,
+      "height": 100,
+    ),
+    1
+  );
+
+  .previewImage {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    border-radius: 100px;
+  }
+}
+
+.removeButton {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background-color: $PRIMARY;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include RP(
+    (
+      "width": 16,
+      "height": 16,
+    )
+  );
+
+  svg {
+    width: 10px;
+    stroke: $WHITE;
+
+    path {
+      fill: $WHITE;
+    }
+  }
+}
+
+.dragActive {
+  border-color: green !important;
+}
+
+.dragReject {
+  border-color: $PRIMARY !important;
+}

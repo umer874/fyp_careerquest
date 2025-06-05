@@ -1,0 +1,52 @@
+@use "global.scss" as *;
+
+.otherDetails {
+  @include RP(
+    (
+      "padding-top": 40,
+    )
+  );
+}
+
+.tabsContainer {
+  border-bottom: 1px solid $BORDER;
+  .tabs {
+    position: relative;
+  }
+
+  .tab {
+    color: $DESC;
+    position: relative;
+    padding: 4px 8px;
+    height: 100%;
+    width: fit-content;
+    @include RP(
+      (
+        "font-size": 16,
+      )
+    );
+  }
+  .activeTab {
+    color: $BLUE;
+    font-weight: 600;
+    border-color: $BLUE;
+
+    &::before {
+      position: absolute;
+      content: "";
+      background-color: $BLUE;
+      height: 2px;
+      width: 100%;
+      bottom: -1.5px;
+      left: 0;
+    }
+  }
+}
+
+.contentContainer {
+  @include RP(
+    (
+      "margin-top": 15,
+    )
+  );
+}

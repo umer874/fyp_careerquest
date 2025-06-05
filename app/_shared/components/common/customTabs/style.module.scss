@@ -1,0 +1,45 @@
+@use "global.scss" as *;
+
+.tabsContainer {
+  .tab {
+    color: #5f5b5b;
+    background-color: #e0ebf4;
+    font-weight: 500;
+    position: relative;
+    padding: 0 3px;
+    @include RP(
+      (
+        "font-size": 16,
+        "height": 44,
+      )
+    );
+    span {
+      color: $BLUE;
+      font-weight: 600;
+    }
+    &:first-child {
+      @include RP(
+        (
+          "border-top-left-radius": 16,
+        )
+      );
+    }
+    &:last-child {
+      @include RP(
+        (
+          "border-top-right-radius": 16,
+        )
+      );
+    }
+  }
+  .activeTab {
+    color: $WHITE;
+    font-weight: 500;
+    background-color: $BLUE;
+    border-color: $PRIMARY;
+
+    span {
+      color: $WHITE;
+    }
+  }
+}

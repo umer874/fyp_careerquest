@@ -1,0 +1,83 @@
+@use "global.scss" as *;
+
+.pageDetailWrapper {
+  background-color: $WHITE;
+  @include RP(
+    (
+      "padding-top": 32,
+      "padding-bottom": 32,
+      "padding-left": 32,
+      "padding-right": 32,
+      "border-radius": 24,
+    )
+  );
+  .heading {
+    .emailContainer {
+      @include RP(
+        (
+          "padding-top": 30,
+          "padding-bottom": 30,
+        )
+      );
+      .iconContainer {
+        background-color: #65b55e1a;
+        border-radius: 100px;
+        @include RP(
+          (
+            "width": 72,
+            "height": 72,
+          )
+        );
+        svg {
+          @include RP(
+            (
+              "width": 26.67,
+            )
+          );
+          path {
+            stroke: $SECONDARY;
+          }
+        }
+      }
+      p {
+        font-weight: 500;
+        color: $SECONDARY;
+        @include RP(
+          (
+            "font-size": 20,
+          )
+        );
+      }
+    }
+  }
+  .contactForm {
+    @include RP(
+      (
+        "padding-left": 30,
+        "padding-right": 30,
+      )
+    );
+    @media screen and (max-width: 767px) {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .formHeading {
+      p {
+        font-weight: 500;
+        margin-top: 5px;
+        @include RP(
+          (
+            "font-size": 14,
+          )
+        );
+      }
+    }
+    .form {
+      @include RP(
+        (
+          "padding-top": 30,
+        )
+      );
+    }
+  }
+}

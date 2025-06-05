@@ -1,0 +1,98 @@
+@use "global.scss" as *;
+
+.inputLabel {
+  @include RP(
+    (
+      "font-size": 16,
+      "line-height": 21,
+    )
+  );
+  color: $LABEL;
+  text-align: center;
+}
+
+.asterik {
+  color: $RED;
+}
+
+.readonly {
+  background: #f4f4f4;
+}
+
+.inputContainer {
+  @include RP(
+    (
+      "height": 56,
+      "padding": 16,
+    )
+  );
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid $BORDER;
+  background-color: $WHITE;
+}
+
+.value {
+  @include RP(
+    (
+      "font-size": 14,
+    )
+  );
+  color: white !important;
+}
+
+.placeholder {
+  @include RP(
+    (
+      "font-size": 14,
+    )
+  );
+  color: $LIGHT_GRAY2 !important;
+  @include elipsis(1);
+}
+
+.error {
+  width: fit-content;
+  color: #ea5b5b;
+  font-size: 11px;
+  text-align: left;
+  z-index: 1;
+  margin-left: 5px;
+}
+
+.iconStyle {
+  @include RP(
+    (
+      "height": 24,
+      "width": 24,
+    )
+  );
+}
+
+.optionsContainer {
+  z-index: 21;
+  @include RP(
+    (
+      "max-height": 250,
+    )
+  );
+  overflow-y: auto;
+  &::-webkit-scrollbar-track {
+    border: 7px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: #f2f2f2;
+  }
+
+  &::-webkit-scrollbar {
+    width: 20px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border: 7px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+    border-radius: 9999px;
+    background-color: $PRIMARY;
+  }
+}

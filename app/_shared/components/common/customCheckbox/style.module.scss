@@ -1,0 +1,52 @@
+@use "global.scss" as *;
+.checkboxContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 31px;
+
+  input[type="radio"],
+  input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #b0babf;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    background-color: transparent;
+    transition: all 0.2s ease;
+
+    &:checked {
+      background-color: $BLUE;
+      border-color: $BLUE;
+
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  .inputLabel {
+    color: $WHITE;
+    margin: 0;
+    @include RP(
+      (
+        "font-size": 14,
+      )
+    );
+  }
+}

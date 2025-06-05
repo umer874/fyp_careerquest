@@ -1,0 +1,96 @@
+@use "global.scss" as *;
+
+.sectionContainer {
+  background-image: url("../../../../_assets/images/hero-bg.png");
+  background-size: cover;
+  background-position: bottom;
+  @include RP(("height": 800,
+    ));
+  position: relative;
+
+  @media screen and (max-width: 576px) {
+    background-position: center right;
+  }
+
+  @include RP(("padding-bottom": 60,
+    ));
+
+  &::before {
+    content: "";
+    background-image: url("../../../../_assets/images/hero-bg-overlay.png");
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    position: absolute;
+  }
+
+  .content {
+    @media screen and (max-width: 576px) {
+      text-align: center;
+      padding-left: 0 !important;
+    }
+
+    z-index: 1;
+    max-width: 550px;
+
+    .title {
+      color: $WHITE;
+
+      @media screen and (max-width: 426px) {
+        @include RP(("font-size": 32,
+            "line-height": 48,
+          ));
+      }
+    }
+
+    p {
+      color: #d1d0d0;
+
+      @include RP(("font-size": 17.5,
+          "padding-top": 15,
+          "margin-right": 35,
+        ));
+
+      @media screen and (max-width: 576px) {
+        text-align: center;
+        margin: 0;
+      }
+    }
+
+    .buttonContainer {
+      display: flex;
+
+      @media screen and (max-width: 576px) {
+        justify-content: center;
+      }
+
+      @include RP(("margin-top": 30,
+        ));
+    }
+  }
+
+  .rightSideContent {
+    backdrop-filter: blur(10px);
+    background: #00000029;
+    max-width: 450px;
+    @include RP(("border-radius": 16,
+        "padding-left": 16,
+        "padding-right": 40,
+        "padding-top": 16,
+        "padding-bottom": 16,
+      ));
+
+    p {
+      font-weight: 500;
+      color: $BORDER;
+
+      @media screen and (max-width: 576px) {
+        text-align: center;
+      }
+
+      &:last-child {
+        color: $WHITE;
+      }
+    }
+  }
+}

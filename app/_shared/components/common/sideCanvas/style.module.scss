@@ -1,0 +1,133 @@
+@use "global.scss" as *;
+
+.backDropContainer {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  z-index: 400;
+  padding: 0px !important;
+  transition: visibility 0.2s;
+  overflow: hidden !important;
+}
+
+.logoContainer {
+  height: 56px;
+  border-bottom: 1px solid var(--BORDER);
+
+  svg {
+    height: 28px;
+  }
+
+  .crossContainer {
+    height: 25px;
+    width: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+
+    svg {
+      height: 20px;
+      width: 20px;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+.mainContainer {
+  background-color: $LIGHT_BLUE;
+  max-width: 280px;
+  height: 100%;
+  padding: 0px !important;
+  overflow-y: auto;
+  transition: transform 0.3s;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow-x: hidden;
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
+}
+
+.hidden {
+  transform: translateX(-240px);
+}
+
+.shown {
+  transform: translateX(0px);
+}
+
+.mainContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.crossIconContainer {
+  height: 30px;
+  width: 30px;
+  border-radius: 8px;
+  border: 1px solid var(--LIGHT_GRAY);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navLink {
+  color: $DESC;
+  font-size: 14px;
+  font-weight: 500;
+  &:hover {
+    color: $PRIMARY;
+  }
+}
+
+.activeLink {
+  color: $PRIMARY;
+  font-weight: 600;
+}
+
+.actionContainer {
+  label {
+    color: $PRIMARY;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  span {
+    color: $PRIMARY;
+  }
+}
+.dropdown_menu {
+  color: $WHITE;
+  font-size: 14px;
+  &:hover {
+    color: $PRIMARY;
+  }
+  &:hover svg {
+    filter: invert(85%) sepia(51%) saturate(5962%) hue-rotate(348deg)
+      brightness(112%) contrast(97%);
+  }
+
+  svg {
+    width: 20px !important;
+  }
+}
+.dropdown_menu_nested {
+  color: $WHITE;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    color: $PRIMARY;
+  }
+  a {
+    width: 100% !important;
+    padding: 0 10px;
+    &:hover {
+      color: $PRIMARY;
+    }
+  }
+}

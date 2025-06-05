@@ -1,0 +1,44 @@
+@use "global.scss" as *;
+
+.searchContainer {
+  position: relative;
+  border: 1px solid $BORDER;
+  border-radius: 50px;
+  @include RP(
+    (
+      "height": 56,
+    )
+  );
+  input {
+    width: 100%;
+    height: 100%;
+    border: 0px;
+    border-radius: 50px;
+    padding: 0 14px 0 30px;
+    outline: 0;
+    &::placeholder {
+      color: Search !important;
+      font-weight: 500;
+      @include RP(
+        (
+          "font-size": 14,
+        )
+      );
+    }
+  }
+  .iconContainer {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    svg,
+    svg path {
+      stroke: #b2aeae !important;
+      @include RP(
+        (
+          "width": 16,
+        )
+      );
+    }
+  }
+}

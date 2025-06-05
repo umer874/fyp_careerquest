@@ -1,0 +1,35 @@
+@import "utils/responsive.module.scss";
+@import "utils/colors.scss";
+
+.sectionContainer {
+    background-color: $LIGHT_BLUE;
+
+    .headingContainer {
+        background-color: $LIGHT_BLUE;
+        @include RP(("padding-top": 60,
+            ));
+    }
+
+    .contentContainer {
+        background-color: $LIGHT_BLUE;
+        @include RP(("padding-bottom": 70,
+            ));
+
+        .imgContainer {
+            @include RP(("border-radius": 16,
+                ));
+            max-height: 306px;
+
+            @media screen and (max-width: 510px) {
+                max-height: 100% !important;
+                height: auto;
+            }
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+    }
+}

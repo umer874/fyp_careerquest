@@ -1,0 +1,160 @@
+@use "global.scss" as *;
+
+.uploadContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  @include RP(
+    (
+      "margin-top": 15,
+    )
+  );
+
+  .previewContainer {
+    position: relative;
+    width: 100% !important;
+    border: 1px solid $BORDER;
+    border-radius: 8px;
+    padding: 10px;
+    .removeButton {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      background-color: $BLUE;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include RP(
+        (
+          "width": 30,
+          "height": 30,
+        )
+      );
+
+      svg {
+        @include RP(
+          (
+            "width": 20,
+            "height": 20,
+          )
+        );
+        path {
+          fill: $WHITE !important;
+        }
+      }
+    }
+    label {
+      @include RP(
+        (
+          "font-size": 16,
+          "line-height": 21,
+        )
+      );
+      color: $BLACK;
+    }
+    img {
+      @include RP(
+        (
+          "height": 50,
+          "width": 50,
+        )
+      );
+    }
+    video {
+      @include RP(
+        (
+          "height": 50,
+          "width": 50,
+        )
+      );
+    }
+    .pdfIcon {
+      @include RP(
+        (
+          "height": 34,
+          "width": 34,
+        )
+      );
+      path {
+        fill: rgb(214, 63, 54);
+      }
+    }
+  }
+}
+
+.uploadArea {
+  background-color: $WHITE;
+  border: 1px dashed $BORDER;
+  width: 100%;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  @include RP(
+    (
+      "height": 200,
+    )
+  );
+
+  .uploadIcon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: $BLUE;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    @include RP(
+      (
+        "height": 36,
+        "width": 36,
+      )
+    );
+
+    svg {
+      @include RP(
+        (
+          "height": 18.33,
+          "width": 18.33,
+        )
+      );
+      path {
+        stroke: $WHITE;
+      }
+    }
+  }
+  .uploadPlaceholder {
+    p {
+      font-weight: 500;
+      color: $BLACK;
+      span {
+        color: $BLUE;
+      }
+    }
+    .info {
+      color: $LABEL !important;
+    }
+  }
+}
+
+.fileInput {
+  display: none;
+}
+
+.dragActive {
+  border-color: green !important;
+}
+
+.dragReject {
+  border-color: $PRIMARY !important;
+}

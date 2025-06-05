@@ -1,0 +1,201 @@
+@use "global.scss" as *;
+
+.dropdown {
+  position: relative;
+
+  .bellIconContainer {
+    position: relative;
+    cursor: pointer;
+    margin-top: 2px;
+    svg {
+      path {
+        stroke: #868e96 !important;
+      }
+      width: 18px;
+    }
+    .bellIconWrapper {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background-color: $WHITE;
+      padding: 1.5px;
+      span {
+        background-color: $PRIMARY;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+        color: $WHITE;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+  }
+
+  .dropdownMenu {
+    position: absolute;
+    opacity: 1 !important;
+    right: 0;
+    top: 41px;
+    @media screen and (max-width: 1200px) {
+      top: 37px;
+    }
+    color: $GRAY2;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    max-width: 360px;
+    min-width: 360px;
+
+    @include RP(
+      (
+        "padding-top": 16,
+        "padding-bottom": 32,
+        "border-bottom-right-radius": 16,
+        "border-bottom-left-radius": 16,
+      )
+    );
+    .heading {
+      color: #0f1106;
+      @include RP(
+        (
+          "margin-left": 16,
+        )
+      );
+    }
+    .itemsContainer {
+      height: 300px;
+      overflow-y: auto;
+      &::-webkit-scrollbar-track {
+        border: 7px solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+        border-radius: 50px;
+        background-color: #f2f2f2;
+      }
+
+      &::-webkit-scrollbar {
+        width: 20px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: 7px solid rgba(0, 0, 0, 0);
+        background-clip: padding-box;
+        border-radius: 50px;
+        background-color: $PRIMARY;
+      }
+      .item {
+        border-bottom: 1px solid #ed1c241a;
+        // border-radius: 8px;
+        @include RP(
+          (
+            "padding-left": 14,
+            "padding-right": 14,
+            "padding-top": 12,
+            "padding-bottom": 12,
+          )
+        );
+        h5 {
+          color: #0f1106;
+        }
+        &:focus,
+        &:hover {
+          background-color: #65b55e1a;
+        }
+        .imgContainer {
+          border: 1px solid $WHITE;
+          border-radius: 100%;
+          @include RP(
+            (
+              "width": 50,
+              "height": 50,
+            ),
+            1
+          );
+          img {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            object-fit: cover;
+          }
+        }
+        .eventContainer {
+          border: 1px solid $WHITE;
+          background-color: #f2f7fb;
+          border-radius: 50px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          @include RP(
+            (
+              "width": 50,
+              "height": 50,
+            ),
+            1
+          );
+          svg {
+            path {
+              stroke: $BLUE;
+            }
+            @include RP(
+              (
+                "width": 18px,
+                "height": 18px,
+              ),
+              1
+            );
+          }
+        }
+
+        h6 {
+          color: #303030 !important;
+          @include RP(
+            (
+              "font-size": 12,
+            ),
+            1
+          );
+        }
+        span {
+          color: #5f5b5b;
+          font-weight: 500;
+          max-width: 85%;
+          @include RP(
+            (
+              "font-size": 12,
+            ),
+            1
+          );
+          @media screen and (max-width: 400px) {
+            max-width: 100%;
+          }
+        }
+        button {
+          border-radius: 4px;
+          color: $WHITE;
+          background-color: $RED;
+          @include RP(
+            (
+              "height": 28,
+              "font-size": 12,
+              "padding-left": 15,
+              "padding-right": 15,
+            )
+          );
+          &:first-child {
+            background-color: #2a7ee0;
+          }
+        }
+      }
+    }
+    @media screen and (max-width: 768px) {
+      min-width: 260px;
+    }
+    @media screen and (max-width: 368px) {
+      min-width: 200px;
+      max-width: 320px;
+      right: -50px;
+    }
+  }
+}

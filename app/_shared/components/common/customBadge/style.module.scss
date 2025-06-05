@@ -1,0 +1,27 @@
+@use "global.scss" as *;
+
+.badge_container {
+  // border: 0.5px solid $PRIMARY;
+  border-radius: 50px;
+  // background-color: #ed1c240f;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  @include RP(
+    (
+      "height": 24,
+    )
+  );
+  padding: 5px 8px;
+  width: fit-content;
+
+  .badge_title {
+    font-size: 12px;
+    font-family: var(--font-montserrat);
+    font-weight: 500;
+    margin: 0;
+    @media screen and (max-width: 576px) {
+      font-size: 10px !important;
+    }
+  }
+}

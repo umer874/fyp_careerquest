@@ -1,0 +1,504 @@
+@use "global.scss" as *;
+h1 {
+  @include RP(
+    (
+      "font-size": 56,
+      "line-height": 72,
+    )
+  );
+  @media screen and (max-width: 640px) {
+    @include RP(
+      (
+        "font-size": 36,
+      )
+    );
+  }
+}
+h2 {
+  @include RP(
+    (
+      "font-size": 42,
+    )
+  );
+  @media screen and (max-width: 640px) {
+    @include RP(
+      (
+        "font-size": 28,
+      )
+    );
+  }
+}
+h3 {
+  @include RP(
+    (
+      "font-size": 32,
+    )
+  );
+  @media screen and (max-width: 640px) {
+    @include RP(
+      (
+        "font-size": 22,
+      )
+    );
+  }
+}
+h4 {
+  @include RP(
+    (
+      "font-size": 24,
+    )
+  );
+  @media screen and (max-width: 640px) {
+    @include RP(
+      (
+        "font-size": 20,
+      )
+    );
+  }
+}
+h5 {
+  @include RP(
+    (
+      "font-size": 20,
+    )
+  );
+}
+h6 {
+  @include RP(
+    (
+      "font-size": 16,
+    )
+  );
+}
+p {
+  color: $DESC;
+  @include RP(
+    (
+      "font-size": 14,
+    )
+  );
+}
+.textBlue {
+  color: $BLUE !important;
+}
+.bg-blue {
+  background-color: $BLUE !important;
+}
+.bg-green {
+  background-color: $SECONDARY !important;
+}
+.bg-red {
+  background-color: $RED !important;
+}
+.btn-font-regular {
+  font-weight: 400 !important;
+}
+.btn-lighter-blue-rounded-sm {
+  border-radius: 6px !important;
+  background-color: #ebf9ff !important;
+  padding: 0 13px !important;
+  @include RP(
+    (
+      "height": 43,
+    )
+  );
+  span {
+    color: $BLUE !important;
+  }
+}
+.btn-lighter-blue {
+  background-color: #ebf9ff !important;
+  @include RP(
+    (
+      "height": 48,
+    )
+  );
+  span {
+    color: $BLUE !important;
+  }
+}
+.btn-lighter-green {
+  background-color: #65b55e1a !important;
+  @include RP(
+    (
+      "height": 48,
+    )
+  );
+  span {
+    color: $SECONDARY !important;
+  }
+}
+.outlined-button-grey {
+  background-color: transparent !important;
+  border: 1px solid $GRAY !important;
+}
+
+.outlined-button-primary {
+  background-color: transparent !important;
+  border: 1px solid $PRIMARY !important;
+  color: $PRIMARY !important;
+}
+.outlined-button-secondary {
+  background-color: transparent !important;
+  border: 1px solid $SECONDARY !important;
+  color: $SECONDARY !important;
+  @include RP(
+    (
+      "height": 44,
+    ),
+    1
+  );
+  svg {
+    path {
+      stroke: $SECONDARY !important;
+    }
+  }
+}
+.outlined-button-light-green {
+  background-color: #65b55e1a !important;
+  border: 1px solid transparent !important;
+  color: $SECONDARY !important;
+  @include RP(
+    (
+      "height": 44,
+    ),
+    1
+  );
+  svg {
+    path {
+      stroke: $SECONDARY !important;
+    }
+  }
+}
+.outlined-button-blue {
+  background-color: transparent !important;
+  border: 1px solid $BLUE !important;
+  color: $BLUE !important;
+  text-wrap: nowrap !important;
+  @include RP(
+    (
+      "height": 56,
+    ),
+    1
+  );
+  svg {
+    path {
+      fill: $BLUE !important;
+    }
+  }
+}
+.gray-btn {
+  background-color: #f0f8ef !important;
+  color: $SECONDARY !important;
+}
+.link-button {
+  background-color: transparent !important;
+  border: none !important;
+  color: $PRIMARY !important;
+  padding: 0 4px !important;
+}
+.icon-button-transparent {
+  background-color: transparent !important;
+  border: 0 !important;
+  color: $PRIMARY !important;
+}
+.maxHeighted_btn {
+  @include RP(
+    (
+      "max-height": 56,
+      "height": 56,
+      "padding-left": 30,
+      "padding-right": 30,
+    ),
+    1
+  );
+}
+.mdHeighted_btn {
+  @include RP(
+    (
+      "max-height": 50,
+      "height": 50,
+    ),
+    1
+  );
+}
+
+.filter-button {
+  @include RP(
+    (
+      "height": 41,
+    )
+  );
+}
+.small-height-button {
+  @include RP(
+    (
+      "height": 36,
+    )
+  );
+}
+.modal-button {
+  @include RP(
+    (
+      "padding-left": 50,
+      "padding-right": 50,
+    ),
+    1
+  );
+}
+.white-bg-input-max-height {
+  background-color: $WHITE !important;
+  @include RP(
+    (
+      "height": 56,
+    ),
+    1
+  );
+}
+.white-bg-input {
+  background-color: $WHITE !important;
+}
+.transparentPhoneInput {
+  background-color: $WHITE !important;
+  border: 1px solid $BORDER !important;
+  @include RP(
+    (
+      "height": 56,
+    ),
+    1
+  );
+}
+
+.transparent-bg-input-profile {
+  background-color: $WHITE !important;
+  border: 1px solid $BORDER !important;
+}
+.filtersCheckbox {
+  input[type="checkbox"] {
+    border: 2px solid #b0babf;
+    border-radius: 4px !important;
+    background-color: transparent;
+
+    &:checked {
+      // background-color: $RED;
+      // border-color: $RED;
+
+      &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 2px;
+        left: 5px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+  }
+
+  .inputLabel {
+    color: $WHITE;
+    margin: 0;
+    @include RP(
+      (
+        "font-size": 14,
+      )
+    );
+  }
+}
+.customSortContainer {
+  background-color: $WHITE !important;
+  border: 1px solid $BORDER !important;
+  @include RP(
+    (
+      "height": 46,
+    ),
+    1
+  );
+}
+
+.custom-product-wrapper {
+  padding: 0 !important;
+}
+.noSidePadding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.custom-border-bottom {
+  border-bottom: 1px solid $BORDER !important;
+}
+.custom-border-top {
+  border-top: 1px solid $BORDER !important;
+}
+.editUpload {
+  @include RP(
+    (
+      "width": 104,
+      "height": 104,
+    ),
+    1
+  );
+}
+.asterik {
+  color: $RED !important;
+}
+.customSort {
+  border: 1px solid $GRAY2;
+  border-radius: 6px !important;
+}
+.customSelect_Icon {
+  border: 0 !important;
+}
+.no-border-select {
+  border-color: transparent !important;
+}
+.authSort {
+  border: 1px solid $GRAY2;
+  border-radius: 50px !important;
+  background-color: $GRAY2 !important;
+}
+
+.iconSelect {
+  background-color: $WHITE !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+  padding: 0px !important;
+}
+.customLabelStyle {
+  color: $WHITE !important;
+  padding: 0.5rem 1rem !important;
+  width: 100% !important;
+  &:hover {
+    background-color: #f0f0f0 !important;
+  }
+  @include RP(
+    (
+      "font-size": 16,
+    ),
+    1
+  );
+}
+
+.white-bg-gallery {
+  background-color: $WHITE !important;
+}
+.dotIconDropdownStyle {
+  transform: translateX(-50%) !important;
+}
+::placeholder {
+  font-size: 14;
+  @include RP(
+    (
+      "font-size": 14,
+    )
+  );
+}
+input {
+  @include RP(
+    (
+      "font-size": 16,
+    )
+  );
+}
+.customSelect {
+  background-color: transparent !important;
+  border-color: transparent !important;
+}
+
+// React Big Calendar
+// .rbc-calendar {
+//   width: 100% !important;
+//   overflow-x: auto !important;
+// }
+
+.rbc-date-cell {
+  display: flex;
+  justify-content: center;
+  background-color: transparent !important;
+  height: auto !important;
+  @include RP(
+    (
+      "padding-top": 15,
+      "padding-bottom": 10,
+      "padding-left": 12,
+      "padding-right": 12,
+    ),
+    1
+  );
+  .rbc-button-link {
+    width: 100% !important;
+    border-radius: 4px !important;
+    background-color: #f5f5f6 !important;
+    color: #5f5b5b;
+    font-weight: 550 !important;
+    transition: all 0.2s ease-in-out;
+    @include RP(
+      (
+        "height": 24,
+        "font-size": 14,
+      )
+    );
+    &:hover {
+      background-color: $BLUE !important;
+      color: $WHITE !important;
+    }
+  }
+}
+.rbc-off-range-bg {
+  background-color: transparent !important;
+}
+.rbc-event {
+  padding: 0 !important;
+  overflow-y: visible;
+  background-color: transparent !important;
+}
+.rbc-event,
+.rbc-day-slot .rbc-background-event {
+  background-color: transparent !important;
+}
+.rbc-month-row {
+  overflow: visible !important;
+}
+.rbc-event-label {
+  display: none !important;
+}
+
+// Event Tooltip
+.tippy-content {
+  padding: 0 !important;
+}
+.tippy-box {
+  background-color: transparent !important;
+}
+.tippy-arrow {
+  display: none !important;
+}
+.label {
+  color: $DARK2;
+  @include RP(
+    (
+      "font-size": 16,
+    )
+  );
+}
+.labelSmall {
+  color: #1a1a1a !important;
+  font-family: var(--font-montserrat);
+  font-weight: 500;
+  @include RP(
+    (
+      "font-size": 14,
+    )
+  );
+  span {
+    color: $BLUE !important;
+  }
+}
+
+.rbc-event-content {
+  div[aria-expanded="false"] {
+    height: 100%;
+  }
+}

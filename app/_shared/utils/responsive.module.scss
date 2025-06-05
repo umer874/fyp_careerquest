@@ -1,0 +1,245 @@
+.h100 {
+  height: 100%;
+}
+
+@mixin elipsis($val) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $val;
+  -webkit-box-orient: vertical;
+}
+
+@mixin hideScrollBar {
+  overflow: auto;
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}
+
+@function calculateRatio($base-size, $ratio) {
+  $result: $base-size * $ratio;
+  @if ($result < 0) {
+    @return $base-size * $ratio;
+  } @else if ($result > 10) {
+    @return $base-size * $ratio;
+  } @else {
+    @return 9;
+  }
+}
+
+@mixin HRP($properties) {
+  @include spreadProperty($properties, 1);
+
+  @media screen and (max-width: 640px) {
+    @include spreadProperty($properties, calc(600 / 1320));
+  }
+
+  @media screen and (min-width: 640px) {
+    @include spreadProperty($properties, calc(600 / 1320));
+  }
+
+  @media screen and (min-width: 768px) {
+    @include spreadProperty($properties, calc(720 / 1320));
+  }
+
+  @media screen and (min-width: 992px) {
+    @include spreadProperty($properties, calc(960 / 1320));
+  }
+
+  @media screen and (min-width: 1200px) {
+    @include spreadProperty($properties, calc(1140 / 1320));
+  }
+
+  @media screen and (min-width: 1400px) {
+    @include spreadProperty($properties, calc(1320 / 1320));
+  }
+}
+@mixin RP($properties, $isImportant: 0) {
+  @include spreadProperty($properties, 1);
+
+  @media screen and (max-width: 640px) {
+    @include spreadProperty($properties, calc(992 / 1400), $isImportant);
+  }
+
+  @media screen and (min-width: 640px) {
+    @include spreadProperty($properties, calc(992 / 1400), $isImportant);
+  }
+
+  @media screen and (min-width: 768px) {
+    @include spreadProperty($properties, calc(992 / 1400), $isImportant);
+  }
+
+  @media screen and (min-width: 992px) {
+    @include spreadProperty($properties, calc(992 / 1400), $isImportant);
+  }
+
+  @media screen and (min-width: 1200px) {
+    @include spreadProperty($properties, calc(1200 / 1400), $isImportant);
+  }
+
+  @media screen and (min-width: 1400px) {
+    @include spreadProperty($properties, calc(1400 / 1400), $isImportant);
+  }
+}
+
+@mixin MRP($properties) {
+  @include spreadProperty($properties, 1);
+
+  @media screen and (max-width: 640px) {
+    @include spreadProperty($properties, calc(992 / 1400));
+  }
+
+  @media screen and (min-width: 640px) {
+    @include spreadProperty($properties, calc(992 / 1400));
+  }
+
+  @media screen and (min-width: 768px) {
+    @include spreadProperty($properties, calc(992 / 1400));
+  }
+
+  @media screen and (min-width: 992px) {
+    @include spreadProperty($properties, calc(1400 / 1400));
+  }
+
+  @media screen and (min-width: 1200px) {
+    @include spreadProperty($properties, calc(1400 / 1400));
+  }
+
+  @media screen and (min-width: 1400px) {
+    @include spreadProperty($properties, calc(1400 / 1400));
+  }
+}
+
+@mixin spreadProperty($myArray, $ratioValue, $isImportant: 0) {
+  @if ($isImportant==1) {
+    @each $name, $value in $myArray {
+      $key: $name;
+      $value: calculateRatio($value, $ratioValue) + px !important;
+      #{$key}: $value;
+    }
+  } @else {
+    @each $name, $value in $myArray {
+      $key: $name;
+      $value: calculateRatio($value, $ratioValue) + px;
+      #{$key}: $value;
+    }
+  }
+}
+
+@function calculatePixels($screenSize, $value) {
+  $ratio: calc($screenSize/1400);
+  $result: $value * $ratio;
+  @return $result + px;
+}
+
+$small: #{calc(60 * 992 / 1400)}px;
+$mid: #{calc(60 * 1200 / 1400)}px;
+$large: #{calc(60 * 1400 / 1400)}px;
+
+.containerPadding {
+  padding: 0 44px;
+  text-align: left;
+  padding-top: 24px;
+
+  @media screen and (max-width: 576px) {
+    padding: 0 14px;
+    padding-top: 20px;
+  }
+
+  @media (min-width: 576px) and (max-width: 768px) {
+    padding: 0 14px;
+    padding-top: 20px;
+  }
+}
+
+.listContainerStyle {
+  width: 100%;
+  height: calc(100vh - 60px);
+  position: relative;
+  @include hideScrollBar();
+}
+
+@media screen and (max-width: 640px) {
+  .listContainerStyle {
+    width: 100%;
+    height: calc(100vh - $small);
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .listContainerStyle {
+    width: 100%;
+    height: calc(100vh - $small);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .listContainerStyle {
+    width: 100%;
+    height: calc(100vh - $small);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .listContainerStyle {
+    width: 100%;
+    height: calc(100vh - $small);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .listContainerStyle {
+    width: 100%;
+    height: calc(100vh - $mid);
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .listContainerStyle {
+    width: 100%;
+    height: calc(100vh - $large);
+  }
+}
+
+.customContainer {
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 640px) {
+  .customContainer {
+    max-width: 95%;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .customContainer {
+    max-width: 600px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .customContainer {
+    max-width: 720px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .customContainer {
+    max-width: 960px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .customContainer {
+    max-width: 1140px;
+  }
+}
+
+@media screen and (min-width: 1400px) {
+  .customContainer {
+    max-width: 1320px;
+  }
+}

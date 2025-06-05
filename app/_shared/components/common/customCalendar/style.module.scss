@@ -1,0 +1,138 @@
+@use "global.scss" as *;
+.container {
+  min-width: 100%;
+  width: 100% !important;
+  overflow-x: auto !important;
+  margin: 0 auto !important;
+  position: relative;
+  background-color: $WHITE;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  @include RP(
+    (
+      "padding-top": 24,
+      "padding-bottom": 24,
+    )
+  );
+  .toolbar {
+    .actionContainer {
+      span {
+        cursor: pointer;
+        width: fit-content !important;
+        svg {
+          width: 14px !important;
+        }
+      }
+    }
+    .label {
+      @include RP(
+        (
+          "margin-top": 20,
+          "margin-bottom": 20,
+        )
+      );
+    }
+  }
+}
+
+.rbc-calendar {
+  background-color: white;
+  border-radius: 10px;
+  min-width: 900px;
+  overflow-x: auto;
+  position: relative !important;
+  .rbc-toolbar {
+    flex-wrap: wrap;
+    @include RP(
+      (
+        "margin-bottom": 40,
+      ),
+      1
+    );
+    .rbc-toolbar-label {
+      position: absolute !important;
+      left: 0 !important;
+      top: 50px !important;
+      margin-bottom: 10px;
+    }
+    .rbc-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+    }
+  }
+}
+
+.button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.rbc-event {
+  color: white;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.rbc-today {
+  background-color: #eaf6ff !important;
+}
+.eventContainer {
+  background-color: #ebf9ff !important;
+  border-radius: 8px;
+  height: 100%;
+  .eventContent {
+    @include RP(
+      (
+        "padding-left": 12,
+        "padding-right": 12,
+        "padding-top": 12,
+        "padding-bottom": 12,
+      ),
+      1
+    );
+    p {
+      color: $BLUE;
+      font-weight: 500;
+      @include RP(
+        (
+          "font-size": 12,
+        ),
+        1
+      );
+    }
+    h6 {
+      color: $PRIMARY !important;
+      text-wrap: wrap;
+      margin-top: 3px;
+      @include RP(
+        (
+          "font-size": 12,
+          "line-height": 18,
+        ),
+        1
+      );
+    }
+    svg {
+      @include RP(
+        (
+          "width": 14,
+        ),
+        1
+      );
+    }
+  }
+}
+.dayViewEvent {
+  .eventContent {
+    padding-top: 3px !important;
+  }
+}

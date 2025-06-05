@@ -1,0 +1,27 @@
+@use "global.scss" as *;
+
+.newsLetter {
+  background-color: $WHITE;
+  @include RP(
+    (
+      "border-radius": 16,
+      "padding-top": 32,
+      "padding-bottom": 32,
+      "padding-left": 32,
+      "padding-right": 32,
+    )
+  );
+  .text {
+    h3 {
+      color: $PRIMARY;
+    }
+    p {
+      color: $DESC;
+      @include RP(
+        (
+          "font-size": 16,
+        )
+      );
+    }
+  }
+}

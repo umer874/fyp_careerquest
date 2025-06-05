@@ -1,0 +1,79 @@
+@use "global.scss" as *;
+.contactCard {
+  background-color: $WHITE;
+  @include RP(
+    (
+      "border-radius": 16,
+      "padding-top": 24,
+      "padding-bottom": 24,
+      "padding-left": 24,
+      "padding-right": 24,
+    ),
+    1
+  );
+  .header {
+    border-bottom: 1px solid $BORDER;
+    @include RP(
+      (
+        "padding-bottom": 17,
+      )
+    );
+    .imgContainer {
+      border: 4px solid #f2f7fb;
+      border-radius: 100%;
+      object-fit: cover;
+      @include RP(
+        (
+          "width": 72,
+          "height": 72,
+        )
+      );
+      img {
+        object-fit: cover;
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+      }
+    }
+    h5 {
+      color: #303030;
+      margin-bottom: 4px;
+    }
+  }
+  .contactDetails {
+    @include RP(
+      (
+        "padding-top": 17,
+      )
+    );
+    .iconContainer {
+      svg {
+        @include RP(
+          (
+            "width": 21,
+          )
+        );
+        path {
+          stroke: $PRIMARY;
+        }
+      }
+    }
+    p {
+      font-weight: 500;
+      @include RP(
+        (
+          "font-size": 16,
+        )
+      );
+    }
+    .dot {
+      width: 6px;
+      height: 6px;
+      background-color: $PRIMARY;
+      border-radius: 100px;
+      @media screen and (max-width: 514px) {
+        display: none;
+      }
+    }
+  }
+}

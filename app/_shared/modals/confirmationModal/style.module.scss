@@ -1,0 +1,108 @@
+@use "global.scss" as *;
+
+.confirmationModal {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center;
+  text-align: center;
+  .iconContainer {
+    svg {
+      @include RP(
+        (
+          "width": 160,
+          "height": 160,
+        )
+      );
+    }
+  }
+  p {
+    color: #5f5b5b;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    @include RP(
+      (
+        "font-size": 14,
+      )
+    );
+  }
+  .buttonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  .paymentItem {
+    width: 100%;
+    @include RP(
+      (
+        "padding-left": 16,
+        "padding-right": 16,
+        "padding-top": 24,
+        "padding-bottom": 24,
+      )
+    );
+    background-color: $WHITE;
+    border: 1px solid $BORDER;
+    display: flex;
+    align-items: center;
+    border-radius: 12px;
+    cursor: pointer;
+
+    &.active {
+      border-color: $PRIMARY;
+    }
+    .iconContainer {
+      background-color: $GRAY2;
+      border: 1px solid $BORDER;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      @include RP(
+        (
+          "width": 66,
+          "height": 66,
+        )
+      );
+      svg {
+        @include RP(
+          (
+            "width": 40,
+          )
+        );
+      }
+    }
+    p {
+      color: $WHITE;
+      margin: 0 !important;
+      @include RP(
+        (
+          "font-size": 18,
+        )
+      );
+    }
+    span {
+      color: $GRAY2;
+      @include RP(
+        (
+          "font-size": 16,
+        )
+      );
+    }
+    .check {
+      cursor: pointer;
+      svg {
+        @include RP(
+          (
+            "width": 32,
+            "height": 32,
+          ),
+          1
+        );
+      }
+    }
+  }
+}

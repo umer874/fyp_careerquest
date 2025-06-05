@@ -1,0 +1,56 @@
+@use "global.scss" as *;
+
+.toggleContainer {
+  display: flex;
+  background-color: $WHITE;
+  border: 1px solid $BORDER;
+  border-radius: 50px;
+  padding: 0 3px;
+  width: fit-content;
+  @include RP(
+    (
+      "height": 48,
+    )
+  );
+  .toggleButton {
+    background: none;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    @include RP(
+      (
+        "height": 40,
+        "width": 40,
+      )
+    );
+
+    svg {
+      path {
+        stroke: $BLUE;
+      }
+      @include RP(
+        (
+          "height": 21,
+          "width": 21,
+        )
+      );
+    }
+  }
+
+  .toggleButton.active {
+    background-color: $BLUE;
+    svg {
+      path {
+        stroke: $WHITE;
+      }
+    }
+  }
+
+  .toggleButton:not(.active):hover {
+    background-color: $BORDER;
+  }
+}

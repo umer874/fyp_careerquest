@@ -1,0 +1,393 @@
+@import "utils/responsive.module.scss";
+@import "utils/colors.scss";
+
+.sectionContainer {
+  .aboutUsBanner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../../_assets/images/community-img-3.png");
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    width: 100%;
+    position: relative;
+   
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(190.67deg, rgba(0, 0, 0, 0.1) 22.96%, rgba(0, 0, 0, 0.4) 82.04%);
+      ;
+    }
+
+    @media screen and (max-width: 768px) {
+      height: 350px;
+    }
+
+    @media screen and (max-width: 576px) {
+      height: 280px;
+    }
+
+    h2 {
+      color: $WHITE;
+      position: relative;
+      font-family: var(--font-nexa-bold);
+      @include RP(("font-size": 56,
+        ),
+        1);
+    }
+  }
+
+  .contentWrapper {
+    background-color: $LIGHT_BLUE;
+
+    .heading {
+      @include RP(("padding-top": 60,
+          "padding-bottom": 30,
+        ));
+      background-color: $LIGHT_BLUE;
+
+      .leftContent {
+        h3 {
+          color: $PRIMARY;
+          font-family: var(--font-nexa-bold) !important;
+          font-weight: 400 !important;
+        }
+
+        span {
+          color: $BLUE;
+          @include RP(("font-size": 18,
+            ));
+        }
+
+        p {
+          max-width: 612px;
+        }
+
+        @media screen and (max-width: 510px) {
+          max-width: 100%;
+          text-align: center;
+        }
+      }
+
+      .rightContent {
+        span {
+          color: $BLUE;
+          @include RP(("font-size": 18,
+            ));
+        }
+      }
+    }
+
+    .content {
+      @include RP(("padding-bottom": 50,
+        ));
+
+      .gridItem {
+        background-color: $WHITE;
+        transition: 0.3s ease-in-out;
+        @include RP(("border-radius": 16,
+            "padding-top": 24,
+            "padding-Bottom": 24,
+            "padding-left": 24,
+            "padding-right": 24,
+          ));
+
+        h5 {
+          color: $PRIMARY;
+        }
+
+        .iconContainer {
+          svg {
+            @include RP(("width": 60,
+                "height": 55,
+              ));
+          }
+        }
+
+        &:hover {
+          box-shadow: 0px 4px 44px 0px #00162b12;
+        }
+      }
+    }
+
+
+    .empowermentSection {
+      background-color: $LIGHT_BLUE;
+      @include RP((
+          "padding-bottom": 20,
+          "margin-top": 30,
+        ));
+  
+    
+  
+      .contentContainer {
+        .iconContainer {
+          svg {
+            @include RP(("width": 60,
+                "height": 60,
+              ));
+          }
+        }
+  
+        h3 {
+          max-width: 60%;
+          @include RP(("margin-bottom": 20,
+            ));
+  
+          @media screen and (max-width: 640px) {
+            max-width: 100%;
+          }
+        }
+  
+        &:last-child {
+          @include RP(("margin-top": 50,
+              "margin-bottom": 50,
+            ));
+  
+          .left {
+            max-width: 80%;
+  
+            @media screen and (max-width: 767px) {
+              max-width: 100%;
+            }
+  
+            h2 {
+              color: $PRIMARY;
+              font-weight: 400 !important;
+              @include RP(("font-size": 42,
+                ), 1)
+            }
+          }
+        }
+      }
+    }
+
+    .coreValuesContainer {
+      background-image: url("../../../_assets/images/core-values-img.png");
+      background-position: center;
+      background-size: cover;
+      background-color: $WHITE;
+      @include RP(("padding-top": 50,
+          "padding-bottom": 50,
+          "height": 592,
+        ));
+
+      img {
+        width: 100%;
+        height: 100%;
+
+        @media screen and (max-width: 767px) {
+          height: auto;
+        }
+      }
+
+      .coreValuesContent {
+        backdrop-filter: blur(20px);
+        background: #0000003D;
+        color: $WHITE;
+        @include RP(("width": 592,
+            "height": 320,
+            "border-radius": 16,
+            "padding-top": 32,
+            "padding-bottom": 32,
+            "padding-left": 32,
+            "padding-right": 32,
+          ));
+
+        @media screen and (max-width: 510px) {
+          height: auto;
+        }
+
+        h2 {
+          color: $WHITE;
+          font-weight: 400 !important;
+          @include RP(("font-size": 42,
+            ));
+        }
+
+
+        ul {
+          li {
+            p {
+              color: $WHITE;
+              font-weight: 500;
+              @include RP(("font-size": 22,
+                ), 1);
+            }
+            svg {
+              @include RP(("width": 24,
+                  "height": 24,
+                ));
+            }
+          }
+        }
+      }
+    }
+
+    .whyCareerLabsContainer {
+      background-color: $LIGHT_BLUE;
+      @include RP(("margin-top": 60,
+        ));
+
+
+      .whySectionContent {
+        @include RP(("padding-top": 30,
+            "padding-bottom": 30,
+          ));
+
+        .whySectionContentRight {
+          max-width: 60%;
+
+          @media screen and (max-width: 510px) {
+            max-width: 100%;
+          }
+
+          svg {
+            @include RP(("width": 24,
+                "height": 24,
+              ));
+          }
+        }
+      }
+    }
+
+    .leaders {
+      background-color: $LIGHT_BLUE;
+      @include RP(("padding-bottom": 60,
+        ));
+
+      .leadersItem {
+        @include RP(("border-radius": 16,
+            "padding-top": 24,
+          ));
+
+        img {
+          margin: 0 auto;
+        }
+
+        .nameContainer {
+          background-color: $WHITE;
+          margin-top: -40px;
+          min-height: 127px;
+          @include RP(("border-radius": 16,
+            ));
+          display: flex;
+          align-items: end;
+          justify-content: center;
+          padding-bottom: 30px;
+        }
+
+        &:hover {
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+          background-color: $WHITE;
+        }
+      }
+    }
+
+    .solutionWrapper {
+      @include RP(("padding-bottom": 60,
+        ));
+
+      .solution {
+        @include RP(("padding-bottom": 60,
+          ));
+
+        .right {
+          @include RP(("padding-left": 40,
+              "padding-right": 40,
+            ));
+
+          @media screen and (max-width: 767px) {
+            @include RP(("padding-left": 20,
+                "padding-right": 20,
+              ));
+          }
+
+          @media screen and (max-width: 640px) {
+            @include RP(("padding-left": 30,
+                "padding-right": 30,
+              ));
+          }
+
+          svg {
+            @include RP(("width": 20,
+                "height": 20,
+              ));
+          }
+        }
+      }
+    }
+
+    .vision {
+      background-color: $WHITE;
+      @include RP(("padding-top": 50,
+          "padding-bottom": 50,
+        ));
+    }
+
+    .impact {
+      @include RP(("padding-top": 70,
+          "padding-bottom": 70,
+        ));
+
+      h4 {
+        color: $PRIMARY !important;
+      }
+
+      ul {
+        svg {
+          width: 3px;
+          height: 3px;
+        }
+      }
+    }
+  }
+
+  .quoteContainer {
+    max-width: 902px;
+    background-color: $WHITE;
+    text-align: center;
+    border: 1px solid $WHITE;
+    @include RP(("border-radius": 16,
+        "padding-top": 32,
+        "padding-bottom": 32,
+        "padding-left": 32,
+        "padding-right": 32,
+        // "margin-bottom": 60,
+      ));
+
+    p {
+      color: #18417E;
+      font-weight: 600;
+      font-style: italic;
+      @include RP(("font-size": 18,
+        ));
+
+      &:last-child {
+        font-weight: 700;
+        font-style: normal;
+        margin-top: 10px;
+      }
+    }
+
+    &:last-child {
+      @include RP(("margin-top": 60,
+        ));
+
+    }
+  }
+
+  h4,
+  h6 {
+    color: $BLUE;
+    font-weight: 700;
+  }
+
+  h2 {
+    color: $PRIMARY;
+  }
+}

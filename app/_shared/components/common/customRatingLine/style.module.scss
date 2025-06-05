@@ -1,0 +1,35 @@
+@use "global.scss" as *;
+
+.ratingLineContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.ratingLabel {
+  color: $LIGHT_GRAY2;
+  @include RP(
+    (
+      "font-size": 16,
+    )
+  );
+  margin-right: 8px;
+}
+
+.ratingLineWrapper {
+  width: 100%;
+  height: 2px;
+  background-color: $BORDER;
+  position: relative;
+  margin-right: 8px;
+}
+
+.ratingLine {
+  height: 100%;
+  background-color: $PRIMARY;
+}
+
+// .ratingValue {
+//   font-size: 14px;
+//   color: $LIGHT_GRAY2;
+// }

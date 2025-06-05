@@ -1,0 +1,15 @@
+@use "global.scss" as *;
+
+.buttonContainer {
+  @include RP(
+    (
+      "margin-top": 30,
+    ),
+    1
+  );
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #0092d60d !important;
+  border: 1px solid $BLUE !important;
+  color: $BLUE !important;
+}

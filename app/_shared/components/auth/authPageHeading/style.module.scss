@@ -1,0 +1,17 @@
+@use "global.scss" as *;
+
+.headingContainer {
+  h3 {
+    color: $PRIMARY;
+  }
+  p {
+    font-weight: 500;
+    @include RP(
+      (
+        "font-size": 16,
+        "margin-top": 10,
+      ),
+      1
+    );
+  }
+}

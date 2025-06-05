@@ -1,0 +1,126 @@
+@use "global.scss" as *;
+
+.paginationContainer {
+  @media screen and (max-width: 576px) {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .paginationInfo {
+    @include RP(
+      (
+        "font-size": 16,
+      )
+    );
+    color: $LIGHT_GRAY2;
+  }
+
+  .paginationItems {
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .paginationItem {
+    text-align: center;
+    color: $DESC;
+    background-color: $WHITE;
+    border: 0.5px solid $BORDER;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100px;
+    cursor: pointer;
+    font-weight: 400;
+    @include RP(
+      (
+        "width": 32,
+        "height": 32,
+        "font-size": 14,
+      )
+    );
+    &:hover {
+      color: $PRIMARY;
+    }
+  }
+
+  .active {
+    border-color: $PRIMARY;
+    color: $PRIMARY;
+    font-weight: 600;
+    @include RP(
+      (
+        "font-size": 12,
+      )
+    );
+  }
+
+  .dots {
+    color: $GRAY2;
+  }
+
+  .arrowContainer {
+    // border: 1px solid $BORDER;
+    background-color: #d7f2ff;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    @include RP(
+      (
+        "width": 32,
+        "height": 32,
+      )
+    );
+    svg {
+      @include RP(
+        (
+          "width": 15,
+          "height": 15,
+        )
+      );
+    }
+    .disabledIcon {
+      svg {
+        width: 15px !important;
+      }
+    }
+
+    &:hover {
+      color: $BLACK;
+    }
+  }
+
+  .disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed !important;
+    color: $GRAY2;
+    svg {
+      width: 15px !important;
+      path {
+        stroke: #92929d !important;
+      }
+    }
+  }
+
+  .activeContainer {
+    color: $BLACK;
+  }
+
+  .smallScreenDisplay {
+    display: none;
+  }
+
+  @media screen and (max-width: 576px) {
+    .paginationContainer {
+      flex-direction: column;
+    }
+
+    .smallScreenDisplay {
+      display: flex;
+    }
+  }
+}

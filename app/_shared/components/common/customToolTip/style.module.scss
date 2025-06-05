@@ -1,0 +1,48 @@
+@use "global.scss" as *;
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  max-height: 70px;
+  visibility: hidden;
+  background-color: $GRAY2 !important;
+  color: $WHITE;
+  text-align: center;
+  border-radius: 8px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 99 !important;
+  bottom: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px !important;
+  word-wrap: break-word;
+  max-width: 300px;
+  min-width: 250px;
+
+  // For mobile view
+  @media screen and (max-width: 769px) {
+    max-width: 200px !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    right: 0 !important;
+  }
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}

@@ -1,0 +1,16 @@
+@mixin elipsis($val) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: $val;
+  -webkit-box-orient: vertical;
+}
+
+@mixin hideScrollBar {
+  overflow: auto;
+  -ms-overflow-style: none; /* IE 11 */
+  scrollbar-width: none; /* Firefox 64 */
+  &::-webkit-scrollbar {
+    display: none !important;
+  }
+}

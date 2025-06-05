@@ -1,0 +1,36 @@
+@use "global.scss" as *;
+
+.jobsWrapper {
+  background-color: $LIGHT_BLUE;
+  min-height: 100vh;
+  height: 100%;
+  @include RP(("padding-top": 60,
+      "padding-bottom": 60,
+    ));
+}
+
+.jobsContainer {
+  // @include RP(
+  //   (
+  //     "margin-left": 200,
+  //     "margin-right": 200,
+  //   )
+  // );
+
+  @media screen and (max-width: 1200px) {
+    @include RP(("margin-left": 100,
+        "margin-right": 100,
+      ));
+  }
+
+  @media screen and (max-width: 768px) {
+    @include RP(("margin-left": 60,
+        "margin-right": 60,
+      ));
+  }
+
+  @media screen and (max-width: 425px) {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

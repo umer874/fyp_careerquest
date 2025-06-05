@@ -1,0 +1,18 @@
+@use "global.scss" as *;
+
+.backLink {
+  color: $PRIMARY;
+  font-weight: 500;
+  @include RP(
+    (
+      "font-size": 14,
+    )
+  );
+  svg {
+    @include RP(
+      (
+        "width": 16,
+      )
+    );
+  }
+}

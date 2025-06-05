@@ -1,0 +1,108 @@
+@use "global.scss" as *;
+
+.pageDetailWrapper {
+
+  padding-top: 30px;
+  width: 100%;
+
+  .box {
+
+    //flex-grow: 1;
+
+    .stepItem {
+      background-color: $WHITE;
+      box-shadow: 0px 4px 44px 0px #00162b12;
+      @include RP(("padding-left": 32,
+          "padding-right": 32,
+          "padding-top": 32,
+          "padding-bottom": 32,
+          "border-radius": 16,
+        ));
+
+      .iconContainer {
+
+        align-items: center;
+        justify-content: center;
+        @include RP(("width": 120,
+            "height": 120,
+            "margin-bottom": 60));
+
+        @media screen and (max-width: 640px) {
+          @include RP(("width": 50,
+              "height": 50,
+            ));
+        }
+
+        h2 {
+          font-family: var(--font-red-hat-display);
+          font-weight: 550;
+          @include RP(("font-size": 24,
+            ));
+          color: #0043CE;
+        }
+      }
+
+      .itemContent {
+        h2 {
+          color: #0043CE;
+          @include RP(("font-size": 64,
+            ));
+        }
+
+        p {
+          color: $DESC;
+          margin-top: 10px;
+          display: inline-block;
+          white-space: nowrap;
+
+          @include RP(("font-size": 16,
+            ));
+        }
+
+        span {
+          font-size: 12px;
+        }
+      }
+
+      button {
+        border: 1px solid #DDE6FC;
+        background-color: #DDE6FC;
+        padding: 8px;
+        border-radius: 12px;
+      }
+
+      .link {
+        border: 1px solid #DDE6FC;
+        background-color: #DDE6FC;
+        padding: 12px;
+        border-radius: 12px;
+        padding-right: 80px;
+        cursor: pointer;
+      }
+      .description{
+        border:1px solid #F7F9FC;
+        background-color: #F7F9FC;
+        border-radius:8px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        span{
+          font-size:10px;
+        }
+      }
+
+      .progress {
+        padding-top: 120px;
+        padding-left: 50px;
+
+        .imageContainer {
+          @include RP(("width": 150,
+              "height": 90,
+            ));
+        }
+      }
+    }
+
+  }
+
+}

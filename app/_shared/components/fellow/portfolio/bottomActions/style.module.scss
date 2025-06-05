@@ -1,0 +1,11 @@
+@use "global.scss" as *;
+
+.actionContainer {
+  border-top: 1px solid $BORDER;
+  @include RP(
+    (
+      "padding-top": 30,
+      "margin-top": 30,
+    )
+  );
+}

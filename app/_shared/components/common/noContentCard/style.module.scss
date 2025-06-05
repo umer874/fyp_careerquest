@@ -1,0 +1,40 @@
+@use "global.scss" as *;
+
+.noContentImg {
+  @include RP(
+    (
+      "height": 200,
+      "width": 200,
+    )
+  );
+}
+
+.labalContainer {
+  @include RP(
+    (
+      "max-width": 300,
+    )
+  );
+}
+
+.label1 {
+  @include RP(
+    (
+      "font-size": 20,
+      "line-height": 30,
+    )
+  );
+  color: $BLACK;
+  text-align: center;
+}
+
+.label2 {
+  @include RP(
+    (
+      "font-size": 18,
+      "line-height": 25,
+    )
+  );
+  color: #667085;
+  text-align: center;
+}

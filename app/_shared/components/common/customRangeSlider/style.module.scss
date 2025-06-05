@@ -1,0 +1,94 @@
+@use "global.scss" as *;
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .slider {
+    position: relative;
+    width: 100%;
+
+    .slider__track,
+    .slider__range,
+    .slider__left_value,
+    .slider__right_value {
+      position: absolute;
+    }
+
+    .slider__track,
+    .slider__range {
+      border-radius: 3px;
+    }
+
+    .slider__track {
+      background-color: $BORDER;
+      width: 100%;
+      z-index: 1;
+      height: 2px;
+    }
+
+    .slider__range {
+      background-color: $PRIMARY;
+      z-index: 2;
+      height: 4px;
+    }
+  }
+
+  /* Removing the default appearance */
+  .thumb,
+  .thumb::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .thumb {
+    pointer-events: none;
+    position: absolute;
+    height: 0;
+    width: 100%;
+    outline: none;
+  }
+
+  .thumb--left {
+    z-index: 3;
+  }
+
+  .thumb--right {
+    z-index: 4;
+  }
+
+  /* For Chrome browsers */
+  .thumb::-webkit-slider-thumb {
+    background-color: $PRIMARY;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    @include RP(
+      (
+        "height": 18,
+        "width": 18,
+      )
+    );
+    margin-top: 4px;
+    pointer-events: all;
+    position: relative;
+  }
+
+  /* For Firefox browsers */
+  .thumb::-moz-range-thumb {
+    background-color: $PRIMARY;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    @include RP(
+      (
+        "height": 18,
+        "width": 18,
+      )
+    );
+    margin-top: 4px;
+    pointer-events: all;
+    position: relative;
+  }
+}

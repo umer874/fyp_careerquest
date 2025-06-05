@@ -1,0 +1,14 @@
+@import "utils/responsive.module.scss";
+@import "utils/colors.scss";
+
+.eventWrapper {
+  background-color: $LIGHT_BLUE;
+  min-height: 100vh;
+
+  .contentContainer {
+
+    h2 {
+      color: $PRIMARY;
+    }
+  }
+}

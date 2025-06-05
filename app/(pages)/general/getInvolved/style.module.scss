@@ -1,0 +1,112 @@
+@import "utils/responsive.module.scss";
+@import "utils/colors.scss";
+
+.eventWrapper {
+  background-color: $LIGHT_BLUE;
+  // min-height: 100vh;
+
+  .contentContainer {
+
+    .ctaSection {
+      .ctaCard {
+        background-color: $WHITE;
+        max-height: 600px;
+        @include RP(("border-radius": 16,
+            "padding-top": 24,
+            "padding-bottom": 24,
+            "padding-left": 32,
+            "padding-right": 32,
+          ));
+
+        img {
+          width: 100%;
+        }
+
+        .content {
+          @include RP(("margin-top": 30,
+            ));
+
+          p {
+            @include RP(("height": 30))
+          }
+        }
+      }
+    }
+
+    .highlightsSection {
+      background-color: $LIGHT_BLUE;
+      @include RP(("padding-top": 30,
+          "padding-bottom": 60,
+        ));
+
+      .quoteContainer {
+        max-width: 902px;
+        background-color: #65B55E1A;
+        text-align: center;
+        border: 1px solid #65B55E;
+        @include RP(("border-radius": 16,
+            "padding-top": 32,
+            "padding-bottom": 32,
+            "padding-left": 32,
+            "padding-right": 32,
+            "margin-bottom": 60,
+          ));
+
+        p {
+          color: #65B55E;
+          font-weight: 600;
+          font-style: italic;
+          @include RP(("font-size": 18,
+            ));
+
+          &:last-child {
+            font-weight: 700;
+            font-style: normal;
+            margin-top: 10px;
+          }
+        }
+      }
+
+      .content {
+        svg {
+          @include RP(("width": 24,
+              "height": 24), 1);
+
+          path {
+            stroke: $BLUE;
+          }
+        }
+
+        background-color: $WHITE;
+        @include RP(("border-radius": 16,
+            "padding-top": 40,
+            "padding-bottom": 40,
+            "padding-left": 40,
+            "padding-right": 40,
+          ));
+
+        @media screen and (max-width: 600px) {
+          padding-bottom: 0;
+          @include RP(("border-radius": 10,
+              "padding-top": 20,
+              "padding-left": 20,
+              "padding-right": 20,
+            ));
+        }
+
+        .whySectionContent {
+          @include RP(("padding-top": 30,
+              "padding-bottom": 30,
+            ));
+
+        }
+      }
+    }
+
+    h3 {
+      color: $PRIMARY;
+      @include RP(("font-size": 30,
+        ));
+    }
+  }
+}

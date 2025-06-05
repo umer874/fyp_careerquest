@@ -1,0 +1,44 @@
+@use "global.scss" as *;
+
+.imgContainer {
+  width: 100%;
+  position: relative;
+  @include RP(
+    (
+      "height": 424,
+      "border-radius": 16,
+    )
+  );
+  img {
+    height: 100%;
+    @include RP(
+      (
+        "border-radius": 16,
+      )
+    );
+  }
+  video {
+    height: 100%;
+    @include RP(
+      (
+        "border-radius": 16,
+      )
+    );
+  }
+
+  .playIcon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    @include RP(
+      (
+        "width": 60,
+        "height": 60,
+      ),
+      1
+    );
+    cursor: pointer;
+  }
+}

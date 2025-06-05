@@ -1,0 +1,54 @@
+@use "global.scss" as *;
+
+.imgContainer {
+  height: 100%;
+  @include RP(("border-radius": 24,
+    ));
+
+  .imgWrapper {
+
+    @include RP(("height": 351));
+
+    img {
+      width: 100%;
+      height: 100% !important;
+      // min-height: 220px;
+      object-fit: cover;
+    }
+
+  }
+
+  .imgContent {
+    color: $WHITE;
+    // max-width: 55%;
+    @include RP(("padding-left": 30,
+        "padding-right": 30,
+      ));
+
+    @media screen and (max-width: 640px) {
+      max-width: 100%;
+    }
+
+
+    h4 {
+      text-transform: capitalize;
+    }
+
+    p {
+      color: rgba($color: #fff, $alpha: 0.8);
+      @include RP(("font-size": 14,
+          "margin-top": 10,
+        ));
+    }
+
+    .buttonContainer {
+      @include RP(("margin-top": 25,
+        ));
+    }
+  }
+
+  img {
+    @include RP(("border-radius": 24,
+      ));
+  }
+}

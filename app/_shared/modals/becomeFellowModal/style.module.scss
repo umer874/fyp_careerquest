@@ -1,0 +1,64 @@
+@use "global.scss" as *;
+
+.modalContentContainer {
+  @include RP(
+    (
+      "border-radius": 24,
+    )
+  );
+  .content {
+    .imgContainer {
+      background-color: #f5f5f6;
+      @include RP(
+        (
+          "border-radius": 16,
+          "padding-top": 24,
+          "padding-bottom": 24,
+          "padding-left": 24,
+          "padding-right": 24,
+        )
+      );
+    }
+    .contentItemContainer {
+      border-bottom: 1px solid $BORDER;
+
+      &:last-child {
+        border-bottom: 0 !important;
+      }
+      .contentItem {
+        @include RP(
+          (
+            "margin-bottom": 10,
+          )
+        );
+        .label {
+          color: #5f5b5b;
+          font-weight: 500;
+          @include RP(
+            (
+              "font-size": 16,
+            )
+          );
+        }
+        .value {
+          color: #303030;
+          font-weight: 500;
+          @include RP(
+            (
+              "font-size": 18,
+            )
+          );
+        }
+        .smallText {
+          color: #b2aeae;
+          font-weight: 500;
+          @include RP(
+            (
+              "font-size": 14,
+            )
+          );
+        }
+      }
+    }
+  }
+}

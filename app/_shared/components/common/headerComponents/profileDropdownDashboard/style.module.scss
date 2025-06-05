@@ -1,0 +1,131 @@
+@use "global.scss" as *;
+
+.dropdown {
+  position: relative;
+  .userName {
+    color: $PRIMARY !important;
+    @include RP(
+      (
+        "font-size": 14,
+      )
+    );
+  }
+  .userEmail {
+    color: $DESC;
+    font-family: var(--font-montserrat);
+    font-weight: 500;
+    @include RP(
+      (
+        "font-size": 12,
+      )
+    );
+  }
+
+  .dropdownToggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    .arrow {
+      img {
+        path {
+          stroke: $DESC !important;
+        }
+      }
+    }
+    img {
+      @include RP(
+        (
+          "width": 44,
+          "height": 44,
+        )
+      );
+      border-radius: 100%;
+    }
+  }
+
+  .dropdownMenu {
+    position: absolute;
+    opacity: 1 !important;
+    right: 0;
+    top: 52px;
+    @media screen and (max-width: 1200px) {
+      top: 46px;
+    }
+    color: $WHITE;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    max-width: 320px;
+    width: 280px;
+
+    .menuItems {
+      list-style: none;
+      padding: 0;
+      background-color: $WHITE !important;
+      opacity: 1 !important;
+
+      li {
+        padding-left: 20px;
+        padding-right: 20px;
+        border-bottom: 1px solid $BORDER;
+        color: $DARK2;
+        cursor: pointer;
+        @include RP(
+          (
+            "padding-top": 16,
+            "padding-bottom": 16,
+          ),
+          1
+        );
+        &:hover {
+          background-color: $LIGHT_BLUE;
+          color: $BLUE !important;
+          svg {
+            path {
+              stroke: $BLUE !important;
+            }
+          }
+        }
+        a {
+          @include RP(
+            (
+              "font-size": 16,
+            )
+          );
+          svg {
+            path {
+              stroke: $DARK2 !important;
+            }
+            @include RP(
+              (
+                "width": 24,
+              )
+            );
+          }
+        }
+      }
+      .logout {
+        svg {
+          path {
+            fill: $GRAY2 !important;
+          }
+        }
+        &:hover {
+          svg {
+            path {
+              stroke: $BLUE !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// @media (max-width: 375px) {
+//   .dropdownMenu {
+//     width: 100%;
+//     left: 0;
+//     right: 0;
+//   }
+// }

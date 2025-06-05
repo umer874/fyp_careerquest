@@ -1,0 +1,114 @@
+@use "global.scss" as *;
+
+.pageDetailWrapper {
+  height: 100% !important;
+  img {
+    @include RP(
+      (
+        "border-radius": 16,
+      )
+    );
+  }
+
+  .tabsContainer {
+    border-bottom: 1px solid $BORDER;
+    .tabs {
+      position: relative;
+    }
+
+    .tab {
+      color: $DESC;
+      position: relative;
+      padding: 4px 8px;
+      height: 100%;
+      @include RP(
+        (
+          "font-size": 16,
+        )
+      );
+    }
+    .activeTab {
+      color: $BLUE;
+      font-weight: 600;
+      border-color: $BLUE;
+
+      &::before {
+        position: absolute;
+        content: "";
+        background-color: $BLUE;
+        height: 2px;
+        width: 100%;
+        bottom: -1.5px;
+        left: 0;
+      }
+    }
+  }
+  .filtersContainer {
+    button {
+      svg {
+        path {
+          stroke: $WHITE;
+        }
+      }
+    }
+  }
+
+  .contentContainer {
+    @include RP(
+      (
+        "margin-top": 15,
+      )
+    );
+  }
+}
+
+.pdfWrapper {
+  background: $WHITE;
+  @include RP(
+    (
+      "padding": 24,
+      "border-radius": 24,
+      "margin-top": 24,
+      "max-width": 760,
+    )
+  );
+  width: 100%;
+
+  .actionContainer {
+    border-top: 1px solid $BORDER;
+    @include RP(
+      (
+        "padding-top": 30,
+        "margin-top": 30,
+      )
+    );
+  }
+}
+
+.replaceBtn {
+  background-color: $PRIMARY;
+  font-family: var(--font-montserrat) !important;
+  font-weight: 600;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: #fff;
+  @include RP(
+    (
+      "font-size": 14,
+      "padding-left": 32,
+      "padding-right": 32,
+      "padding-top": 13.5,
+      "padding-bottom": 13.5,
+      "max-height": 44,
+    )
+  );
+
+  border-radius: 100px;
+  outline: 0px;
+  transition: all 0.5s ease-in-out;
+  &:hover {
+    opacity: 0.65 !important;
+  }
+  width: fit-content;
+}

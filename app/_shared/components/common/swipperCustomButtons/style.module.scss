@@ -1,0 +1,38 @@
+@use "global.scss" as *;
+
+.customNavigation {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+
+  .swiperButton {
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    svg {
+      path {
+        stroke: $WHITE;
+      }
+      @include RP(
+        (
+          "width": 24,
+        ),
+        1
+      );
+    }
+
+    &:disabled,
+    &.swiper-button-disabled {
+      cursor: not-allowed;
+      svg path {
+        stroke: $GRAY;
+      }
+    }
+  }
+
+  .swiperButton:first-child {
+    margin-top: 0.5px;
+  }
+}

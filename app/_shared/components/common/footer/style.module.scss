@@ -1,0 +1,60 @@
+@use "global.scss" as *;
+
+.footer {
+  background-color: $PRIMARY;
+  border-top: 4px solid $WHITE;
+  @include RP(
+    (
+      "height": 80,
+      "padding-top": 15,
+      "padding-bottom": 15,
+    )
+  );
+  @media screen and (max-width: 768px) {
+    height: auto;
+  }
+
+  .menus {
+    li {
+      a {
+        color: $WHITE;
+        transition: all 0.3s ease-in-out;
+        font-weight: 500;
+        @include RP(
+          (
+            "font-size": 13,
+          )
+        );
+        &:hover {
+          color: $WHITE;
+        }
+      }
+    }
+  }
+
+  &__copyright {
+    p {
+      color: $WHITE;
+      font-weight: 500;
+      @include RP(
+        (
+          "font-size": 13,
+        )
+      );
+    }
+
+    a {
+      color: rgba(208, 208, 209, 1) !important;
+      position: relative;
+      transition: all 0.3s ease-in-out;
+      @include RP(
+        (
+          "font-size": 16,
+        )
+      );
+      &:hover {
+        color: $PRIMARY !important;
+      }
+    }
+  }
+}

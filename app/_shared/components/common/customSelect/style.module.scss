@@ -1,0 +1,140 @@
+@use "global.scss" as *;
+
+.selectWrapper {
+  border: 1px solid $BORDER;
+  background-color: $WHITE;
+  border-radius: 50px;
+  @include RP(
+    (
+      "height": 48,
+    )
+  );
+  .inputLabel {
+    font-weight: 500;
+    @include RP(
+      (
+        "font-size": 16,
+        "line-height": 21,
+        "padding-left": 20,
+        "padding-right": 10,
+        "padding-top": 12,
+        "padding-bottom": 12,
+      )
+    );
+    color: $PRIMARY;
+    text-align: center;
+
+    .asterik {
+      color: $RED !important;
+    }
+  }
+
+  .sortContainer {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border-radius: 50px;
+    position: relative;
+    width: 100%;
+
+    @include RP(
+      (
+        "height": 49,
+      )
+    );
+    .activeItem {
+      color: $PRIMARY !important;
+      @include RP(
+        (
+          "font-size": 14,
+        )
+      );
+    }
+    svg {
+      path {
+        stroke: $PRIMARY !important;
+      }
+    }
+  }
+
+  .sortLabel {
+    color: $LIGHT_GRAY2 !important;
+    @include RP(
+      (
+        "font-size": 15,
+      )
+    );
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    border-radius: 50px;
+    .triggerIcon {
+      svg {
+        path {
+          stroke: #aeaeb2 !important;
+        }
+      }
+    }
+    .chevDownFilled {
+      svg {
+        path {
+          stroke: #b2aeae !important;
+        }
+      }
+    }
+  }
+
+  .dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    // transform: translateX(-50%);
+    background-color: $WHITE;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 0.5rem;
+    width: 100%;
+    z-index: 10;
+    min-width: fit-content !important;
+
+    // @media (max-width: 1200px) {
+    //   left: auto;
+    //   right: 0;
+    //   transform: translateX(-20%);
+    // }
+  }
+
+  .optionItem {
+    padding: 0.5rem 1rem;
+    text-wrap: nowrap;
+    @include RP(
+      (
+        "font-size": 16,
+      )
+    );
+    cursor: pointer;
+    &:hover {
+      background-color: $LIGHT_BLUE;
+      &:first-child {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+      }
+      &:last-child {
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+    }
+  }
+
+  .active {
+    background-color: $LIGHT_BLUE;
+    &:first-child {
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    &:last-child {
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+  }
+}

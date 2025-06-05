@@ -1,0 +1,52 @@
+@use "global.scss" as *;
+
+.badge_container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  max-height: 64px;
+  @include RP(
+    (
+      "border-radius": 16,
+      "padding-left": 16,
+      "padding-right": 16,
+      "padding-top": 16,
+      "padding-bottom": 16,
+    )
+  );
+
+  .badge_title {
+    font-size: 12px;
+    margin: 0;
+    @media screen and (max-width: 576px) {
+      font-size: 10px !important;
+    }
+    svg {
+      @include RP(
+        (
+          "width": 32,
+        ),
+        1
+      );
+    }
+  }
+  .close_button {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: $PRIMARY;
+    margin-left: auto;
+    svg {
+      path {
+        fill: $PRIMARY;
+      }
+      @include RP(
+        (
+          "width": 19,
+        )
+      );
+    }
+  }
+}

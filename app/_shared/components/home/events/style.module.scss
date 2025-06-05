@@ -1,0 +1,19 @@
+@use "global.scss" as *;
+
+.sectionContainer {
+  background-color: $LIGHT_BLUE;
+  @include RP(
+    (
+      "padding-top": 60,
+      "padding-bottom": 80,
+    )
+  );
+}
+
+.buttonContainer {
+  @include RP(
+    (
+      "margin-top": 50,
+    )
+  );
+}
