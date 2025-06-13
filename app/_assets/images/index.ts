@@ -59,7 +59,9 @@ import User1 from "./user1.png";
 import Gragh from "./Graph.png";
 import UI from "./UI.png";
 import React from "./React.png";
-import Python from "./Python.png";
+import 
+ from "./
+.png";
 import Profile from "./user2.png";
 import Chart from "./Chart.png";
 import Figma from "./figma.png";
@@ -140,7 +142,8 @@ const Images = {
   Gragh,
   UI,
   React,
-  Python,
+  
+,
   Profile,
   Chart,
   Figma,

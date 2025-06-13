@@ -1,6 +1,8 @@
 import { Icons, Images } from "assets";
 import React from "../../_assets/images/React.png";
-import Python from "../../_assets/images/Python.png";
+import 
+ from "../../_assets/images/
+.png";
 import UI from "../../_assets/images/UI.png";
 import SeniorUI from "../../_assets/images/seniorUI.png";
 
@@ -161,7 +163,8 @@ const jobData = [
     "applyButton": "Apply Now"
   },
   {
-    "title": "Python Developer",
+    "title": "
+ Developer",
     "company": "System Limited",
     "salaryRange": "85,000 - 1,000,000",
     "location": "Lahore, Pakistan",
@@ -169,7 +172,8 @@ const jobData = [
     "experience": ["4+ yrs exp"],
     "workMode": ["On-Site"],
     "image": {
-      "src": Python, // Corrected image path
+      "src": 
+, // Corrected image path
       "width": 200,
       "height": 200
     },
@@ -213,12 +217,15 @@ const jobs = [
     company: {
       title: "Slack Technologies, LLC",
       company_asset: {
-        icon: Python, // Imported icon
+        icon: 
+, // Imported icon
         width: 200,
         height: 200
       }
     },
-    position_overview: "As a Python Developer, you will collaborate with the development team to build robust, scalable, and efficient backend systems while refining your skills in Python programming. This role involves writing clean, maintainable code, developing APIs, integrating databases, and contributing to projects that enhance application performance and user experience, ensuring alignment with business requirements and technical goals.",
+    position_overview: "As a 
+ Developer, you will collaborate with the development team to build robust, scalable, and efficient backend systems while refining your skills in 
+ programming. This role involves writing clean, maintainable code, developing APIs, integrating databases, and contributing to projects that enhance application performance and user experience, ensuring alignment with business requirements and technical goals.",
     created_at: "2025-01-18T12:40:00Z"
   },
   // Add more job objects here...

@@ -63,7 +63,8 @@ const Test = () => {
             question: "Which programming language are you most proficient in?",
             options: [
                 { id: 'A', text: 'C++' },
-                { id: 'B', text: 'Python' },
+                { id: 'B', text: '
+' },
                 { id: 'C', text: 'Java' },
                 { id: 'D', text: 'JavaScript' },
                 { id: 'E', text: 'Other' },
