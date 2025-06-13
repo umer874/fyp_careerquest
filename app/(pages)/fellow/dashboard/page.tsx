@@ -5,21 +5,12 @@ import styles from "./style.module.scss";
 import { Icons, Images } from "assets";
 import Image from "next/image";
 import { jobData } from "utils/constants";
-import CustomInput from "components/common/customInput";
-import CustomPhoneInput from "components/common/customPhoneInput";
-import CustomTextArea from "components/common/customTextArea";
 import CustomButton from "components/common/customButton";
 import ProgressBar from "components/common/progressBar";
 import VacancyStatsChart from "components/common/vacancyStatsChart";
-import RatingLine from "components/common/customRatingLine";
-import { ContactUsService } from "services/general";
-import { toastMessage } from "components/common/toast";
-import { handleErrors } from "utils/helper";
-import { ContactVS } from "utils/validation";
-import { useFormik } from "formik";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect , ReactNode} from "react";
 
 const Dashbaord = () => {
 

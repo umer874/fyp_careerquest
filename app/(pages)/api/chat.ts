@@ -7,10 +7,6 @@ interface CareerMatch {
   icon: string;
 }
 
-const isValidCareerMatch = (data: any): data is CareerMatch => {
-  return data?.title && data?.description && data?.icon;
-};
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -25,8 +21,6 @@ export default async function handler(
   if (!answers || !Array.isArray(answers) || answers.length === 0) {
     return res.status(400).json({ error: 'Invalid answers format' });
   }
-
-  try {
     const prompt = `
     You are a career advisor AI. Based on the following quiz answers, suggest the most suitable IT career. Be concise and include a title, description, and emoji icon.
     
@@ -60,15 +54,8 @@ export default async function handler(
 
     const jsonResponse = JSON.parse(content);
     
-    if (!isValidCareerMatch(jsonResponse)) {
-      throw new Error('Invalid career match data structure');
-    }
+    
 
     res.status(200).json(jsonResponse);
-  } catch (err: any) {
-    console.error('API Error:', err);
-    const status = err.response?.status || 500;
-    const message = err.response?.data?.error?.message || err.message || 'Unknown error';
-    res.status(status).json({ error: 'Failed to fetch career match', details: message });
-  }
+  
 }

@@ -8,10 +8,10 @@ import AuthSlider from "components/auth/authSlider";
 import { routeConstant } from "routes/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense,ReactNode } from "react";
 
 interface LayoutProps {
-  children: any;
+  children: ReactNode;
 }
 
 const Layout = ({ children }: LayoutProps) => {

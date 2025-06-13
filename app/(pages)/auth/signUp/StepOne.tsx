@@ -104,12 +104,12 @@ const StepOne = ({
           placeholder="YYYY-MM-DD"
           required
           value={values.dob}
-          onChange={(e) =>
-            handleChange({
-              // @ts-error
-              target: { name: "dob", value: e.target.value },
-            } as React.ChangeEvent<HTMLInputElement>)
-          }
+          // onChange={(e) =>
+          //   handleChange({
+          //     // @ts-error
+          //     target: { name: "dob", value: e.target.value },
+          //   } as React.ChangeEvent<HTMLInputElement>)
+          // }
           error={touched.dob && errors.dob ? errors.dob : ""}
         />
 
