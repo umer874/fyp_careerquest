@@ -16,7 +16,6 @@ import { LoginVS } from "utils/validation";
 import AuthPageHeading from "components/auth/authPageHeading";
 import { LoginService } from "services/auth";
 import { handleErrors } from "utils/helper";
-//import { UserType } from "utils/enum";
 
 const initialValues: LoginType = {
   email: "",
@@ -47,58 +46,57 @@ const Login = () => {
     setSubmitting,
   } = formik;
 
-  const handleLogin = (values: LoginType) => {
-    setSubmitting(true);
-    LoginService(values)
-      .then(({ data: { data }, status }) => {
-        if (status) {
-          dispatch(
-            setAuthReducer({
-              isLoggedIn: true,
-              user: data?.user,
-              token: data?.accessToken,
-              refreshToken: data?.refreshToken,
-            })
-          );
-          setCookie(
-            "user",
-            JSON.stringify({
-              isLoggedIn: true,
-              id: data?.user?.id,
-              first_name: data?.user?.first_name,
-              last_name: data?.user?.last_name,
-              email: data?.user?.email,
-              role: data?.user?.type,
-              profile_asset: data?.user?.profile_asset?.full_path ?? "",
-              resume_asset: data?.user?.resume_asset?.full_path ?? "",
-            }),
-            {
-              path: "/fellow/dashbaord",
-              maxAge: 3600 * 24 * 30,
-              sameSite: true,
-            }
-          );
-          setCookie("token", data?.accessToken, {
-            path: "/fellow/dashboard",
-            maxAge: 3600 * 24 * 30,
-            sameSite: true,
-          });
-
-          setCookie("refreshToken", data?.refreshToken, {
-            path: "/fellow/dashboard",
-            maxAge: 3600 * 24 * 30,
-            sameSite: true,
-          });
-         
-            router.push(routeConstant.fellow.dashboard.path);
-          }
-        
+ const handleLogin = (values: LoginType) => {
+  setSubmitting(true);
+  LoginService(values)
+    .then(({ data, status }) => {
+  if (status === 200) {
+    dispatch(
+      setAuthReducer({
+        isLoggedIn: true,
+        user: data.user,
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
       })
-      .catch((err) => {
-        handleErrors(err);
-        setSubmitting(false);
-      });
-  };
+    );
+
+        setCookie(
+          "user",
+          JSON.stringify({
+            isLoggedIn: true,
+            id: data?.user?.id,
+            first_name: data?.user?.first_name,
+            last_name: data?.user?.last_name,
+            email: data?.user?.email,
+      
+          }),
+          {
+            path: "/fellow/test",
+            maxAge: 3600 * 24 * 30,
+            sameSite: true,
+          }
+        );
+
+        setCookie("token", data?.accessToken, {
+          path: "/fellow/test",
+          maxAge: 3600 * 24 * 30,
+          sameSite: true,
+        });
+
+        setCookie("refreshToken", data?.refreshToken, {
+          path: "/fellow/test",
+          maxAge: 3600 * 24 * 30,
+          sameSite: true,
+        });
+
+        router.push(routeConstant.test.path);
+      }
+    })
+    .catch((err) => {
+      handleErrors(err);
+      setSubmitting(false);
+    });
+};
 
   return (
     <div className={classNames(styles.auth_page_container, "h-full")}>

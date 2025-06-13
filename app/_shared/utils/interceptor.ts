@@ -7,7 +7,11 @@ import { BaseURL } from "./endpoints";
 export const HTTP_CLIENT = axios.create({
   baseURL: BaseURL,
   timeout: 30000,
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
+
 
 const isServer = typeof window === "undefined";
 

@@ -8,12 +8,12 @@ type RegisterType = {
   lastName: string;
   email: string;
   dob: string;
-  //address: string;
   phone: string;
-  coordinates: number[];
+  coordinates?: number[];
   checked: boolean;
   file: File | null;
 };
+
 
 type CreatePasswordType = {
   password: string;

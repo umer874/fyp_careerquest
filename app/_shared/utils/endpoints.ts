@@ -1,12 +1,13 @@
-const BaseURL = "";
+const BaseURL = "http://localhost:3001/api/";
+
 
 const GoogleKey = "";
 
 const Endpoint = {
   auth: {
-    login: "auth/sign-in",
-    register: "users/register",
-    refreshToken: "auth/refresh-tokens",
+    login: "/sign-in",
+    register: "/register",
+    refreshToken: "/refresh-tokens",
     resetRequest: "auth/reset-request",
     resetPassword: "auth/reset-password",
     updatePassword: "auth/update-password",
@@ -26,10 +27,7 @@ const Endpoint = {
   },
   user: {
     update: "users/update-profile",
-    applyFellowship: "users/apply-fellowship",
     getUpdatedUser: "users/get-updated-user",
-    addUpdateResume: "users/add-update-resume",
-    deleteResume: "users/delete-resume",
     getUser: "users/get-user/:id",
     addFcmToken: "users/add-fcm-token",
   },

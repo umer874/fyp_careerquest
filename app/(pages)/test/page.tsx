@@ -19,6 +19,8 @@ import { handleErrors } from "utils/helper";
 import { ContactVS } from "utils/validation";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 
 type Option = {
@@ -215,18 +217,27 @@ const Test = () => {
         setCareerMatch(null);
     };
 
-//     const navigate = useNavigate();
+    const router = useRouter();
+    const { isLoggedIn } = useSelector((state: any) => state.root.auth);
 
-//     const handleGoToDashboard = () => {
-//     navigate('fellow/dashboard'); 
-// };
+    useEffect(() => {
+        if (!isLoggedIn) {
+            router.replace("/auth/login"); // Redirect if not logged in
+        }
+    }, [isLoggedIn]);
+
+    //     const navigate = useNavigate();
+
+    //     const handleGoToDashboard = () => {
+    //     navigate('fellow/dashboard'); 
+    // };
 
     const isContinueDisabled = selectedOptions[currentQuestion] === null;
 
     if (step === 'result' && careerMatch) {
         return (
-            <div className={classNames(styles.resultContainer,'items-center')}>
-                <div className={classNames(styles.resultCard,'items-center')}>
+            <div className={classNames(styles.resultContainer, 'items-center')}>
+                <div className={classNames(styles.resultCard, 'items-center')}>
                     <div className={classNames(styles.confetti)}>
                         {Array.from({ length: 50 }).map((_, i) => (
                             <div key={i} className={classNames(styles.confettiPiece)} />
@@ -243,17 +254,17 @@ const Test = () => {
                     <p className={classNames(styles.careerDescription)}>{careerMatches[careerMatch].description}</p>
 
                     <div className='flex gap-4 items-center text-center'>
-                         <button className={classNames(styles.restartButton)} onClick={handleRestart}>
-                        Take Quiz Again
-                    </button>
+                        <button className={classNames(styles.restartButton)} onClick={handleRestart}>
+                            Take Quiz Again
+                        </button>
 
-                    {/* New Dashboard Button */}
-                   <button 
-                        className={classNames(styles.restartButton, styles.dashboardButton)} 
-                        onClick={() => window.location.href = '/fellow/dashboard'}
-                    >
-                        Go to Dashboard
-                    </button>
+                        {/* New Dashboard Button */}
+                        <button
+                            className={classNames(styles.restartButton, styles.dashboardButton)}
+                            onClick={() => window.location.href = '/fellow/dashboard'}
+                        >
+                            Go to Dashboard
+                        </button>
                     </div>
 
                 </div>
@@ -261,7 +272,9 @@ const Test = () => {
         );
     }
 
-    return (
+    return isLoggedIn ?
+
+        
 
         <div className={classNames(styles.customContainer)}>
             <div className={classNames(styles.pageDetailWrapper)}>
@@ -325,7 +338,7 @@ const Test = () => {
 
         </div>
 
-    )
+    :null
 };
 
 export default Test;

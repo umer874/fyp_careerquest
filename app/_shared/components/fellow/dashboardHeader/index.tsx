@@ -20,11 +20,11 @@ import { fellowRoutes } from "routes/authRoutes";
 
 interface Props {
   openMobile: () => void;
+  userCookie: any;
 }
 
-function DashboardHeader({ openMobile }: Props) {
+function DashboardHeader({ openMobile, userCookie }: Props) {
   const { auth } = useSelector((state: any) => state.root);
-
   const pathname = usePathname();
   const dispatch = useDispatch();
   const [cookie, setCookie] = useCookies();
@@ -109,9 +109,10 @@ function DashboardHeader({ openMobile }: Props) {
     // eslint-disable-next-line
   }, [pathname]);
 
-  // useEffect(() => {
-  //   handleGetUpdatedUser();
-  // }, []);
+  useEffect(() => {
+    handleGetUpdatedUser();
+     initSocket(userCookie.id);
+  }, []);
 
   return (
     <>
@@ -135,9 +136,11 @@ function DashboardHeader({ openMobile }: Props) {
               <NotificationsDropdown />
             </div>
             <div className={classNames(styles.profileContainer)}>
+              <MyContext.Provider value={{ user: userCookie }}>
                 <ProfileDropdownDashboard
                   path={routeConstant.fellow.profileSettings.path}
                 />
+              </MyContext.Provider>
             </div>
           </div>
         </div>

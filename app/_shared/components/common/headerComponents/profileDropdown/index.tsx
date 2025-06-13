@@ -9,8 +9,8 @@ import { resetRedux } from "utils/helper";
 import Image from "next/image";
 
 interface ProfileDropdownProps {
-  user: {
-    name: string;
+   user: {
+    firstName: string;
     email: string;
     avatar: string;
   };
@@ -85,7 +85,7 @@ const ProfileDropdown = ({ user }: ProfileDropdownProps) => {
               alt="profile"
             />
             <div>
-              <h4 className={styles.userName}>{user?.name}</h4>
+              <h4 className={styles.userName}>{user?.firstName}</h4>
               <p className={styles.userEmail}>{user?.email}</p>
             </div>
           </div>

@@ -214,13 +214,13 @@ const SignUp = () => {
             />
           )}
           <CustomButton
-            // @ts-error
-            onClick={handleSubmit}
+            onClick={() => handleSubmit()}
             title={step === 1 ? "Continue" : "Signup"}
             containerStyle="w-full maxHeighted_btn bg-blue"
             loading={isSubmitting}
             disabled={isSubmitting}
           />
+
         </div>
 
         {step === 1 && (

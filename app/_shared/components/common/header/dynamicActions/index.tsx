@@ -11,7 +11,6 @@ import ProfileDropdown from "components/common/headerComponents/profileDropdown"
 import { Icons } from "assets";
 import BecomeFellowModal from "modals/becomeFellowModal";
 import { useRouter } from "next13-progressbar";
-//import { UserType } from "utils/enum";
 
 const DynamicActions = () => {
   const {
@@ -29,9 +28,9 @@ const DynamicActions = () => {
   };
 
   const handleNavigation = () => {
-    
-      router.push(routeConstant.fellow.dashboard.path);
-    
+
+    router.push(routeConstant.fellow.dashboard.path);
+
   };
 
   return (
@@ -46,19 +45,21 @@ const DynamicActions = () => {
           <>
             <ProfileDropdown
               user={{
-                name: user?.first_name + " " + user?.last_name,
+                firstName: user?.first_name + " " + user?.last_name,
                 email: user?.email,
                 avatar: user?.profile_asset?.full_path,
               }}
+
             />
             <div className="hidden sm:block">
-             
-                <CustomButton
-                  title="Go to Dashboard"
-                  containerStyle="outlined-button-secondary"
-                  onClick={handleNavigation}
-                />
-              
+
+
+              <CustomButton
+                title="Go to Dashboard"
+                containerStyle="outlined-button-secondary"
+                onClick={handleNavigation}
+              />
+
             </div>
           </>
         ) : (
@@ -79,6 +80,11 @@ const DynamicActions = () => {
           </>
         )}
       </div>
+      <BecomeFellowModal
+        title="Become a fellow"
+        isOpen={becomeFellowModal}
+        onClose={closeFellowModal}
+      />
     </>
   );
 };
@@ -100,16 +106,26 @@ export default dynamic(() => Promise.resolve(DynamicActions), {
           <>
             <ProfileDropdown
               user={{
-                name: user?.first_name + " " + user?.last_name,
+                firstName: user?.first_name + " " + user?.last_name,
                 email: user?.email,
-                avatar: user?.profile_asset,
+                avatar: user?.profile_asset?.full_path,
               }}
+
             />
             <div className="hidden sm:block">
-                <CustomButton
-                  title="Go to Dashboard"
-                  containerStyle="outlined-button-secondary"
-                />
+
+              <CustomButton
+                title="Become a Fellow"
+                Icon={Icons.Briefcase}
+                IconDirection="left"
+                containerStyle="outlined-button-secondary"
+              />
+
+              <CustomButton
+                title="Go to Dashboard"
+                containerStyle="outlined-button-secondary"
+              />
+
             </div>
           </>
         ) : (

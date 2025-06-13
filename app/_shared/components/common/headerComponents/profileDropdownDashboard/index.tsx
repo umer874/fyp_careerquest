@@ -140,47 +140,47 @@ export default dynamic(() => Promise.resolve(ProfileDropdownDashboard), {
   loading: () => {
     const value = useContext(MyContext);
 
-    if (!value || !value.user) {
-      return null; // Return null to avoid the error
-    }
+     const { user } = value;
 
-    return (
+    return user ? (
       <div
         className={classNames(
           styles.actionContainer,
           "gap-3 items-center hidden sm:flex"
         )}
       >
-        <div className={classNames(styles.dropdown, "flex items-center gap-2")}>
-          <button
-            className={classNames(
-              styles.dropdownToggle,
-              "flex items-center gap-2 "
-            )}
+        <>
+          <div
+            className={classNames(styles.dropdown, "flex items-center gap-2")}
           >
-            <Image
-              width={44}
-              height={44}
-              src={
-                value.user.profile_asset
-                  ? value.user.profile_asset
-                  : Images.DefaultAvatar
-              }
-              alt="profile"
-            />
-            <div className="text-left hidden xs:block">
-              <h6 className={classNames(styles.userName)}>
-                {value.user.first_name + " " + value.user.last_name}
-              </h6>
-              <p className={classNames(styles.userEmail)}>
-                {value.user.email}
-              </p>
-            </div>
-            <Icons.ChevDownFilled />
-          </button>
-        </div>
+            <button
+              className={classNames(
+                styles.dropdownToggle,
+                "flex items-center gap-2 "
+              )}
+            >
+              <Image
+                width={44}
+                height={44}
+                src={
+                  user?.profile_asset
+                    ? user?.profile_asset
+                    : Images.DefaultAvatar
+                }
+                alt="profile"
+              />
+              <div className="text-left hidden xs:block">
+                <h6 className={classNames(styles.userName)}>
+                  {user?.first_name + " " + user?.last_name}
+                </h6>
+                <p className={classNames(styles.userEmail)}>{user?.email}</p>
+              </div>
+              <Icons.ChevDownFilled />
+            </button>
+          </div>
+        </>
       </div>
-    );
+    ) : null;
   },
 });
 

@@ -5,10 +5,10 @@ interface LayoutProps {
   children: React.ReactNode;
 }
 
-const Layout = ({ children }: Partial<LayoutProps>) => {
-  //const user = await GetCookieUser();
+const Layout = async ({ children }: Partial<LayoutProps>) => {
+  const user = await GetCookieUser();
   return (
-    <FellowDashboardWrapper>{children}</FellowDashboardWrapper>
+    <FellowDashboardWrapper user={user}>{children}</FellowDashboardWrapper>
   );
 };
 

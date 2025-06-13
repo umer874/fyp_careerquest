@@ -58,18 +58,37 @@ function findScreenTitle(
 }
 
 const resetRedux = () => {
-  const { auth }: any = store.getState().root;
-  if (auth?.token) {
+  const stateBefore = store.getState().root.auth;
+
+  console.log("Before reset:");
+  console.log("isLoggedIn:", stateBefore?.isLoggedIn);
+  console.log("token:", stateBefore?.token);
+  console.log("refreshToken:", stateBefore?.refreshToken);
+
+  if (stateBefore?.isLoggedIn || stateBefore?.token) {
     store.dispatch(resetAuthReducer());
-    if (document) {
-      document.cookie.split(";").forEach(function (c) {
+
+    // Clear cookies
+    if (typeof document !== "undefined") {
+      document.cookie.split(";").forEach((c) => {
         document.cookie = c
           .replace(/^ +/, "")
           .replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
       });
     }
+
+    const stateAfter = store.getState().root.auth;
+
+    console.log("After reset:");
+    console.log("isLoggedIn:", stateAfter?.isLoggedIn);
+    console.log("token:", stateAfter?.token);
+    console.log("refreshToken:", stateAfter?.refreshToken);
+  } else {
+    console.log("No token or login found to reset.");
   }
 };
+
+
 
 function getTopPosition(divElement: HTMLElement) {
   const rect = divElement.getBoundingClientRect();

@@ -1,22 +1,37 @@
 "use client";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initState: any = {
-  user: {},
+interface AuthState {
+  user: {
+    first_name?: string;
+    last_name?: string;
+    email?: string;
+    profile_asset?: string | null;
+  } | null;
+  isLoggedIn: boolean;
+  accessToken: string;
+  refreshToken: string;
+}
+
+const initialState: AuthState = {
+  user: null,
   isLoggedIn: false,
-  token: "",
+  accessToken: "",
   refreshToken: "",
 };
 
 export const authSlice = createSlice({
   name: "auth",
-  initialState: initState,
+  initialState,
   reducers: {
     setAuthReducer: (state, action) => {
-      let tempObj = { ...state, ...action.payload };
-      return tempObj;
+      const { user, accessToken, refreshToken } = action.payload;
+      state.user = user;
+      state.accessToken = accessToken;
+      state.refreshToken = refreshToken;
+      state.isLoggedIn = true;
     },
-    resetAuthReducer: () => initState,
+    resetAuthReducer: () => initialState,
   },
 });
 

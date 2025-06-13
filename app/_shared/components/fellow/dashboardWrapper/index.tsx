@@ -9,9 +9,10 @@ import styles from "./style.module.scss";
 
 interface Props {
   children: any;
+  user: any;
 }
 
-function FellowDashboardWrapper({ children }: Props) {
+function FellowDashboardWrapper({ children,user }: Props) {
   const [isSideCanvas, setIsSideCanvas] = useState<boolean>(false);
   const handleOpen = () => {
     setIsSideCanvas(!isSideCanvas);
@@ -32,7 +33,7 @@ function FellowDashboardWrapper({ children }: Props) {
       </aside>
 
       <main id="mainContainer" className={classNames(styles.mainContainer)}>
-        <DashboardHeader openMobile={handleOpen}  />
+        <DashboardHeader openMobile={handleOpen} userCookie={user} />
         <div
           // id="container-padding"
           className={classNames(
