@@ -196,7 +196,7 @@ const CustomInput: ForwardRefRenderFunction<any, Partial<InputProps>> = (
               onPaste={onPaste}
             />
           )}
-          {isPassword &&
+          {/* {isPassword &&
             (inputType === "password" ? (
               <Icons.EyeDisable
                 role="button"
@@ -209,7 +209,7 @@ const CustomInput: ForwardRefRenderFunction<any, Partial<InputProps>> = (
                 onClick={() => setInputType("password")}
                 className={classNames(styles.iconStyleEye)}
               />
-            ))}
+            ))} */}
           {IconDirection === direction.right ? (
             Icon ? (
               <Icon

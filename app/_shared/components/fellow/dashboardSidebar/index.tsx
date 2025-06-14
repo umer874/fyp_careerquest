@@ -79,7 +79,7 @@ function DashboardSidebar({ sidebarArr }: Props) {
             />
 
           </div>
-          
+
           <div
             className={classNames(styles.sideNavFull, "flex flex-col gap-0.5")}
           >
@@ -116,7 +116,7 @@ function DashboardSidebar({ sidebarArr }: Props) {
               className={classNames(styles.navItemContainer)}
               onClick={handleOpenConfirmationModal}
             >
-              <div className={classNames(styles.logoutIcon)}  onClick={handleLogout}>
+              <div className={classNames(styles.logoutIcon)} onClick={handleLogout}>
 
                 <Icons.Logout />
               </div>
@@ -134,13 +134,14 @@ function DashboardSidebar({ sidebarArr }: Props) {
         </div>
       </div>
       <ConfirmationModal
-        // @ts-error
-        show={openConfirmationModal}
-        handleClose={handleCloseConfirmationModal}
-        subtitle="Are you sure you want to logout?"
-        actionButtonText="Yes, Logout"
-        handleSubmit={handleLogout}
+        isOpen={openConfirmationModal} // ✅ correct prop
+        onClose={handleCloseConfirmationModal} // ✅ correct prop
+        title="Logout" // ✅ required prop
+        description="Are you sure you want to logout?" // ✅ optional
+        actionButtonText="Yes, Logout" // ✅ optional
+        onConfirm={handleLogout} // ✅ correct prop
       />
+
     </div>
   );
 }

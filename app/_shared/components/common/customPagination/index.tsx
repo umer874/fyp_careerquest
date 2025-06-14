@@ -73,11 +73,11 @@ const CustomPagination = ({
             })}
             onClick={currentPage > 1 ? onPrevious : undefined}
           >
-            <Icons.ChevLeft
+            {/* <Icons.ChevLeft
               className={classNames(styles.iconStyle, {
                 [styles.disabledIcon]: currentPage === 1,
               })}
-            />
+            /> */}
           </li>
         )}
 
@@ -102,11 +102,11 @@ const CustomPagination = ({
             })}
             onClick={currentPage < lastPage ? onNext : undefined}
           >
-            <Icons.ChevRight
+            {/* <Icons.ChevRight
               className={classNames(styles.iconStyle, {
                 [styles.disabledIcon]: currentPage === lastPage,
               })}
-            />
+            /> */}
           </li>
         )}
       </ul>
