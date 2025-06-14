@@ -3,8 +3,8 @@ import { GetPortfoliosServerCall } from "services/portfolio";
 import { GetCookieUser, GetTokensFromCookies } from "utils/server-side-helper";
 
 const Porfolios = async () => {
-  const { token, refreshToken } = await GetTokensFromCookies();
-  const user = await GetCookieUser();
+  // const { token, refreshToken } = await GetTokensFromCookies();
+  // const user = await GetCookieUser();
 
   // const { response, updatedToken } = await GetPortfoliosServerCall({
   //   token,

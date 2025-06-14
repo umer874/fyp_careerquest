@@ -10,30 +10,30 @@ import { GetTokensFromCookies } from "utils/server-side-helper";
 import styles from "./style.module.scss";
 import AssetPreview from "components/common/assetPreview";
 
-const PortfolioDetail = async ({ params }: any) => {
-  const { id } = await params;
+const PortfolioDetail =  ({ params }: any) => {
+  const { id } =  params;
   if (!id) {
     redirect(routeConstant.fellow.portfolios.path);
   }
-  const { token, refreshToken } = await GetTokensFromCookies();
-  const { response, updatedToken } = await GetPortfolioDetailServerCall({
-    token,
-    refreshToken,
-    id,
-  });
+  //const { token, refreshToken } = await GetTokensFromCookies();
+  // const { response, updatedToken } = await GetPortfolioDetailServerCall({
+  //   token,
+  //   refreshToken,
+  //   id,
+  // });
 
-  if (!response?.data) {
-    redirect(routeConstant.fellow.portfolios.path);
-  }
+  // if (!response?.data) {
+  //   redirect(routeConstant.fellow.portfolios.path);
+  // }
 
-  const portfolioItem = response?.data;
+  // const portfolioItem = response?.data;
 
   return (
     <>
       <div className={classNames(styles.customContainer)}>
         <div className={classNames(styles.eventDetailContainer)}>
           <div className={classNames(styles.portfolioContent)}>
-            <AssetPreview {...portfolioItem.portfolio_asset} />
+            {/* <AssetPreview {...portfolioItem.portfolio_asset} /> */}
 
             <div
               className={classNames(
@@ -44,15 +44,15 @@ const PortfolioDetail = async ({ params }: any) => {
               <span>
                 <Icons.Calendar />
               </span>
-              <p>{moment(portfolioItem?.created_at).format("DD MMMM, YYYY")}</p>
+              {/* <p>{moment(portfolioItem?.created_at).format("DD MMMM, YYYY")}</p> */}
             </div>
-            <div className={classNames(styles.heading)}>
+            {/* <div className={classNames(styles.heading)}>
               <h3 className={classNames(styles.title)}>
                 {portfolioItem.title}
               </h3>
               <p>{portfolioItem.description}</p>
-            </div>
-            <BottomActions updatedToken={updatedToken} item={portfolioItem} />
+            </div> */}
+            {/* <BottomActions updatedToken={updatedToken} item={portfolioItem} /> */}
           </div>
         </div>
       </div>
