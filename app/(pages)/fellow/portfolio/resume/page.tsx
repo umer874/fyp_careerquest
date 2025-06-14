@@ -3,9 +3,7 @@ import React from "react";
 import { GetCookieUser } from "utils/server-side-helper";
 const Resume =  () => {
   //const user =  GetCookieUser();
-  return 
-  // <UploadResumePage />;
-  
+  // return <UploadResumePage />;
 };
 
 export default Resume;

@@ -13,7 +13,7 @@ import { useCookies } from "react-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthReducer } from "redux/reducers/authSlice";
 import { routeConstant } from "routes/constants";
-import { AddUpdateResumeService, DeleteResumeService } from "services/user";
+//import { AddUpdateResumeService, DeleteResumeService } from "services/user";
 import { PortfolioTabs } from "utils/constants";
 import { handleErrors } from "utils/helper";
 import styles from "../style.module.scss";
@@ -88,40 +88,40 @@ const UploadResumePage = ({ userCookie }: PortfolioProps) => {
       if (finalFile) {
         formData.append("profile_resume", finalFile);
       }
-      AddUpdateResumeService(formData)
-        .then(({ data, status }) => {
-          if (status) {
-            toastMessage("success", "Resume uploaded successfully");
-            dispatch(
-              setAuthReducer({
-                ...auth,
-                user: data?.data,
-              })
-            );
-            setCookie(
-              "user",
-              JSON.stringify({
-                isLoggedIn: true,
-                id: data?.data?.id,
-                first_name: data?.data?.first_name,
-                last_name: data?.data?.last_name,
-                email: data?.data?.email,
-                role: data?.data?.type,
-                profile_asset: data?.data?.profile_asset?.full_path ?? "",
-                resume_asset: data?.data?.resume_asset?.full_path ?? "",
-              }),
-              {
-                path: "/",
-                maxAge: 3600 * 24 * 30,
-                sameSite: true,
-              }
-            );
-          }
-        })
-        .catch((err) => handleErrors(err))
-        .finally(() => {
-          setLoading(false);
-        });
+      // AddUpdateResumeService(formData)
+      //   .then(({ data, status }) => {
+      //     if (status) {
+      //       toastMessage("success", "Resume uploaded successfully");
+      //       dispatch(
+      //         setAuthReducer({
+      //           ...auth,
+      //           user: data?.data,
+      //         })
+      //       );
+      //       setCookie(
+      //         "user",
+      //         JSON.stringify({
+      //           isLoggedIn: true,
+      //           id: data?.data?.id,
+      //           first_name: data?.data?.first_name,
+      //           last_name: data?.data?.last_name,
+      //           email: data?.data?.email,
+      //           role: data?.data?.type,
+      //           profile_asset: data?.data?.profile_asset?.full_path ?? "",
+      //           resume_asset: data?.data?.resume_asset?.full_path ?? "",
+      //         }),
+      //         {
+      //           path: "/",
+      //           maxAge: 3600 * 24 * 30,
+      //           sameSite: true,
+      //         }
+      //       );
+      //     }
+      //   })
+      //   .catch((err) => handleErrors(err))
+      //   .finally(() => {
+      //     setLoading(false);
+      //   });
     } else {
       setError("Please select a file to upload");
     }
@@ -129,45 +129,45 @@ const UploadResumePage = ({ userCookie }: PortfolioProps) => {
 
   const handleRemove = () => {
     setLoading(true);
-    DeleteResumeService()
-      .then(({ data, status }) => {
-        if (status) {
-          toastMessage("success", "Resume removed successfully");
-          closeDeleteModal();
-          handleRemoveFile();
-          dispatch(
-            setAuthReducer({
-              ...auth,
-              user: {
-                ...auth?.user,
-                resume_asset: null,
-              },
-            })
-          );
-          setCookie(
-            "user",
-            JSON.stringify({
-              isLoggedIn: true,
-              id: auth?.user?.id,
-              first_name: auth?.user?.first_name,
-              last_name: auth?.user?.last_name,
-              email: auth?.user?.email,
-              role: auth?.user?.type,
-              profile_asset: auth?.user?.profile_asset?.full_path ?? "",
-              resume_asset: "",
-            }),
-            {
-              path: "/",
-              maxAge: 3600 * 24 * 30,
-              sameSite: true,
-            }
-          );
-        }
-      })
-      .catch((err) => handleErrors(err))
-      .finally(() => {
-        setLoading(false);
-      });
+    // DeleteResumeService()
+    //   .then(({ data, status }) => {
+    //     if (status) {
+    //       toastMessage("success", "Resume removed successfully");
+    //       closeDeleteModal();
+    //       handleRemoveFile();
+    //       dispatch(
+    //         setAuthReducer({
+    //           ...auth,
+    //           user: {
+    //             ...auth?.user,
+    //             resume_asset: null,
+    //           },
+    //         })
+    //       );
+    //       setCookie(
+    //         "user",
+    //         JSON.stringify({
+    //           isLoggedIn: true,
+    //           id: auth?.user?.id,
+    //           first_name: auth?.user?.first_name,
+    //           last_name: auth?.user?.last_name,
+    //           email: auth?.user?.email,
+    //           role: auth?.user?.type,
+    //           profile_asset: auth?.user?.profile_asset?.full_path ?? "",
+    //           resume_asset: "",
+    //         }),
+    //         {
+    //           path: "/",
+    //           maxAge: 3600 * 24 * 30,
+    //           sameSite: true,
+    //         }
+    //       );
+    //     }
+    //   })
+    //   .catch((err) => handleErrors(err))
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
   };
 
   const handleResizeObserver = () => {
