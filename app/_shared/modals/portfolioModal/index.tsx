@@ -6,6 +6,7 @@ import CustomTextArea from "components/common/customTextArea";
 import CustomFileUpload from "components/common/customFileUpload";
 import { useFormik } from "formik";
 import { CreatePortfolioVS, UpdatePortfolioVS } from "utils/validation";
+import { CreatePortfolio } from "_shared/types/portfolio";
 import {
   CreatePortfolioService,
   UpdatePortfolioService,
