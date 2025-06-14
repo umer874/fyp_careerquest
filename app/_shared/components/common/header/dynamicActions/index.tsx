@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import CustomButton from "components/common/customButton";
 import ProfileDropdown from "components/common/headerComponents/profileDropdown";
 import { Icons } from "assets";
-import BecomeFellowModal from "modals/becomeFellowModal";
+//import BecomeFellowModal from "modals/becomeFellowModal";
 import { useRouter } from "next13-progressbar";
 
 const DynamicActions = () => {
@@ -80,11 +80,11 @@ const DynamicActions = () => {
           </>
         )}
       </div>
-      <BecomeFellowModal
+      {/* <BecomeFellowModal
         title="Become a fellow"
         isOpen={becomeFellowModal}
         onClose={closeFellowModal}
-      />
+      /> */}
     </>
   );
 };
