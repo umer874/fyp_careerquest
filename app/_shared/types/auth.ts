@@ -1,9 +1,9 @@
-type LoginType = {
+export type LoginType = {
   email: string;
   password: string;
 };
 
-type RegisterType = {
+export type RegisterType = {
   firstName: string;
   lastName: string;
   email: string;
@@ -14,19 +14,18 @@ type RegisterType = {
   file: File | null;
 };
 
-
-type CreatePasswordType = {
+export type CreatePasswordType = {
   password: string;
   confirmPassword: string;
 };
 
-type UpdatePasswordType = {
+export type UpdatePasswordType = {
   currentPassword: string;
   password: string;
   confirmPassword: string;
 };
 
-type UpdateProfileType = {
+export type UpdateProfileType = {
   firstName: string;
   lastName: string;
   email: string;
@@ -38,22 +37,22 @@ type UpdateProfileType = {
   profileAsset: string;
 };
 
-type UpdateEducationType = {
+export type UpdateEducationType = {
   educations: EducationType[] | [];
 };
 
-type UpdateExperienceType = {
+export type UpdateExperienceType = {
   exps: ExperienceType[] | [];
 };
 
-type RefreshToken = {
+export type RefreshToken = {
   status: number;
   is_token_updated: boolean;
   token: string;
   refreshToken: string;
 };
 
-type RefreshWrapperType = {
+export type RefreshWrapperType = {
   url: string;
   method: string;
   payload?: any;
