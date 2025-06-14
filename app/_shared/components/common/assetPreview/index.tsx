@@ -69,7 +69,7 @@ const AssetPreview = ({
               setIsPlaying(false);
             }}
           />
-          {isPlaying && mouseEnter ? (
+          {/* {isPlaying && mouseEnter ? (
             <Icons.Pause
               className={classNames(styles.playIcon)}
               onClick={toggleVideoClick}
@@ -81,7 +81,7 @@ const AssetPreview = ({
                 onClick={toggleVideoClick}
               />
             )
-          )}
+          )} */}
         </div>
       )}
     </>
