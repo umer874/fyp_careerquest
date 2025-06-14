@@ -1,13 +1,13 @@
-// import JobDetailWrapper from "components/jobDetail/wrapper";
-// import { GetSingleJobServerCall } from "services/job";
+import JobDetailWrapper from "components/jobDetail/wrapper";
+import { GetSingleJobServerCall } from "services/job";
 
-// const JobDetail = async ({ params }: any) => {
-//   const { id } = await params;
-//   if (!id) return null;
-//   const data = await GetSingleJobServerCall(id ?? "");
-//   const job = data?.data;
+const JobDetail =  ({ params }: any) => {
+  const { id } =  params;
+  if (!id) return null;
+  // const data = await GetSingleJobServerCall(id ?? "");
+  // const job = data?.data;
 
-//   return <JobDetailWrapper job={job} noPadding />;
-// };
+  // return <JobDetailWrapper job={job} noPadding />;
+};
 
-// export default JobDetail;
+export default JobDetail;
