@@ -10,6 +10,7 @@ import { UpdatePasswordVS } from "utils/validation";
 import { UpdatePasswordService } from "services/auth";
 import { toastMessage } from "components/common/toast";
 import { handleErrors } from "utils/helper";
+import { UpdatePasswordType } from "_shared/types/auth";
 
 const initialValues: UpdatePasswordType = {
   currentPassword: "",
