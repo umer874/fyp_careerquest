@@ -76,7 +76,7 @@ const Dashbaord = () => {
                     </div>
                   </div>
                   <div className={classNames(styles.iconContainer)}>
-                    <Icons.User />
+                    <Icons.Usermain />
                   </div>
                 </div>
 

@@ -29,7 +29,7 @@ const SignUp = () => {
     lastName: firstStepValues?.lastName ?? "",
     email: firstStepValues?.email ?? "",
     dob: firstStepValues?.dob ?? "",
-    //address: firstStepValues?.address ?? "",
+    address: firstStepValues?.address ?? "",
     phone: firstStepValues?.phone ?? "",
     coordinates: firstStepValues?.coordinates ?? [],
     checked: firstStepValues?.checked ?? false,
@@ -119,7 +119,7 @@ const SignUp = () => {
     formData.append("lastname", firstStepValues?.lastName);
     formData.append("email", firstStepValues?.email);
     formData.append("dob", firstStepValues?.dob);
-    //formData.append("address", firstStepValues?.address);
+    formData.append("address", firstStepValues?.address);
     formData.append("phonenumber", firstStepValues?.phone);
     formData.append(
       "coordinates",

@@ -46,7 +46,7 @@ const NavItem = ({
           setIsOpen(false);
         }}
       >
-        <Icon />
+        {/* <Icon /> */}
         <label className={classNames(styles.heading)} role="button">
           {title}
         </label>

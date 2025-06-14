@@ -8,6 +8,7 @@ export type LoginType = {
 export type RegisterType = {
   firstName: string;
   lastName: string;
+  address:string;
   email: string;
   dob: string;
   phone: string;
