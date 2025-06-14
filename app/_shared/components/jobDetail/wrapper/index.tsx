@@ -11,7 +11,7 @@ interface JobDetailProps {
   noPadding?: boolean;
 }
 
-const JobDetailWrapper = async ({ job, noPadding }: JobDetailProps) => {
+const JobDetailWrapper =  ({ job, noPadding }: JobDetailProps) => {
   return (
     <>
       <div className={classNames(!noPadding && styles.eventWrapper)}>
