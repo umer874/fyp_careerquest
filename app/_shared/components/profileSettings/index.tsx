@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import BasicSettings from "./basic";
-import Education from "./education";
-import Experience from "./experience";
+//import Education from "./education";
+//import Experience from "./experience";
 import PasswordSettings from "./password";
 import styles from "./style.module.scss";
 
@@ -17,9 +17,9 @@ function ProfileSettings({ userCookie }: ProfileSettingsProps) {
         {/* Basic */}
         <BasicSettings userCookie={userCookie} />
         {/* Education */}
-        <Education />
+        {/* <Education /> */}
         {/* Experience */}
-        <Experience />
+        {/* <Experience /> */}
         {/* Password */}
         <PasswordSettings />
       </div>
