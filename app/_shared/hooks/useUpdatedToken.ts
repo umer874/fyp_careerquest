@@ -1,6 +1,7 @@
 "use client";
 import { useCallback, useEffect } from "react";
 import { resetRedux, setTokens } from "utils/helper";
+import { RefreshToken } from "_shared/types/auth";
 
 export default function useUpdateToken(
   token: RefreshToken,
