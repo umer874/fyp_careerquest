@@ -5,7 +5,7 @@
   phonenumber: string;
 };
 
-export type JobApplicationStep22 = {
+export type JobApplicationStep2 = {
   resume: File | null;
   cover_letter: File | null;
   projects: number[];
