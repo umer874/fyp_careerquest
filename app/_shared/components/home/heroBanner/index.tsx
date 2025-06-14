@@ -14,7 +14,7 @@ const HeroBanner = () => {
         <div className={classNames(styles.content)}>
           <div className="">
             <h1 className={classNames(styles.title)}>
-              Ready to pursue your dreams
+              Ready to pursue your dreams?
             </h1>
             <p>
               We support Boys & Girls  ages 18–24 in building job and career pathways through
