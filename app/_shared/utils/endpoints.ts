@@ -1,4 +1,4 @@
-const BaseURL = "http://localhost:3001/api/";
+const BaseURL = "https://fyp-careerquest-5.onrender.com/";
 
 
 const GoogleKey = "";
