@@ -15,16 +15,17 @@ import { GetPortfoliosService } from "services/portfolio";
 import { GetProjectsService } from "services/project";
 import { JobApplicationStep2 } from "utils/validation";
 import styles from "./style.module.scss";
+import { JobApplicationStep22 } from "_shared/types/user";
 
 interface JobApplicationStepTwoProps {
   isOpen: boolean;
   onClose: () => void;
-  onNext?: (values: JobApplicationStep2) => void;
+  onNext?: (values: JobApplicationStep22) => void;
   onBackClick?: () => void;
   title: string;
   buttonText?: string;
-  step2Values: JobApplicationStep2 | undefined;
-  setStep2Values: (values: JobApplicationStep2) => void;
+  step2Values: JobApplicationStep22 | undefined;
+  setStep2Values: (values: JobApplicationStep22) => void;
   submitLoading: boolean;
 }
 
@@ -43,7 +44,7 @@ const JobApplicationStepTwo = ({
     auth: { user },
   } = useSelector((state: any) => state.root);
 
-  const initialValues: JobApplicationStep2 = {
+  const initialValues: JobApplicationStep22 = {
     resume: step2Values?.resume ? step2Values?.resume : null,
     cover_letter: step2Values?.cover_letter ? step2Values?.cover_letter : null,
     portfolios: step2Values?.portfolios ?? [],
