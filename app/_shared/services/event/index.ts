@@ -1,5 +1,6 @@
 import { BaseURL, Endpoint } from "utils/endpoints";
 import { HTTP_CLIENT } from "utils/interceptor";
+import { ListingInterface } from "_shared/types/pagination";
 
 const GetEventsService = ({ page, limit, search }: ListingInterface) => {
   return HTTP_CLIENT.get(

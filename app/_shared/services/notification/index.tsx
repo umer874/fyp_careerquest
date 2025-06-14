@@ -1,6 +1,7 @@
 import { BaseURL, Endpoint } from "utils/endpoints";
 import { HTTP_METHODS } from "utils/enum";
 import { refreshTokenWrapper } from "utils/helper";
+import { ListingInterface } from "_shared/types/pagination";
 
 const GetAllNotificationsService = ({ page, limit }: ListingInterface) => {
   return refreshTokenWrapper({

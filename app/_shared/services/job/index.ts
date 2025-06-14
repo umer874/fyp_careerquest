@@ -2,6 +2,7 @@ import { BaseURL, Endpoint } from "utils/endpoints";
 import { HTTP_METHODS } from "utils/enum";
 import { refreshTokenWrapper } from "utils/helper";
 import { HTTP_CLIENT } from "utils/interceptor";
+import { ListingInterface } from "_shared/types/pagination";
 
 const GetJobsService = ({ page, limit, search }: ListingInterface) => {
   return HTTP_CLIENT.get(

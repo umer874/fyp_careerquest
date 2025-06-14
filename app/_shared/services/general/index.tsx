@@ -1,5 +1,6 @@
 import { BaseURL, Endpoint } from "utils/endpoints";
 import { HTTP_CLIENT } from "utils/interceptor";
+import { ContactUs } from "_shared/types/general";
 
 const ContactUsService = (payload: ContactUs) => {
   return HTTP_CLIENT.post(Endpoint.general.contactUs, payload);

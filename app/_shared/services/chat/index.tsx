@@ -2,6 +2,7 @@ import { BaseURL, Endpoint } from "utils/endpoints";
 import { HTTP_METHODS } from "utils/enum";
 import { refreshTokenWrapper } from "utils/helper";
 import { apiCallWithToken } from "utils/server-side-helper";
+import { ListingInterface } from "_shared/types/pagination";
 
 const GetConversationsServerCall = async ({
   token,
