@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next13-progressbar";
 import { routeConstant } from "routes/constants";
 import { useState } from "react";
-import BecomeFellowModal from "modals/becomeFellowModal";
+//import BecomeFellowModal from "modals/becomeFellowModal";
 import Image from "next/image";
 //import { UserType } from "utils/enum";
 import Link from "next/link";
@@ -105,11 +105,11 @@ function JobsCTA() {
         </div>
       ))}
 
-      <BecomeFellowModal
+      {/* <BecomeFellowModal
         title="Become a fellow"
         isOpen={becomeFellowModal}
         onClose={closeFellowModal}
-      />
+      /> */}
     </div>
   );
 }

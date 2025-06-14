@@ -6,7 +6,7 @@ import { Icons, Images } from "assets";
 import Image from "next/image";
 import CustomButton from "components/common/customButton";
 import { useState } from "react";
-import LeaderModal from "modals/leaderModal";
+//import LeaderModal from "modals/leaderModal";
 import CustomAccordion from "components/common/customAccordion";
 import useWindowDimensions from "hooks/useWindowDimensions";
 import { servicesData } from "utils/constants";
@@ -364,7 +364,7 @@ function AboutProgram() {
           </div>
         </div> */}
       </div>
-      {selectedLeader && (
+      {/* {selectedLeader && (
         <LeaderModal
           title={selectedLeader.name}
           bio={selectedLeader.bio}
@@ -372,7 +372,7 @@ function AboutProgram() {
           isOpen={becomeFellowModal}
           onClose={closeFellowModal}
         />
-      )}
+      )} */}
     </section>
   );
 }
