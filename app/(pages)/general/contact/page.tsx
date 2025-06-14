@@ -14,6 +14,7 @@ import { ContactUsService } from "services/general";
 import { handleErrors } from "utils/helper";
 import { toastMessage } from "components/common/toast";
 import { useSelector } from "react-redux";
+import { ContactUs } from "_shared/types/general";
 
 const Contact = () => {
   const { auth } = useSelector((state: any) => state.root);
