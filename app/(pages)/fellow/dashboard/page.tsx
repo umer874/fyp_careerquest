@@ -91,7 +91,7 @@ const Dashbaord = () => {
             <div className={classNames(styles.user, "")}>
               <div className={classNames(styles.main)}>
                 <div className={classNames(styles.box, "flex gap-6 items-center")}>
-                  <Image src={Images.User1} alt="user icon" />
+                  <Image style={{"width":70,"height":70}}src={Images.DefaultAvatar} alt="user icon" />
                   <div className={classNames(styles.text, "flex flex-col gap-3")}>
                     <h6>Muhammad Anas</h6>
                     <p style={{ "color": "#0092D6" }}>ReactJS Developer</p>

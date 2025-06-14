@@ -34,7 +34,7 @@ const Profile = () => {
 <div className={classNames(styles.stepItem, "flex items-center gap-10")}>
 
   <div className={classNames(styles.iconContainer)}>
-    <Image src={Images.Profile} alt="user profile" />
+    <Image style={{"width":120,"height":120}} src={Images.DefaultAvatar} alt="user profile" />
   </div>
 
   <div className={classNames(styles.itemContent, "flex flex-col gap-4")}>
@@ -42,7 +42,7 @@ const Profile = () => {
     <h6>Muhammad Anas</h6>
     <div className="flex gap-4">
       <div className="flex gap-1" >
-        <Icons.UserIcons />
+        <Icons.UserProfileIcon />
         <span>ReactJS Developer</span>
       </div>
       <div className="flex gap-1" >
