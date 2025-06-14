@@ -3,6 +3,7 @@ import React from "../../_assets/images/React.png";
 import Python from "../../_assets/images/Python.png";
 import UI from "../../_assets/images/UI.png";
 import SeniorUI from "../../_assets/images/seniorUI.png";
+import { SideBarItemPathType,SideBarItemsType } from "_shared/types/navigation";
 
 import { routeConstant } from "routes/constants";
 
