@@ -97,67 +97,67 @@ const JobApplicationStepTwo = ({
     setFieldValue("projects", filtered);
   };
 
-  const handleGetPortfolios = () => {
-    setPortfolioLoading(true);
-    GetPortfoliosService({
-      page: portfolioPageRef.current,
-      limit: 10,
-      id: user?.id,
-    })
-      .then(
-        ({
-          data: {
-            data: { data, meta },
-          },
-          status,
-        }) => {
-          if (status) {
-            let newPortfolios = [...portfolios, ...data];
-            setPortfolios(newPortfolios);
-            if (meta?.totalPages > meta?.currentPage) {
-              setPortfolioLoadMore(true);
-            } else {
-              setPortfolioLoadMore(false);
-            }
-          }
-        }
-      )
-      .catch((er) => {})
-      .finally(() => {
-        setPortfolioLoading(false);
-      });
-  };
+  // const handleGetPortfolios = () => {
+  //   setPortfolioLoading(true);
+  //   GetPortfoliosService({
+  //     page: portfolioPageRef.current,
+  //     limit: 10,
+  //     id: user?.id,
+  //   })
+  //     .then(
+  //       ({
+  //         data: {
+  //           data: { data, meta },
+  //         },
+  //         status,
+  //       }) => {
+  //         if (status) {
+  //           let newPortfolios = [...portfolios, ...data];
+  //           setPortfolios(newPortfolios);
+  //           if (meta?.totalPages > meta?.currentPage) {
+  //             setPortfolioLoadMore(true);
+  //           } else {
+  //             setPortfolioLoadMore(false);
+  //           }
+  //         }
+  //       }
+  //     )
+  //     .catch((er) => {})
+  //     .finally(() => {
+  //       setPortfolioLoading(false);
+  //     });
+  // };
 
-  const handleGetProjects = () => {
-    setProjectLoading(true);
-    GetProjectsService({
-      page: projectPageRef.current,
-      limit: 10,
-      id: user?.id,
-    })
-      .then(
-        ({
-          data: {
-            data: { data, meta },
-          },
-          status,
-        }) => {
-          if (status) {
-            let newPortfolios = [...projects, ...data];
-            setProjects(newPortfolios);
-            if (meta?.totalPages > meta?.currentPage) {
-              setProjectLoadMore(true);
-            } else {
-              setProjectLoadMore(false);
-            }
-          }
-        }
-      )
-      .catch((er) => {})
-      .finally(() => {
-        setProjectLoading(false);
-      });
-  };
+  // const handleGetProjects = () => {
+  //   setProjectLoading(true);
+  //   GetProjectsService({
+  //     page: projectPageRef.current,
+  //     limit: 10,
+  //     id: user?.id,
+  //   })
+  //     .then(
+  //       ({
+  //         data: {
+  //           data: { data, meta },
+  //         },
+  //         status,
+  //       }) => {
+  //         if (status) {
+  //           let newPortfolios = [...projects, ...data];
+  //           setProjects(newPortfolios);
+  //           if (meta?.totalPages > meta?.currentPage) {
+  //             setProjectLoadMore(true);
+  //           } else {
+  //             setProjectLoadMore(false);
+  //           }
+  //         }
+  //       }
+  //     )
+  //     .catch((er) => {})
+  //     .finally(() => {
+  //       setProjectLoading(false);
+  //     });
+  // };
 
   useEffect(() => {
     if (isOpen) {
@@ -179,28 +179,28 @@ const JobApplicationStepTwo = ({
     }
   }, [isOpen]);
 
-  useEffect(() => {
-    if (isOpen) {
-      handleGetPortfolios();
-      handleGetProjects();
-    }
-  }, [isOpen]);
+  // useEffect(() => {
+  //   if (isOpen) {
+  //     handleGetPortfolios();
+  //     handleGetProjects();
+  //   }
+  // }, [isOpen]);
 
-  useEffect(() => {
-    if (portfolioEndReach && portfolioLoadMore && !portfolioLoading) {
-      portfolioPageRef.current++;
-      handleGetPortfolios();
-    }
-    // eslint-disable-next-line
-  }, [portfolioEndReach]);
+  // useEffect(() => {
+  //   if (portfolioEndReach && portfolioLoadMore && !portfolioLoading) {
+  //     portfolioPageRef.current++;
+  //     handleGetPortfolios();
+  //   }
+  //   // eslint-disable-next-line
+  // }, [portfolioEndReach]);
 
-  useEffect(() => {
-    if (projectEndReach && projectLoadMore && !projectLoading) {
-      projectPageRef.current++;
-      handleGetProjects();
-    }
-    // eslint-disable-next-line
-  }, [projectEndReach]);
+  // useEffect(() => {
+  //   if (projectEndReach && projectLoadMore && !projectLoading) {
+  //     projectPageRef.current++;
+  //     handleGetProjects();
+  //   }
+  //   // eslint-disable-next-line
+  // }, [projectEndReach]);
 
   return (
     <CustomModal
