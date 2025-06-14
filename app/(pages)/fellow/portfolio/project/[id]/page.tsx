@@ -15,24 +15,24 @@ const ProjectDetail =  async ({ params }: any) => {
   if (!id) {
     redirect(routeConstant.fellow.projects.path);
   }
-  const { token, refreshToken } = await GetTokensFromCookies();
-  const { response, updatedToken } = await GetProjectDetailServerCall({
-    token,
-    refreshToken,
-    id,
-  });
+  // const { token, refreshToken } = await GetTokensFromCookies();
+  // const { response, updatedToken } = await GetProjectDetailServerCall({
+  //   token,
+  //   refreshToken,
+  //   id,
+  // });
 
-  if (!response?.data) {
-    redirect(routeConstant.fellow.projects.path);
-  }
+  // if (!response?.data) {
+  //   redirect(routeConstant.fellow.projects.path);
+  // }
 
-  const portfolioItem = response?.data;
+  // const portfolioItem = response?.data;
   return (
     <>
       <div className={classNames(styles.customContainer)}>
         <div className={classNames(styles.eventDetailContainer)}>
           <div className={classNames(styles.portfolioContent)}>
-            <AssetPreview {...portfolioItem.project_asset} />
+            {/* <AssetPreview {...portfolioItem.project_asset} /> */}
             <div
               className={classNames(
                 styles.iconContainer,
@@ -42,19 +42,19 @@ const ProjectDetail =  async ({ params }: any) => {
               <span>
                 <Icons.Calendar />
               </span>
-              <p>{moment(portfolioItem?.created_at).format("DD MMMM, YYYY")}</p>
+              {/* <p>{moment(portfolioItem?.created_at).format("DD MMMM, YYYY")}</p> */}
             </div>
-            <div className={classNames(styles.heading)}>
+            {/* <div className={classNames(styles.heading)}>
               <h3 className={classNames(styles.title)}>
                 {portfolioItem.title}
               </h3>
               <p>{portfolioItem.description}</p>
-            </div>
-            <BottomActions
+            </div> */}
+            {/* <BottomActions
               updatedToken={updatedToken}
               item={portfolioItem}
               isProject
-            />
+            /> */}
           </div>
         </div>
       </div>
