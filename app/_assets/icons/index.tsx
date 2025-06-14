@@ -115,6 +115,7 @@ import Github from "./github.svg";
 import Linkedin from "./Button (1).svg";
 import Youtube from "./youtube.svg";
 import Attach from "./attach.svg";
+import Profile from "./person.svg";
 
 const Icons = {
   ArrowRight,
@@ -234,6 +235,7 @@ const Icons = {
   Linkedin,
   Youtube,
   Attach,
+  Profile,
 };
 
 export { Icons };
