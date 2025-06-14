@@ -8,6 +8,7 @@ import { routeConstant } from "routes/constants";
 import { Endpoint } from "./endpoints";
 import { HTTP_METHODS, SUPPORTED_FORMATS } from "./enum";
 import { HTTP_CLIENT } from "./interceptor";
+import { RefreshWrapperType } from "_shared/types/auth";
 
 function normalizePath(path: string): string {
   return path.split("?")[0].replace(/\/$/, "");

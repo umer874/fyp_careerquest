@@ -16,6 +16,7 @@ import { handleErrors } from "utils/helper";
 import { setAuthReducer } from "redux/reducers/authSlice";
 //import CustomAutoComplete from "components/common/customAutoComplete";
 import { useCookies } from "react-cookie";
+import { UpdateProfileType } from "_shared/types/auth";
 import moment from "moment";
 
 interface BasicSettingsProps {
