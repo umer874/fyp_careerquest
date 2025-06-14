@@ -1,4 +1,4 @@
-const BaseURL = "https://fyp-careerquest-5.onrender.com/";
+const BaseURL = "https://fyp-careerquest-7.onrender.com/";
 
 
 const GoogleKey = "";
