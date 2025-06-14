@@ -7,6 +7,7 @@ import PortfolioCard from "components/fellow/portfolioCard";
 import useUpdateToken from "hooks/useUpdatedToken";
 import PortfolioModal from "modals/portfolioModal";
 import moment from "moment";
+import { RefreshToken } from "_shared/types/auth";
 import { useRouter } from "next13-progressbar";
 import { useState } from "react";
 import { useSelector } from "react-redux";

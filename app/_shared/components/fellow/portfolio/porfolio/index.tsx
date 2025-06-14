@@ -6,6 +6,7 @@ import CustomButton from "components/common/customButton";
 import NoContentCard from "components/common/noContentCard";
 import PortfolioCard from "components/fellow/portfolioCard";
 import useUpdateToken from "hooks/useUpdatedToken";
+import { RefreshToken } from "_shared/types/auth";
 import PortfolioModal from "modals/portfolioModal";
 import moment from "moment";
 import { useRouter } from "next13-progressbar";
