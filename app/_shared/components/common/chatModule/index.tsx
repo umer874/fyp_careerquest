@@ -197,7 +197,7 @@ const ChatModule = ({
             ) : null}
             {message?.message ? <p>{message.message}</p> : null}
 
-            <div className="flex items-end gap-1 self-end">
+            {/* <div className="flex items-end gap-1 self-end">
               <span>{moment(message.created_at).fromNow()}</span>
               {message?.sender?.id === auth?.user?.id ? (
                 <Icons.CheckDouble
@@ -206,7 +206,7 @@ const ChatModule = ({
                   )}
                 />
               ) : null}
-            </div>
+            </div> */}
           </div>
         ))}
         {newMessages?.length > 0 ? (
@@ -305,9 +305,9 @@ const ChatModule = ({
                 width={50}
               />
             )}
-            {file?.type.includes("pdf") && (
+            {/* {file?.type.includes("pdf") && (
               <Icons.FileDocument className={classNames(styles.pdfIcon)} />
-            )}
+            )} */}
             <label>file.{file?.name.split(".").pop()}</label>
           </div>
           <button
