@@ -152,11 +152,11 @@ function AboutProgram() {
     img: string;
   } | null>(null);
 
-  const openFellowModal = (leader: (typeof leadersData)[0]) => {
-    // @ts-error
-    setSelectedLeader(leader);
-    setBecomeFellowModal(true);
-  };
+  // const openFellowModal = (leader: (typeof leadersData)[0]) => {
+  //   // @ts-error
+  //   setSelectedLeader(leader);
+  //   setBecomeFellowModal(true);
+  // };
 
   const closeFellowModal = () => {
     setBecomeFellowModal(false);
