@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { routeConstant } from "routes/constants";
 import { ApplyJobService } from "services/job";
 import { handleErrors } from "utils/helper";
+import { JobApplicationStep11,JobApplicationStep22 } from "_shared/types/user";
 
 interface ApplyJobButtonProps {
   company: any;
@@ -25,8 +26,8 @@ const ApplyJobButton = ({ company, id }: ApplyJobButtonProps) => {
   const [jobApplicationStepTwo, setJobApplicationStepTwo] =
     useState<boolean>(false);
   const [successModal, setSuccessModal] = useState<boolean>(false);
-  const [step1Values, setStep1Values] = useState<JobApplicationStep1>();
-  const [step2Values, setStep2Values] = useState<JobApplicationStep2>();
+  const [step1Values, setStep1Values] = useState<JobApplicationStep11>();
+  const [step2Values, setStep2Values] = useState<JobApplicationStep22>();
   const [loading, setLoading] = useState<boolean>(false);
 
   const openSuccessModal = () => {
@@ -65,7 +66,7 @@ const ApplyJobButton = ({ company, id }: ApplyJobButtonProps) => {
     }
   };
 
-  const handleSubmit = (values: JobApplicationStep2) => {
+  const handleSubmit = (values: JobApplicationStep22) => {
     setLoading(true);
     let formData = new FormData();
     formData.append("email", step1Values?.email ?? "");

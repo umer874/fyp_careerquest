@@ -8,7 +8,9 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { JobApplicationStep1 } from "utils/validation";
+import { JobApplicationStep11 } from "_shared/types/user";
 import { useEffect } from "react";
+
 
 interface JobApplicationModalProps {
   isOpen: boolean;
@@ -16,8 +18,8 @@ interface JobApplicationModalProps {
   onNext: () => void;
   title: string;
   buttonText?: string;
-  step1Values: JobApplicationStep1 | undefined;
-  setStep1Values: (values: JobApplicationStep1) => void;
+  step1Values: JobApplicationStep11 | undefined;
+  setStep1Values: (values: JobApplicationStep11) => void;
 }
 
 const JobApplicationModal = ({
@@ -33,7 +35,7 @@ const JobApplicationModal = ({
     auth: { user },
   } = useSelector((state: any) => state.root);
 
-  const initialValues: JobApplicationStep1 = {
+  const initialValues: JobApplicationStep11 = {
     email: step1Values?.email
       ? step1Values?.email
       : user.email

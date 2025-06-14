@@ -1,11 +1,11 @@
 
 
- type JobApplicationStep1 = {
+ export type JobApplicationStep11 = {
   email: string;
   phonenumber: string;
 };
 
-type JobApplicationStep2 = {
+export type JobApplicationStep22 = {
   resume: File | null;
   cover_letter: File | null;
   projects: number[];
