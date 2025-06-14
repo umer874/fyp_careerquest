@@ -1,9 +1,6 @@
-type ApplyFellowShipType = {
-  email: string;
-  reason: string;
-};
 
-type JobApplicationStep1 = {
+
+ type JobApplicationStep1 = {
   email: string;
   phonenumber: string;
 };

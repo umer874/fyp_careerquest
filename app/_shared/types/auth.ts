@@ -1,3 +1,5 @@
+import { EducationType,ExperienceType } from "./general";
+
 export type LoginType = {
   email: string;
   password: string;

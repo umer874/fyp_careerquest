@@ -10,6 +10,7 @@ import { resetAuthReducer } from "redux/reducers/authSlice";
 import { routeConstant } from "routes/constants";
 import NavItem from "./navItem";
 import styles from "./style.module.scss";
+import { SideBarItemsType,SideBarItemPathType } from "_shared/types/navigation";
 
 interface Props {
   sidebarArr: SideBarItemsType[];

@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { routeConstant } from "routes/constants";
 import styles from "../style.module.scss";
+import { SideBarItemPathType } from "_shared/types/navigation";
 
 interface navItemInterface extends SideBarItemPathType {
   setIsOpen: (val: boolean) => void;

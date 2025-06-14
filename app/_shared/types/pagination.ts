@@ -1,10 +1,10 @@
-type ListingInterface = {
+export type ListingInterface = {
   page?: number;
   limit?: number;
   search?: string;
 };
 
-type Meta = {
+export type Meta = {
   itemsPerPage: number;
   totalItems: number;
   currentPage: number;

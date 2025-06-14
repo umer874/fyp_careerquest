@@ -1,4 +1,4 @@
-type ContactUs = {
+export type ContactUs = {
   firstname: string;
   lastname: string;
   email: string;
@@ -6,15 +6,17 @@ type ContactUs = {
   message: string;
 };
 
-type EducationType = {
+export type EducationType = {
   institute: string;
   degree: string;
   completion_date: string;
 };
 
-type ExperienceType = {
+export type ExperienceType = {
   institute: string;
   designation: string;
   from: string;
   to: string;
 };
+
+

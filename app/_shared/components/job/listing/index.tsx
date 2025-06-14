@@ -11,6 +11,7 @@ import { useRouter } from "next13-progressbar";
 import { routeConstant } from "routes/constants";
 import { useSelector } from "react-redux";
 import { jobs } from "utils/constants";
+import { Meta } from "_shared/types/pagination";
 //import { UserType } from "utils/enum";
 
 interface JobsListingProps {

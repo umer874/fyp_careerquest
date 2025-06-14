@@ -11,6 +11,7 @@ import Link from "next/link";
 import { routeConstant } from "routes/constants";
 import Image from "next/image";
 import { toastMessage } from "components/common/toast";
+import { SideBarItemsType,SideBarItemPathType } from "_shared/types/navigation";
 
 interface SideCanvasProps {
   setIsOpen: (val: boolean) => void;

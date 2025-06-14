@@ -14,6 +14,7 @@ import { handleErrors } from "utils/helper";
 import { ContactVS } from "utils/validation";
 import { useFormik } from "formik";
 import { useSelector } from "react-redux";
+import { ContactUs } from "_shared/types/general";
 
 const Contact = () => {
   const { auth } = useSelector((state: any) => state.root);

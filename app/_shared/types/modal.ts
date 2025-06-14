@@ -1,4 +1,4 @@
-type ModalProps = {
+export type ModalProps = {
   show: boolean;
   handleClose: () => void;
 };

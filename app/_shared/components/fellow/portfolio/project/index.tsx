@@ -15,6 +15,7 @@ import { routeConstant } from "routes/constants";
 import { GetProjectsService } from "services/project";
 import { PortfolioTabs } from "utils/constants";
 import styles from "../style.module.scss";
+import { Meta } from "_shared/types/pagination";
 
 interface PortfolioProps {
   list: any[];
@@ -59,27 +60,27 @@ const ProjectList = ({ list, updatedToken, meta }: PortfolioProps) => {
     setActiveTab(tabValue);
   };
 
-  const handleGetPortfolios = async (page: number) => {
-    setLoading(true);
-    GetProjectsService({
-      id: user?.id,
-      page,
-      limit: 9,
-    })
-      .then(({ data, status }) => {
-        if (status) {
-          setListings([...listings, ...data?.data]);
-          setPage(data?.meta?.currentPage);
-          setTotalPages(data?.meta?.totalPages);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  // const handleGetPortfolios = async (page: number) => {
+  //   setLoading(true);
+  //   GetProjectsService({
+  //     id: user?.id,
+  //     page,
+  //     limit: 9,
+  //   })
+  //     .then(({ data, status }) => {
+  //       if (status) {
+  //         setListings([...listings, ...data?.data]);
+  //         setPage(data?.meta?.currentPage);
+  //         setTotalPages(data?.meta?.totalPages);
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     })
+  //     .finally(() => {
+  //       setLoading(false);
+  //     });
+  // };
 
   useUpdateToken(updatedToken, () => {}, []);
 
@@ -173,7 +174,7 @@ const ProjectList = ({ list, updatedToken, meta }: PortfolioProps) => {
             />
           </div>
         )}
-        {page < totalPages ? (
+        {/* {page < totalPages ? (
           <CustomButton
             title="View More Listings"
             containerStyle="mx-auto mt-5"
@@ -183,7 +184,7 @@ const ProjectList = ({ list, updatedToken, meta }: PortfolioProps) => {
             loading={loading}
             disabled={loading}
           />
-        ) : null}
+        ) : null} */}
       </div>
       <PortfolioModal
         title="Add Project Details"

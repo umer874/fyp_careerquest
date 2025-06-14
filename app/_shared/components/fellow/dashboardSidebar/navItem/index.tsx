@@ -4,6 +4,7 @@ import styles from "../style.module.scss";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { routeConstant } from "routes/constants";
+import { SideBarItemPathType } from "_shared/types/navigation";
 
 const NavItem = ({ title, Icon, path }: SideBarItemPathType) => {
   const pathname = usePathname();
