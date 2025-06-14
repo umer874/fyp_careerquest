@@ -16,7 +16,7 @@ import { LoginVS } from "utils/validation";
 import AuthPageHeading from "components/auth/authPageHeading";
 import { LoginService } from "services/auth";
 import { handleErrors } from "utils/helper";
-
+import { LoginType } from "_shared/types/auth";
 const initialValues: LoginType = {
   email: "",
   password: "",

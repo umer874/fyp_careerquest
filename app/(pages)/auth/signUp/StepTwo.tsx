@@ -4,7 +4,7 @@ import classNames from "classnames";
 import AuthPageHeading from "components/auth/authPageHeading";
 import CustomInput from "components/common/customInput";
 import { FormikErrors, FormikTouched } from "formik";
-
+import { CreatePasswordType } from "_shared/types/auth";
 interface StepTwoProps {
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

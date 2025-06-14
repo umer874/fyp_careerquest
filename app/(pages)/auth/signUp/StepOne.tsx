@@ -9,6 +9,7 @@ import CustomPhoneInput from "components/common/customPhoneInput";
 import CustomFileUpload from "components/common/customProfileUpload";
 import { FormikErrors, FormikTouched } from "formik";
 import styles from "./style.module.scss";
+import { RegisterType } from "_shared/types/auth";
 
 interface StepOneProps {
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;

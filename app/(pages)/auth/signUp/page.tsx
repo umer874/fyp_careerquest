@@ -15,6 +15,7 @@ import StepTwo from "./StepTwo";
 import styles from "./style.module.scss";
 import { handleErrors } from "utils/helper";
 import { requestNotificationPermission } from "services/firebase";
+import { RegisterType ,CreatePasswordType} from "_shared/types/auth";
 
 const SignUp = () => {
   const router = useRouter();
