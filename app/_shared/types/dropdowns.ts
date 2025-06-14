@@ -3,3 +3,5 @@ type OptionProps = {
   Icon?: any;
   action: (arg?: any) => any;
 };
+
+export {}
