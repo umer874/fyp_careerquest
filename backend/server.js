@@ -1,5 +1,4 @@
 require('dotenv').config();
-
 const express = require('express');
 const http = require("http");
 const { Server } = require("socket.io");
@@ -8,45 +7,39 @@ const cors = require('cors');
 
 const app = express();
 
+// Enable CORS for Express
+app.use(cors());
+app.use(express.json());
+
+// Routes
+const authRoutes = require('./routes/auth.routes');
+app.use('/api/', authRoutes);
+
+// Create HTTP server
 const server = http.createServer(app);
+
+// Configure Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000", // your frontend origin
+    origin: "*", // Allow all origins (update in production)
     methods: ["GET", "POST"],
   },
 });
 
 io.on("connection", (socket) => {
   console.log("User connected: " + socket.id);
-
   socket.on("disconnect", () => {
     console.log("User disconnected");
   });
 });
 
-server.listen(3001, () => {
-  console.log("Socket.IO server listening on port 3001");
-});
-
-app.use(cors()); // ✅ Enable CORS
-app.use(express.json());
-
-
-// Middleware
-app.use(express.json());
-//app.use(express.urlencoded({ extended: true })); // handles urlencoded forms just in case
-
-// Route file
-const authRoutes = require('./routes/auth.routes');
-app.use('/api/', authRoutes); // instead of /api
-
-
-console.log('MONGODB_URI:', process.env.MONGODB_URI);
-
-
-// Connect MongoDB
+// Connect to MongoDB and start server
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('MongoDB Connected');
-    app.listen(3001, () => console.log('Server running on port 3001'));
-  });
+    const PORT = process.env.PORT || 3001; // Use Render's PORT or fallback
+    server.listen(PORT, () => {
+      console.log(`Server and Socket.IO running on port ${PORT}`);
+    });
+  })
+  .catch(err => console.error('MongoDB connection error:', err));
