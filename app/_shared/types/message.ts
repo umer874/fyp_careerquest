@@ -1,4 +1,4 @@
-import { FileType, MessageType, UserType } from "utils/enum";
+import { FileType, MessageType } from "utils/enum";
 
 interface AssetDTO {
   full_path: string;
@@ -10,7 +10,7 @@ interface UserDTO {
   first_name: string;
   last_name: string;
   profile_asset: AssetDTO;
-  type: UserType;
+  //type: UserType;
 }
 
 export type Conversation = {

@@ -11,16 +11,16 @@ const UpdateProfileService = (payload: any) => {
   });
 };
 
-const ApplyFellowShipService = (payload: ApplyFellowShipType) => {
-  let obj: any = {
-    reason: payload.reason,
-  };
-  return refreshTokenWrapper({
-    url: Endpoint.user.applyFellowship,
-    method: HTTP_METHODS.POST,
-    payload: obj,
-  });
-};
+// const ApplyFellowShipService = (payload: ApplyFellowShipType) => {
+//   let obj: any = {
+//     reason: payload.reason,
+//   };
+//   return refreshTokenWrapper({
+//     url: Endpoint.user.applyFellowship,
+//     method: HTTP_METHODS.POST,
+//     payload: obj,
+//   });
+// };
 
 const GetUpdateUserService = () => {
   return refreshTokenWrapper({
@@ -29,20 +29,20 @@ const GetUpdateUserService = () => {
   });
 };
 
-const AddUpdateResumeService = (payload: any) => {
-  return refreshTokenWrapper({
-    url: Endpoint.user.addUpdateResume,
-    method: HTTP_METHODS.PATCH,
-    payload,
-  });
-};
+// const AddUpdateResumeService = (payload: any) => {
+//   return refreshTokenWrapper({
+//     url: Endpoint.user.addUpdateResume,
+//     method: HTTP_METHODS.PATCH,
+//     payload,
+//   });
+// };
 
-const DeleteResumeService = () => {
-  return refreshTokenWrapper({
-    url: Endpoint.user.deleteResume,
-    method: HTTP_METHODS.DELETE,
-  });
-};
+// const DeleteResumeService = () => {
+//   return refreshTokenWrapper({
+//     url: Endpoint.user.deleteResume,
+//     method: HTTP_METHODS.DELETE,
+//   });
+// };
 
 const GetUserDetailServerCall = async ({
   token,
@@ -73,9 +73,9 @@ const AddFcmTokenService = (payload: { fcm_token: string }) => {
 };
 
 export {
-  AddUpdateResumeService,
-  ApplyFellowShipService,
-  DeleteResumeService,
+  // AddUpdateResumeService,
+  // ApplyFellowShipService,
+  // DeleteResumeService,
   GetUpdateUserService,
   GetUserDetailServerCall,
   UpdateProfileService,
