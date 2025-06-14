@@ -4,6 +4,7 @@ import { Endpoint } from "utils/endpoints";
 import { HTTP_METHODS } from "utils/enum";
 import { refreshTokenWrapper } from "utils/helper";
 import { HTTP_CLIENT } from "utils/interceptor";
+import { LoginType } from '_shared/types/auth';
 //import { SERVER_HTTP_CLIENT } from "utils/server-side-helper";
 
 const LoginService = (payload: LoginType) => {
