@@ -61,12 +61,7 @@ function findScreenTitle(
 const resetRedux = () => {
   const stateBefore = store.getState().root.auth;
 
-  console.log("Before reset:");
-  console.log("isLoggedIn:", stateBefore?.isLoggedIn);
-  console.log("token:", stateBefore?.token);
-  console.log("refreshToken:", stateBefore?.refreshToken);
-
-  if (stateBefore?.isLoggedIn || stateBefore?.token) {
+  if (stateBefore?.isLoggedIn ) {
     store.dispatch(resetAuthReducer());
 
     // Clear cookies
@@ -82,8 +77,7 @@ const resetRedux = () => {
 
     console.log("After reset:");
     console.log("isLoggedIn:", stateAfter?.isLoggedIn);
-    console.log("token:", stateAfter?.token);
-    console.log("refreshToken:", stateAfter?.refreshToken);
+    
   } else {
     console.log("No token or login found to reset.");
   }
@@ -191,12 +185,12 @@ async function refreshTokenWrapper({
         document.cookie = `user=${encodeURIComponent(
           JSON.stringify({
             isLoggedIn: true,
-            id: user?.id,
+            //id: user?.id,
             first_name: user?.first_name,
             last_name: user?.last_name,
             email: user?.email,
-            role: user?.type,
-            profile_asset: user?.profile_asset?.full_path ?? "",
+            // role: user?.type,
+            // profile_asset: user?.profile_asset?.full_path ?? "",
           })
         )}; path=/; max-age=${refreshTokenAge}; sameSite=${true}`;
 
@@ -235,12 +229,12 @@ function setTokens(token: string, refreshToken: string) {
   document.cookie = `user=${encodeURIComponent(
     JSON.stringify({
       isLoggedIn: true,
-      id: user?.id,
+      //id: user?.id,
       first_name: user?.first_name,
       last_name: user?.last_name,
       email: user?.email,
-      role: user?.type,
-      profile_asset: user?.profile_asset?.full_path ?? "",
+      //role: user?.type,
+      // profile_asset: user?.profile_asset?.full_path ?? "",
     })
   )}; path=/; max-age=${refreshTokenAge}; sameSite=${true}`;
 

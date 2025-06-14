@@ -9,13 +9,15 @@ interface AuthState {
     profile_asset?: string | null;
   } | null;
   isLoggedIn: boolean;
+   token: string; // <-- ADD THIS
+  refreshToken: string; // <-- ADD THIS
   accessToken: string;
-  refreshToken: string;
 }
 
 const initialState: AuthState = {
   user: null,
   isLoggedIn: false,
+    token: "",
   accessToken: "",
   refreshToken: "",
 };
