@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { submitAssessmentService } from "services/assessment";
 import axios from 'axios';
-import { Endpoint } from 'utils/endpoints';
+import { Endpoint, BaseURL } from 'utils/endpoints';
 import Toast from 'components/common/toast';
+
 
 
 
@@ -18,11 +19,12 @@ type Option = {
     text: string;
 };
 
-type Question = {
+interface Question {
+    _id: string; // ✅ MongoDB ObjectId as string
     id: number;
     question: string;
-    options: Option[];
-};
+    options: { id: string; text: string }[];
+}
 
 type CareerKey =
     | 'dataScientist'
@@ -50,12 +52,15 @@ const Test = () => {
     const [questions, setQuestions] = useState<Question[]>([]);
 
     useEffect(() => {
-        axios.get(Endpoint.assessment.questions).then((res) => {
-            setQuestions(res.data);
-        }).catch((err) => {
-            console.error("Failed to fetch questions:", err);
-        });
+        axios.get(`${BaseURL}${Endpoint.assessment.questions}`)
+            .then((res) => {
+                setQuestions(res.data);
+            })
+            .catch((err) => {
+                console.error("Failed to fetch questions:", err);
+            });
     }, []);
+
 
 
     const careerMatches: Record<CareerKey, CareerMatch> = {
@@ -152,18 +157,29 @@ const Test = () => {
             setStep('result');
             setProgress(100);
 
+            if (selectedOptions.some(option => option === null)) {
+                console.error("Some questions are not answered");
+                // Toast.error("Please answer all questions before submitting.");
+                return;
+            }
+
+
+
             // ✅ Send match to backend
             try {
                 await submitAssessmentService({
                     userId: user._id,
                     answers: questions.map((q, i) => ({
-                        questionId: q.id.toString(), // if coming from DB, use q._id
-                        optionId: selectedOptions[i],
+                        questionId: q._id,
+                        optionId: selectedOptions[i] as string, // ✅ cast to string, already validated above
                     })),
                 });
 
+
+
+
             } catch (error: any) {
-                console.error("🔴 Submit error:", error?.response?.data || error.message);
+                console.error(" Submit error:", error?.response?.data || error.message);
                 console.error("Failed to submit assessment. Please try again later.");
             }
 
@@ -260,43 +276,43 @@ const Test = () => {
                             </div>
 
                             {questions.length > 0 && questions[currentQuestion] && (
- 
 
 
 
-                            <div className={classNames(styles.questionContainer)}>
-                                <h2>Question {currentQuestion + 1}/{questions.length}</h2>
-                                <h3>{questions[currentQuestion].question}</h3>
 
-                                <div className={classNames(styles.optionsContainer)}>
-                                    {questions[currentQuestion].options.map((option) => (
-                                        <div
-                                            key={option.id}
+                                <div className={classNames(styles.questionContainer)}>
+                                    <h2>Question {currentQuestion + 1}/{questions.length}</h2>
+                                    <h3>{questions[currentQuestion].question}</h3>
+
+                                    <div className={classNames(styles.optionsContainer)}>
+                                        {questions[currentQuestion].options.map((option) => (
+                                            <div
+                                                key={option.id}
+                                                className={classNames(
+                                                    styles.option,
+                                                    { [styles.selected]: selectedOptions[currentQuestion] === option.id }
+                                                )}
+                                                onClick={() => handleOptionSelect(option.id)}
+                                            >
+                                                <span className={classNames(styles.optionId)}>{option.id}</span>
+                                                <span className={classNames(styles.optionText)}>{option.text}</span>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    <div className={classNames(styles.buttonContainer)}>
+                                        <button
                                             className={classNames(
-                                                styles.option,
-                                                { [styles.selected]: selectedOptions[currentQuestion] === option.id }
+                                                styles.continueBtn,
+                                                { [styles.disabled]: isContinueDisabled }
                                             )}
-                                            onClick={() => handleOptionSelect(option.id)}
+                                            onClick={handleContinue}
+                                            disabled={isContinueDisabled}
                                         >
-                                            <span className={classNames(styles.optionId)}>{option.id}</span>
-                                            <span className={classNames(styles.optionText)}>{option.text}</span>
-                                        </div>
-                                    ))}
+                                            {currentQuestion === questions.length - 1 ? 'SEE RESULTS' : 'CONTINUE'}
+                                        </button>
+                                    </div>
                                 </div>
-
-                                <div className={classNames(styles.buttonContainer)}>
-                                    <button
-                                        className={classNames(
-                                            styles.continueBtn,
-                                            { [styles.disabled]: isContinueDisabled }
-                                        )}
-                                        onClick={handleContinue}
-                                        disabled={isContinueDisabled}
-                                    >
-                                        {currentQuestion === questions.length - 1 ? 'SEE RESULTS' : 'CONTINUE'}
-                                    </button>
-                                </div>
-                            </div>
                             )}
                         </div>
 

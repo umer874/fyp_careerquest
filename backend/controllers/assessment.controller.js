@@ -3,40 +3,81 @@ const User = require('../models/User');
 
 exports.submitAssessment = async (req, res) => {
   try {
-    const { answers, userId } = req.body;
-
-    if (!userId || !answers || !Array.isArray(answers)) {
-      return res.status(400).json({ error: "Invalid request data" });
+    const { userId, answers } = req.body;
+    
+    // 1. Validate input
+    if (!mongoose.Types.ObjectId.isValid(userId)) {
+      return res.status(400).json({ error: "Invalid user ID" });
     }
 
-    const questionsFromDB = await Question.find();
+    if (!Array.isArray(answers) || answers.length === 0) {
+      return res.status(400).json({ error: "Answers must be a non-empty array" });
+    }
+
+    // 2. Get all questions (only needed fields)
+    const questions = await Question.find({}, 'questionId options');
+
+    // 3. Calculate skills
     const skillScores = {};
+    let processedAnswers = 0;
 
-    answers.forEach(({ questionId, optionId }) => {
-      const question = questionsFromDB.find(q => q._id.toString() === questionId);
-      const selectedOption = question?.options.find(o => o.id === optionId);
+    answers.forEach(answer => {
+      const question = questions.find(q => q.questionId === answer.questionId);
+      
+      if (!question) {
+        console.warn(`Question ${answer.questionId} not found`);
+        return;
+      }
 
-      if (selectedOption?.tags) {
-        selectedOption.tags.forEach(tag => {
-          skillScores[tag] = (skillScores[tag] || 0) + (selectedOption.weight || 1);
+      const option = question.options.find(o => o.id === answer.optionId);
+      
+      if (option?.tags) {
+        option.tags.forEach(tag => {
+          skillScores[tag] = (skillScores[tag] || 0) + (option.weight || 1);
         });
+        processedAnswers++;
       }
     });
 
-    const sortedSkills = Object.entries(skillScores)
-      .sort(([, a], [, b]) => b - a)
-      .map(([skill]) => skill)
-      .slice(0, 3);
+    // 4. Handle case where no valid answers processed
+    if (processedAnswers === 0) {
+      return res.status(400).json({ 
+        error: "No valid answers processed",
+        debug: {
+          receivedAnswers: answers,
+          availableQuestions: questions.map(q => q.questionId)
+        }
+      });
+    }
 
-    await User.findByIdAndUpdate(userId, { skills: sortedSkills });
+    // 5. Get top 3 skills
+    const topSkills = Object.entries(skillScores)
+      .sort(([,a], [,b]) => b - a)
+      .slice(0, 3)
+      .map(([skill]) => skill);
 
-    res.json({ success: true, skills: sortedSkills });
+    // 6. Update user
+    await User.findByIdAndUpdate(userId, { skills: topSkills });
 
-  } catch (err) {
-    console.error("Error in submitAssessment:", err);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.json({ 
+      success: true,
+      skills: topSkills,
+      debug: {
+        processedAnswers,
+        skillScores
+      }
+    });
+
+  } catch (error) {
+    console.error("Assessment error:", error);
+    res.status(500).json({ 
+      error: "Internal server error",
+      details: error.message 
+    });
   }
 };
+
+
 
 
 exports.getQuestions = async (req, res) => {

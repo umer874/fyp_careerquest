@@ -1,17 +1,10 @@
-import { HTTP_METHODS } from "utils/enum";
-import { refreshTokenWrapper } from "utils/helper";
-import { Endpoint } from "utils/endpoints";
+import axios from "axios";
+import { BaseURL, Endpoint } from "utils/endpoints";
 
-type SubmitAssessmentPayload = {
+export const submitAssessmentService = async (data: {
   userId: string;
-  answers: { questionId: string; optionId: string | null }[];
-};
-
-
-export const submitAssessmentService = (payload: SubmitAssessmentPayload) => {
-  return refreshTokenWrapper({
-    url: Endpoint.assessment.submit,
-    method: HTTP_METHODS.POST,
-    payload,
-  });
+  answers: { questionId: string; optionId: string }[];
+}) => {
+  const response = await axios.post(`${BaseURL}${Endpoint.assessment.submit}`, data);
+  return response.data;
 };
