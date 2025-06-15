@@ -5,9 +5,9 @@ const GoogleKey = "";
 
 const Endpoint = {
   auth: {
-    login: "/sign-in",
-    register: "/register",
-    refreshToken: "/refresh-tokens",
+    login: "/api/sign-in",
+    register: "/api/register",
+    refreshToken: "/api/refresh-tokens",
     resetRequest: "auth/reset-request",
     resetPassword: "auth/reset-password",
     updatePassword: "auth/update-password",
