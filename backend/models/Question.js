@@ -1,15 +1,14 @@
 const mongoose = require('mongoose');
 
+const optionSchema = new mongoose.Schema({
+  id: String,
+  text: String,
+});
+
 const questionSchema = new mongoose.Schema({
+  id: Number,
   question: String,
-  options: [
-    {
-      id: String,
-      text: String,
-      weight: Number,
-      tags: [String], // Tags that hint at skills (e.g. ["Frontend", "JavaScript"])
-    },
-  ]
-}, { timestamps: true });
+  options: [optionSchema],
+});
 
 module.exports = mongoose.model('Question', questionSchema);

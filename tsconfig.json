@@ -88,7 +88,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "backend/models/User.js"  ],
+, "backend/models/User.js", "backend/seedQuestions.js"  ],
   "exclude": [
     "node_modules"
   ]

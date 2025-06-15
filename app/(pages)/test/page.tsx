@@ -7,6 +7,9 @@ import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { submitAssessmentService } from "services/assessment";
+import axios from 'axios';
+import { Endpoint } from 'utils/endpoints';
+import Toast from 'components/common/toast';
 
 
 
@@ -44,63 +47,16 @@ const Test = () => {
     const [progress, setProgress] = useState<number>(0);
     const [careerMatch, setCareerMatch] = useState<CareerKey | null>(null);
 
-    const questions: Question[] = [
-        {
-            id: 1,
-            question: "Which programming language are you most proficient in?",
-            options: [
-                { id: 'A', text: 'C++' },
-                { id: 'B', text: 'Python' },
-                { id: 'C', text: 'Java' },
-                { id: 'D', text: 'JavaScript' },
-                { id: 'E', text: 'Other' },
-            ],
-        },
-        {
-            id: 2,
-            question: "Which area of software development interests you most?",
-            options: [
-                { id: 'A', text: 'Frontend (React, Angular, Vue)' },
-                { id: 'B', text: 'Backend (Node.js, Django, Spring)' },
-                { id: 'C', text: 'Mobile Development' },
-                { id: 'D', text: 'Data Science/AI' },
-                { id: 'E', text: 'DevOps/Cloud' },
-            ],
-        },
-        {
-            id: 3,
-            question: "Which UI/UX design tool do you prefer?",
-            options: [
-                { id: 'A', text: 'Figma' },
-                { id: 'B', text: 'Adobe XD' },
-                { id: 'C', text: 'Sketch' },
-                { id: 'D', text: 'InVision Studio' },
-                { id: 'E', text: 'Other' },
-            ],
-        },
-        {
-            id: 4,
-            question: "Which database technology are you most familiar with?",
-            options: [
-                { id: 'A', text: 'SQL (MySQL, PostgreSQL)' },
-                { id: 'B', text: 'NoSQL (MongoDB, Cassandra)' },
-                { id: 'C', text: 'Graph Databases (Neo4j)' },
-                { id: 'D', text: 'In-memory (Redis)' },
-                { id: 'E', text: 'NewSQL' },
-            ],
-        },
-        {
-            id: 5,
-            question: "Which version control system do you primarily use?",
-            options: [
-                { id: 'A', text: 'Git (GitHub, GitLab)' },
-                { id: 'B', text: 'Mercurial' },
-                { id: 'C', text: 'SVN' },
-                { id: 'D', text: 'Perforce' },
-                { id: 'E', text: 'Other' },
-            ],
-        },
-    ];
+    const [questions, setQuestions] = useState<Question[]>([]);
+
+    useEffect(() => {
+        axios.get(Endpoint.assessment.questions).then((res) => {
+            setQuestions(res.data);
+        }).catch((err) => {
+            console.error("Failed to fetch questions:", err);
+        });
+    }, []);
+
 
     const careerMatches: Record<CareerKey, CareerMatch> = {
         dataScientist: {
@@ -184,27 +140,35 @@ const Test = () => {
         return match;
     };
 
-   const handleContinue = async () => {
-    if (currentQuestion < questions.length - 1) {
-        setCurrentQuestion(currentQuestion + 1);
-        setProgress(((currentQuestion + 1) / questions.length) * 100);
-    } else {
-        const match = calculateCareerMatch();
-        setCareerMatch(match);
-        setStep('result');
-        setProgress(100);
 
-        // ✅ Send match to backend
-        try {
-            await submitAssessmentService({
-                userId: user._id, // adjust based on your Redux shape
-                match,
-            });
-        } catch (error) {
-            console.error("Failed to submit assessment:", error);
+
+    const handleContinue = async () => {
+        if (currentQuestion < questions.length - 1) {
+            setCurrentQuestion(currentQuestion + 1);
+            setProgress(((currentQuestion + 1) / questions.length) * 100);
+        } else {
+            const match = calculateCareerMatch();
+            setCareerMatch(match);
+            setStep('result');
+            setProgress(100);
+
+            // ✅ Send match to backend
+            try {
+                await submitAssessmentService({
+                    userId: user._id,
+                    answers: questions.map((q, i) => ({
+                        questionId: q.id.toString(), // if coming from DB, use q._id
+                        optionId: selectedOptions[i],
+                    })),
+                });
+
+            } catch (error: any) {
+                console.error("🔴 Submit error:", error?.response?.data || error.message);
+                console.error("Failed to submit assessment. Please try again later.");
+            }
+
         }
-    }
-};
+    };
 
 
     const handleRestart = () => {
@@ -216,7 +180,7 @@ const Test = () => {
     };
 
     const router = useRouter();
-   const { isLoggedIn, user } = useSelector((state: any) => state.root.auth); // ✅ fixed
+    const { isLoggedIn, user } = useSelector((state: any) => state.root.auth); // ✅ fixed
 
     useEffect(() => {
         if (!isLoggedIn) {
@@ -272,7 +236,7 @@ const Test = () => {
 
     return isLoggedIn ?
 
-        
+
 
         <div className={classNames(styles.customContainer)}>
             <div className={classNames(styles.pageDetailWrapper)}>
@@ -294,6 +258,11 @@ const Test = () => {
                                     {Math.round(progress)}% Complete
                                 </div>
                             </div>
+
+                            {questions.length > 0 && questions[currentQuestion] && (
+ 
+
+
 
                             <div className={classNames(styles.questionContainer)}>
                                 <h2>Question {currentQuestion + 1}/{questions.length}</h2>
@@ -328,6 +297,7 @@ const Test = () => {
                                     </button>
                                 </div>
                             </div>
+                            )}
                         </div>
 
                     </div>
@@ -336,7 +306,7 @@ const Test = () => {
 
         </div>
 
-    :null
+        : null
 };
 
 export default Test;
