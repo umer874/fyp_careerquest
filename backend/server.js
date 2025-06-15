@@ -15,6 +15,9 @@ app.use(express.json());
 const authRoutes = require('./routes/auth.routes');
 app.use('/api/', authRoutes);
 
+const assessmentRoutes=require('./routes/assessment.routes');
+app.use('/api/assessment', assessmentRoutes);
+
 // Create HTTP server
 const server = http.createServer(app);
 

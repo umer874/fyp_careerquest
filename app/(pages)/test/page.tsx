@@ -1,26 +1,13 @@
 "use client";
 import React, { useState } from 'react';
 import classNames from "classnames";
-import { useNavigate } from 'react-router-dom';
 import styles from "./style.module.scss";
-import { Icons, Images } from "assets";
-import Image from "next/image";
-import { jobData } from "utils/constants";
-import CustomInput from "components/common/customInput";
-import CustomPhoneInput from "components/common/customPhoneInput";
-import CustomTextArea from "components/common/customTextArea";
-import CustomButton from "components/common/customButton";
-import ProgressBar from "components/common/progressBar";
-import VacancyStatsChart from "components/common/vacancyStatsChart";
-import RatingLine from "components/common/customRatingLine";
-import { ContactUsService } from "services/general";
-import { toastMessage } from "components/common/toast";
-import { handleErrors } from "utils/helper";
-import { ContactVS } from "utils/validation";
-import { useFormik } from "formik";
+
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { submitAssessmentService } from "services/assessment";
+
 
 
 type Option = {
@@ -197,17 +184,28 @@ const Test = () => {
         return match;
     };
 
-    const handleContinue = () => {
-        if (currentQuestion < questions.length - 1) {
-            setCurrentQuestion(currentQuestion + 1);
-            setProgress(((currentQuestion + 1) / questions.length) * 100);
-        } else {
-            const match = calculateCareerMatch();
-            setCareerMatch(match);
-            setStep('result');
-            setProgress(100);
+   const handleContinue = async () => {
+    if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(currentQuestion + 1);
+        setProgress(((currentQuestion + 1) / questions.length) * 100);
+    } else {
+        const match = calculateCareerMatch();
+        setCareerMatch(match);
+        setStep('result');
+        setProgress(100);
+
+        // ✅ Send match to backend
+        try {
+            await submitAssessmentService({
+                userId: user._id, // adjust based on your Redux shape
+                match,
+            });
+        } catch (error) {
+            console.error("Failed to submit assessment:", error);
         }
-    };
+    }
+};
+
 
     const handleRestart = () => {
         setStep('quiz');
@@ -218,7 +216,7 @@ const Test = () => {
     };
 
     const router = useRouter();
-    const { isLoggedIn } = useSelector((state: any) => state.root.auth);
+   const { isLoggedIn, user } = useSelector((state: any) => state.root.auth); // ✅ fixed
 
     useEffect(() => {
         if (!isLoggedIn) {

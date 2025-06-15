@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
   coordinates: { type: Array }, // or [Number] or { type: [Number] }
   checked: { type: Boolean },
   password: { type: String, required: true },
+   skills: [String],
 });
 
 module.exports = mongoose.model('User', userSchema);

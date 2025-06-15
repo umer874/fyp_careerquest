@@ -12,6 +12,11 @@ const Endpoint = {
     resetPassword: "auth/reset-password",
     updatePassword: "auth/update-password",
   },
+  assessment:{
+     questions:"/api/assessment/questions",
+     submit:"/api/assessment/submit",
+
+  },
   job: {
     get: "jobs/get",
     getJobDetail: "jobs/get/:id",
