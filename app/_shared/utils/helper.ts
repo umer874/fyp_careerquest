@@ -61,7 +61,7 @@ function findScreenTitle(
 const resetRedux = () => {
   const stateBefore = store.getState().root.auth;
 
-  if (stateBefore?.isLoggedIn ) {
+  if (stateBefore?.isLoggedIn) {
     store.dispatch(resetAuthReducer());
 
     // Clear cookies
@@ -77,7 +77,7 @@ const resetRedux = () => {
 
     console.log("After reset:");
     console.log("isLoggedIn:", stateAfter?.isLoggedIn);
-    
+
   } else {
     console.log("No token or login found to reset.");
   }
@@ -176,10 +176,10 @@ async function refreshTokenWrapper({
         const accessTokenAge = 3600;
         store.dispatch(
           setAuthReducer({
-            isLoggedIn: true,
-            user: user,
-            token: data?.accessToken,
-            refreshToken: data?.refreshToken,
+
+            user: data.user,
+            accessToken: data.accessToken,
+            refreshToken: data.refreshToken,
           })
         );
         document.cookie = `user=${encodeURIComponent(
@@ -194,13 +194,11 @@ async function refreshTokenWrapper({
           })
         )}; path=/; max-age=${refreshTokenAge}; sameSite=${true}`;
 
-        document.cookie = `token=${
-          data?.accessToken
-        }; path=/; max-age=${accessTokenAge}; sameSite=${true}`;
+        document.cookie = `token=${data?.accessToken
+          }; path=/; max-age=${accessTokenAge}; sameSite=${true}`;
 
-        document.cookie = `refreshToken=${
-          data?.refreshToken
-        }; path=/; max-age=${refreshTokenAge}; sameSite=${true}`;
+        document.cookie = `refreshToken=${data?.refreshToken
+          }; path=/; max-age=${refreshTokenAge}; sameSite=${true}`;
       }
 
       return GenerateRequest({ url, method, payload });
@@ -216,32 +214,38 @@ function setTokens(token: string, refreshToken: string) {
   const {
     auth: { user },
   } = store.getState().root;
+
+  if (!user) {
+    console.error("Cannot set tokens: user is null");
+    return;
+  }
+
   const refreshTokenAge = 3600 * 24;
   const accessTokenAge = 3600;
+
+  // ✅ Only pass allowed properties
   store.dispatch(
     setAuthReducer({
-      isLoggedIn: true,
-      user: user,
-      token: token,
+      user,
+      accessToken: token,
       refreshToken: refreshToken,
     })
   );
+
+  // Set cookies (this is fine to include isLoggedIn for your own use)
   document.cookie = `user=${encodeURIComponent(
     JSON.stringify({
       isLoggedIn: true,
-      //id: user?.id,
       first_name: user?.first_name,
       last_name: user?.last_name,
       email: user?.email,
-      //role: user?.type,
-      // profile_asset: user?.profile_asset?.full_path ?? "",
     })
   )}; path=/; max-age=${refreshTokenAge}; sameSite=${true}`;
 
   document.cookie = `token=${token}; path=/; max-age=${accessTokenAge}; sameSite=${true}`;
-
   document.cookie = `refreshToken=${refreshToken}; path=/; max-age=${refreshTokenAge}; sameSite=${true}`;
 }
+
 
 const handleGetFilteredPathname = (newParams: Record<string, string>) => {
   const url = new URL(window.location.href);
