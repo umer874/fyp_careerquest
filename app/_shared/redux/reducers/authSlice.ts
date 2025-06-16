@@ -1,23 +1,27 @@
 "use client";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface User {
+  _id: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  profile_asset?: string | null;
+  skills?: string[]; // Add skills array to user interface
+}
 
 interface AuthState {
-  user: {
-    first_name?: string;
-    last_name?: string;
-    email?: string;
-    profile_asset?: string | null;
-  } | null;
+  user: User | null;
   isLoggedIn: boolean;
-   token: string; // <-- ADD THIS
-  refreshToken: string; // <-- ADD THIS
+  token: string;
+  refreshToken: string;
   accessToken: string;
 }
 
 const initialState: AuthState = {
   user: null,
   isLoggedIn: false,
-    token: "",
+  token: "",
   accessToken: "",
   refreshToken: "",
 };
@@ -26,17 +30,41 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAuthReducer: (state, action) => {
+    setAuthReducer: (state, action: PayloadAction<{
+      user: User;
+      accessToken: string;
+      refreshToken: string;
+    }>) => {
       const { user, accessToken, refreshToken } = action.payload;
       state.user = user;
       state.accessToken = accessToken;
       state.refreshToken = refreshToken;
       state.isLoggedIn = true;
     },
+    
+    updateUserSkills: (state, action: PayloadAction<{
+      skills: string[];
+    }>) => {
+      if (state.user) {
+        state.user.skills = action.payload.skills;
+      }
+    },
+    
+    updateUserProfile: (state, action: PayloadAction<Partial<User>>) => {
+      if (state.user) {
+        state.user = { ...state.user, ...action.payload };
+      }
+    },
+    
     resetAuthReducer: () => initialState,
   },
 });
 
-export const { setAuthReducer, resetAuthReducer } = authSlice.actions;
+export const { 
+  setAuthReducer, 
+  resetAuthReducer,
+  updateUserSkills, // Export the new action
+  updateUserProfile 
+} = authSlice.actions;
 
 export default authSlice.reducer;

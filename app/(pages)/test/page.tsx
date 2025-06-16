@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import { submitAssessmentService } from "services/assessment";
 import axios from 'axios';
 import { Endpoint, BaseURL } from 'utils/endpoints';
+import { useDispatch } from "react-redux";
+import { GetUserWithSkills } from 'services/user';
 import Toast from 'components/common/toast';
 
 
@@ -18,12 +20,16 @@ type Option = {
     id: string;
     text: string;
 };
-
 interface Question {
-    _id: string; // ✅ MongoDB ObjectId as string
-    id: number;
+    _id: string;
+    questionId: number; // Add this
     question: string;
-    options: { id: string; text: string }[];
+    options: {
+        id: string;
+        text: string;
+        tags?: string[]; // Add for debugging
+        weight?: number; // Add for debugging
+    }[];
 }
 
 type CareerKey =
@@ -50,6 +56,8 @@ const Test = () => {
     const [careerMatch, setCareerMatch] = useState<CareerKey | null>(null);
 
     const [questions, setQuestions] = useState<Question[]>([]);
+
+    const dispatch = useDispatch();
 
     useEffect(() => {
         axios.get(`${BaseURL}${Endpoint.assessment.questions}`)
@@ -162,22 +170,30 @@ const Test = () => {
                 // Toast.error("Please answer all questions before submitting.");
                 return;
             }
-
+            // Before submission:
+            console.log("Submitting:", {
+                userId: user._id,
+                answers: questions.map((q, i) => ({
+                    questionId: q.questionId,
+                    questionText: q.question,
+                    optionId: selectedOptions[i],
+                    optionText: q.options.find(o => o.id === selectedOptions[i])?.text
+                }))
+            });
 
 
             // ✅ Send match to backend
             try {
+                // In handleContinue():
                 await submitAssessmentService({
                     userId: user._id,
                     answers: questions.map((q, i) => ({
-                        questionId: q._id,
-                        optionId: selectedOptions[i] as string, // ✅ cast to string, already validated above
+                        questionId: q.questionId, // Changed from _id to questionId
+                        optionId: selectedOptions[i] as string,
                     })),
                 });
 
-
-
-
+    
             } catch (error: any) {
                 console.error(" Submit error:", error?.response?.data || error.message);
                 console.error("Failed to submit assessment. Please try again later.");

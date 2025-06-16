@@ -62,8 +62,20 @@ exports.register = async (req, res) => {
       return res.status(500).json({ message: ['Failed to generate token'] });
     }
 
-    // ✅ Send response
-    res.status(201).json({ message: 'User registered successfully', token });
+    res.status(201).json({
+      message: 'User registered successfully',
+      user: {
+        _id: newUser._id,
+        first_name: newUser.firstName,
+        last_name: newUser.lastName,
+        email: newUser.email,
+      },
+      accessToken: token, // <-- Rename from `token` to `accessToken`
+      refreshToken: jwt.sign({ id: newUser._id }, process.env.JWT_REFRESH_SECRET, {
+        expiresIn: '7d',
+      }),
+    });
+
 
   } catch (err) {
     console.error('Register Error:', err.message);
@@ -100,6 +112,7 @@ exports.login = async (req, res) => {
     res.status(200).json({
       message: 'Login successful',
       user: {
+        _id: user._id, // ✅ Add this line
         first_name: user.firstName,
         last_name: user.lastName,
         email: user.email,
@@ -107,6 +120,8 @@ exports.login = async (req, res) => {
       accessToken,
       refreshToken
     });
+
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });

@@ -10,207 +10,219 @@ import ProgressBar from "components/common/progressBar";
 import VacancyStatsChart from "components/common/vacancyStatsChart";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
-import { useEffect , ReactNode} from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { GetUserWithSkills } from "services/user";
+import { updateUserSkills } from "redux/reducers/authSlice";
 
 const Dashbaord = () => {
-
-
+  const dispatch = useDispatch();
+  const { user } = useSelector((state: any) => state.root.auth);
   const router = useRouter();
-  const { isLoggedIn } = useSelector((state: any) => state.root.auth);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      router.replace("/auth/login"); // Redirect if not logged in
-    }
-  }, [isLoggedIn]);
+  console.log("User object:", user); // Add this to inspect the user object
+}, [user]);
 
+  useEffect(() => {
+    const loadUserSkills = async () => {
+      if (!user?._id) return;
 
+      try {
+        const response = await GetUserWithSkills(user._id);
+        dispatch(updateUserSkills({
+          skills: response.data.user?.skills || []
+        }));
+      } catch (error) {
+        console.error("Failed to fetch user skills:", error);
+      }
+    };
 
+    loadUserSkills();
+  }, [user?._id, dispatch]);
+
+  const calculateSkillProgress = (skill: string) => {
+    const skillWeights: Record<string, number> = {
+      "Programming & Development": 90,
+      "Data Science & AI": 73,
+      "UI/UX Design": 45,
+      "Frontend Development": 85,
+      "Backend Development": 75,
+      "DevOps": 65
+    };
+    return skillWeights[skill] || 70;
+  };
 
   return (
-    isLoggedIn ?
-      <div className={classNames(styles.customContainer)}>
-        <div className={classNames(styles.pageDetailWrapper)}>
-
-          <div className="grid md:grid-cols-[60%_40%] grid-cols-1 gap-8">
-
-
-
-            <div className={classNames(styles.box)}>
-
-              <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-7 sm:gap-5 xs:gap-4 gap-3">
-
-                <div className={classNames(styles.stepItem, "flex items-center")}>
-
-                  <div className={classNames(styles.itemContent, "")}>
-                    <div>
-                      <h2>43</h2>
-                      <p>Application Sent</p>
-                    </div>
+    <div className={classNames(styles.customContainer)}>
+      <div className={classNames(styles.pageDetailWrapper)}>
+        <div className="grid md:grid-cols-[60%_40%] grid-cols-1 gap-8">
+          {/* Left Column */}
+          <div className={classNames(styles.box)}>
+            {/* Stats Cards */}
+            <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-7 sm:gap-5 xs:gap-4 gap-3">
+              {[
+                { value: 43, label: "Application Sent", icon: <Icons.Home />, color: "" },
+                { value: 27, label: "Interviews Scheduled", icon: <Icons.Calendar />, color: "#F39C12" },
+                { value: "10k", label: "Profile Viewed", icon: <Icons.Usermain />, color: "#28A745" }
+              ].map((stat, index) => (
+                <div key={index} className={classNames(styles.stepItem, "flex items-center")}>
+                  <div className={classNames(styles.itemContent)}>
+                    <h2 style={{ color: stat.color }}>{stat.value}</h2>
+                    <p>{stat.label}</p>
                   </div>
                   <div className={classNames(styles.iconContainer)}>
-                    <Icons.Home />
-                  </div>
-                </div>
-
-                <div className={classNames(styles.stepItem, "flex items-center")}>
-
-                  <div className={classNames(styles.itemContent, "")}>
-                    <div>
-                      <h2 style={{ "color": "#F39C12" }}>27</h2>
-                      <p>Interviews Shedule</p>
-                    </div>
-                  </div>
-
-                  <div className={classNames(styles.iconContainer)}>
-                    <Icons.Calendar />
-                  </div>
-                </div>
-
-                <div className={classNames(styles.stepItem, "flex items-center")}>
-
-                  <div className={classNames(styles.itemContent, "")}>
-                    <div>
-                      <h2 style={{ "color": "#28A745" }}>10k</h2>
-                      <p>Profile Viewed</p>
-                    </div>
-                  </div>
-                  <div className={classNames(styles.iconContainer)}>
-                    <Icons.Usermain />
-                  </div>
-                </div>
-
-              </div>
-
-              <div className={classNames(styles.chart)}>
-                <VacancyStatsChart />
-              </div>
-
-            </div>
-
-            <div className={classNames(styles.user, "")}>
-              <div className={classNames(styles.main)}>
-                <div className={classNames(styles.box, "flex gap-6 items-center")}>
-                  <Image style={{"width":70,"height":70}}src={Images.DefaultAvatar} alt="user icon" />
-                  <div className={classNames(styles.text, "flex flex-col gap-3")}>
-                    <h6>Muhammad Anas</h6>
-                    <p style={{ "color": "#0092D6" }}>ReactJS Developer</p>
-                    <div className={classNames("flex gap-1 items-center")}>
-                      <Icons.LocationPin />
-                      <span className="whitespace-nowrap text-xs">Lahore, Pakistan</span>
-                    </div>
-
-                  </div>
-                  <CustomButton
-                    title="Update Profile"
-                    containerStyle="bg-blue maxHeighted_btn"
-                  />
-                </div>
-
-                <div className="flex gap-14 items-center">
-
-                  <div className={classNames(styles.content, "flex flex-col gap-4")}>
-
-
-                    <h5>Skills</h5>
-
-                    <div className="flex flex-col gap-2">
-                      <ProgressBar percent={90} />
-                      <p>Programming & Development</p>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                      <ProgressBar percent={73} style={{ "color": "#F39C12" }} />
-                      <p>Data Science & AI</p>
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                      <ProgressBar percent={45} style={{ "color": "#28A745" }} />
-                      <p>UI / UX</p>
-                    </div>
-                  </div>
-                  <Image src={Images.Gragh} alt="gragh" className="w-45 h-55" />
-                </div>
-
-
-                <div className={classNames(styles.text, "flex flex-col gap-2")}>
-                  <h5>Boost Your Career with a Quick Skill Test! </h5>
-
-                  <p>Evaluate your skills and get personalized career
-                    recommendations to grow in the IT sector.</p>
-
-                  <div className="flex gap-6 pt-4 items-center">
-                    <span style={{ "color": "#53BE33" }}>Discover your strengths today!</span>
-                    <CustomButton
-                      title="Take the Test!"
-                      containerStyle="bg-blue maxHeighted_btn"
-                    />
-                  </div>
-                </div>
-                <div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div className={classNames(styles.jobs)}>
-            <h4 className="pt-6">Recommended Jobs</h4>
-            <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 pt-6">
-              {jobData.map((job, index) => (
-                <div key={index} className={classNames(styles.stepItem, "items-center")}>
-                  <div className="flex items-center gap-4">
-                    <div className={classNames(styles.iconContainer)}>
-                      <Image
-                        src={job.image.src}
-                        alt={job.title}
-                        width={job.image.width}
-                        height={job.image.height}
-                      />
-                    </div>
-                    <div className={classNames(styles.itemContent, "items-center mb-4")}>
-                      <div>
-                        <h6>{job.title}</h6>
-                        <p>{job.company}</p>
-                      </div>
-                    </div>
-                    <CustomButton
-                      title={job.applyButton}
-                      containerStyle="bg-blue maxHeighted_btn"
-                    />
-                  </div>
-                  <div className={classNames(styles.line, "mt-6")}></div>
-                  <div className={classNames(styles.description, "flex flex-col gap-6 pt-6")}>
-                    <div className="flex gap-4">
-                      <Icons.Money />
-                      <span>{job.salaryRange}</span>
-                    </div>
-                    <div className="flex gap-4">
-                      <Icons.LocationPin />
-                      <span>{job.location}</span>
-                    </div>
-                    <div className="flex gap-4">
-                      {job.jobType.map((type, idx) => (
-                        <button key={idx}>{type}</button>
-                      ))}
-                    </div>
-                    <div className="flex gap-4">
-                      {job.experience.map((exp, idx) => (
-                        <button key={idx}>{exp}</button>
-                      ))}
-                      {job.workMode.map((mode, idx) => (
-                        <button key={idx}>{mode}</button>
-                      ))}
-                    </div>
+                    {stat.icon}
                   </div>
                 </div>
               ))}
             </div>
+
+            {/* Chart */}
+            <div className={classNames(styles.chart, "mt-8")}>
+              <VacancyStatsChart />
+            </div>
+          </div>
+
+          {/* Right Column - User Profile */}
+          <div className={classNames(styles.user)}>
+            <div className={classNames(styles.main)}>
+              {/* Profile Header */}
+              <div className={classNames(styles.box, "flex flex-col sm:flex-row gap-6 items-start sm:items-center")}>
+                <Image
+                  width={70}
+                  height={70}
+                  src={Images.DefaultAvatar}
+                  alt="user icon"
+                  className="flex-shrink-0"
+                />
+                <div className={classNames(styles.text, "flex flex-col gap-3 flex-grow")}>
+                  <h6>{user.first_name} {user.last_name}</h6>
+                  <p className="text-blue">ReactJS Developer</p>
+                  <div className="flex gap-1 items-center">
+                    <Icons.LocationPin />
+                    <span className="text-xs">Lahore, Pakistan</span>
+                  </div>
+                </div>
+                <CustomButton
+                  title="Update Profile"
+                  containerStyle="bg-blue maxHeighted_btn w-full sm:w-auto"
+                />
+              </div>
+
+              {/* Skills Section */}
+              <div className="flex flex-col lg:flex-row gap-8 items-start mt-8 items-center">
+                <div className={classNames(styles.skillSection, "flex flex-col gap-4 w-full")}>
+                  <h5>Skills</h5>
+
+                  {user?.skills?.length > 0 ? (
+                    user.skills.map((skill: string, index: number) => (
+                      <div key={index} className="flex flex-col gap-2 w-full">
+                        <div className="flex justify-between items-center">
+                          <span className="text-sm">{skill}</span>
+                          <span className="text-xs text-gray-500">{calculateSkillProgress(skill)}%</span>
+                        </div>
+                        <ProgressBar
+                          percent={calculateSkillProgress(skill)}
+                          style={{
+                            color: index === 0 ? "#28A745" :
+                              index === 1 ? "#F39C12" :
+                                "#0092D6"
+                          }}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <div className="flex flex-col gap-2 w-full">
+                      <ProgressBar percent={0} />
+                      <p>No skills assessed yet</p>
+                      <p className={styles.takeTestPrompt}>
+                        Take the test to discover your skills!
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                <Image
+                  src={Images.Gragh}
+                  alt="skill graph"
+                  width={180}
+                  height={220}
+                  className="hidden lg:block flex-shrink-0 pt-6"
+                />
+              </div>
+
+              {/* CTA Section */}
+              <div className={classNames(styles.text, "flex flex-col gap-2 mt-8")}>
+                <h5>Boost Your Career with a Quick Skill Test!</h5>
+                <p>Evaluate your skills and get personalized career recommendations to grow in the IT sector.</p>
+                <div className="flex flex-col sm:flex-row gap-4 pt-4 items-start sm:items-center">
+                  <span className="text-green-500">Discover your strengths today!</span>
+                  <CustomButton
+                    title="Take the Test!"
+                    containerStyle="bg-blue maxHeighted_btn"
+                    onClick={() => router.push('/test')}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Recommended Jobs */}
+        <div className={classNames(styles.jobs, "mt-8")}>
+          <h4>Recommended Jobs</h4>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 pt-6">
+            {jobData.map((job, index) => (
+              <div key={index} className={classNames(styles.stepItem)}>
+                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                  <div className={classNames(styles.iconContainer, "flex-shrink-0")}>
+                    <Image
+                      src={job.image.src}
+                      alt={job.title}
+                      width={40}
+                      height={40}
+                    />
+                  </div>
+                  <div className={classNames(styles.itemContent, "flex-grow")}>
+                    <h6>{job.title}</h6>
+                    <p>{job.company}</p>
+                  </div>
+                  <CustomButton
+                    title={job.applyButton}
+                    containerStyle="bg-blue maxHeighted_btn w-full sm:w-auto"
+                  />
+                </div>
+
+                <div className={classNames(styles.line, "my-4")} />
+
+                <div className={classNames(styles.description, "flex flex-col gap-4")}>
+                  <div className="flex gap-2 items-center">
+                    <Icons.Money className="flex-shrink-0" />
+                    <span>{job.salaryRange}</span>
+                  </div>
+                  <div className="flex gap-2 items-center">
+                    <Icons.LocationPin className="flex-shrink-0" />
+                    <span>{job.location}</span>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    {[...job.jobType, ...job.experience, ...job.workMode].map((item, idx) => (
+                      <button
+                        key={idx}
+                        className="px-3 py-1 bg-gray-100 rounded-full text-xs"
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-
-      : null);
+    </div>
+  )
 };
 
 export default Dashbaord;

@@ -9,7 +9,10 @@ const userSchema = new mongoose.Schema({
   coordinates: { type: Array }, // or [Number] or { type: [Number] }
   checked: { type: Boolean },
   password: { type: String, required: true },
-   skills: [String],
+    skills: {
+    type: [String],
+    default: []
+  },
 });
 
 module.exports = mongoose.model('User', userSchema);

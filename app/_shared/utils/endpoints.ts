@@ -1,4 +1,5 @@
-const BaseURL = "https://fyp-careerquest-7.onrender.com";
+const BaseURL = "http://localhost:3001";
+
 
 
 const GoogleKey = "";
@@ -31,10 +32,10 @@ const Endpoint = {
     contactUs: "/support/send-support-message",
   },
   user: {
-    update: "users/update-profile",
-    getUpdatedUser: "users/get-updated-user",
-    getUser: "users/get-user/:id",
-    addFcmToken: "users/add-fcm-token",
+    update: "/api/update-profile",
+    getUpdatedUser: "/api/get-updated-user",
+    getUser: "/api/get-user/:id",
+    addFcmToken: "/api//add-fcm-token",
   },
   porfolio: {
     create: "portfolios/create",

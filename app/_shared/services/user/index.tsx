@@ -1,7 +1,16 @@
 import { BaseURL, Endpoint } from "utils/endpoints";
 import { HTTP_METHODS } from "utils/enum";
 import { refreshTokenWrapper } from "utils/helper";
-//import { apiCallWithToken } from "utils/server-side-helper";
+
+interface UserWithSkillsResponse {
+  _id: string;
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  profile_asset?: string | null;
+  skills: string[]; // Explicitly include skills
+  // ... other user fields
+}
 
 const UpdateProfileService = (payload: any) => {
   return refreshTokenWrapper({
@@ -11,17 +20,6 @@ const UpdateProfileService = (payload: any) => {
   });
 };
 
-// const ApplyFellowShipService = (payload: ApplyFellowShipType) => {
-//   let obj: any = {
-//     reason: payload.reason,
-//   };
-//   return refreshTokenWrapper({
-//     url: Endpoint.user.applyFellowship,
-//     method: HTTP_METHODS.POST,
-//     payload: obj,
-//   });
-// };
-
 const GetUpdateUserService = () => {
   return refreshTokenWrapper({
     url: Endpoint.user.getUpdatedUser,
@@ -29,39 +27,12 @@ const GetUpdateUserService = () => {
   });
 };
 
-// const AddUpdateResumeService = (payload: any) => {
-//   return refreshTokenWrapper({
-//     url: Endpoint.user.addUpdateResume,
-//     method: HTTP_METHODS.PATCH,
-//     payload,
-//   });
-// };
-
-// const DeleteResumeService = () => {
-//   return refreshTokenWrapper({
-//     url: Endpoint.user.deleteResume,
-//     method: HTTP_METHODS.DELETE,
-//   });
-// };
-
-const GetUserDetailServerCall = async ({
-  token,
-  userId,
-  refreshToken,
-}: {
-  token: string;
-  userId: string;
-  refreshToken: string;
-}) => {
-  let url = BaseURL + Endpoint.user.getUser.replace(":id", userId.toString());
-  // return await apiCallWithToken(url, token ?? "", refreshToken ?? "", {
-  //   method: "POST",
-  //   headers: {
-  //     Authorization: "Bearer " + token,
-  //     "Content-Type": "application/json",
-  //   },
-  //   cache: "no-store",
-  // });
+// New function to get user with skills
+const GetUserWithSkills = (userId: string) => {
+  return refreshTokenWrapper({
+    url: `${Endpoint.user.getUser.replace(":id", userId)}?includeSkills=true`,
+    method: HTTP_METHODS.GET,
+  });
 };
 
 const AddFcmTokenService = (payload: { fcm_token: string }) => {
@@ -73,11 +44,8 @@ const AddFcmTokenService = (payload: { fcm_token: string }) => {
 };
 
 export {
-  // AddUpdateResumeService,
-  // ApplyFellowShipService,
-  // DeleteResumeService,
   GetUpdateUserService,
-  GetUserDetailServerCall,
   UpdateProfileService,
   AddFcmTokenService,
+  GetUserWithSkills // Export the new function
 };

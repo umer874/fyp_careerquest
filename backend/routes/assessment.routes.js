@@ -5,8 +5,8 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/assessment.controller');
 
-//router.get('/assessment/questions', controller.getQuestions);
-router.post('/assessment/submit', controller.submitAssessment);
+router.get('/questions', controller.getQuestions);
+router.post('/submit', controller.submitAssessment);
 
 
 // Add this temporary route

@@ -1,10 +1,13 @@
 import axios from "axios";
 import { BaseURL, Endpoint } from "utils/endpoints";
 
+// services/assessment.ts
 export const submitAssessmentService = async (data: {
   userId: string;
-  answers: { questionId: string; optionId: string }[];
+  answers: Array<{
+    questionId: number; // Not string/_id
+    optionId: string;
+  }>;
 }) => {
-  const response = await axios.post(`${BaseURL}${Endpoint.assessment.submit}`, data);
-  return response.data;
+  return axios.post(`${BaseURL}${Endpoint.assessment.submit}`, data);
 };
