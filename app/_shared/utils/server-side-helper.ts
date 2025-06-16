@@ -4,6 +4,12 @@ import { jwtDecode } from "jwt-decode";
 import { getAuthentication } from "routes/helper";
 import { BaseURL, Endpoint } from "./endpoints";
 import { cookies } from "next/headers";
+import axios from "axios";
+
+export const SERVER_HTTP_CLIENT = axios.create({
+  baseURL: BaseURL,
+  timeout: 30000,
+});
 
 function parseCookies(req: any) {
   return cookie.parse(
@@ -25,19 +31,15 @@ const redirectBasedOnRole = async (req: any, pathName: string) => {
   if (req) {
     const persistState = getDataFromCookies(parseCookies(req), "user");
 
-    const result = await getAuthentication(
-      persistState?.isLoggedIn,
+    const isAuthenticated = await getAuthentication(
+      persistState.isLoggedIn,
       pathName
     );
 
-    return result;
+    return isAuthenticated;
   }
-
-  return {
-    path: "/", // default fallback path
-    isAutherized: false,
-  };
 };
+
 
 const RefreshTokensService = (payload: { refreshToken: string }) => {
   return fetch(BaseURL + Endpoint.auth.refreshToken, {
@@ -59,6 +61,7 @@ async function apiCallWithToken(
     updatedRefreshToken = refreshToken,
     is_token_updated = false,
     status = 200;
+
   if (token) {
     const response = await refreshServerToken(token, refreshToken);
     updatedToken = response.updatedToken;
@@ -75,7 +78,23 @@ async function apiCallWithToken(
     },
   });
 
-  const responseJson = await res.json();
+  let responseJson;
+
+  try {
+    // Only try to parse as JSON if content-type is JSON
+    const contentType = res.headers.get("content-type");
+    if (contentType && contentType.includes("application/json")) {
+      responseJson = await res.json();
+    } else {
+      const text = await res.text(); // log it for debugging
+      throw new Error(
+        `Expected JSON but received: ${text.slice(0, 100)}...`
+      );
+    }
+  } catch (error) {
+    console.error("Error parsing response JSON:", error);
+    throw error; // rethrow for caller to handle
+  }
 
   return {
     updatedToken: {
@@ -87,6 +106,7 @@ async function apiCallWithToken(
     response: responseJson,
   };
 }
+
 
 const refreshServerToken = async (token: string, refreshToken: string) => {
   let decodedToken: any = jwtDecode(token);

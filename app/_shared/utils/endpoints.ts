@@ -1,4 +1,4 @@
-const BaseURL = "http://localhost:3001";
+const BaseURL = "https://fyp-careerquest-7.onrender.com";
 
 
 
@@ -38,11 +38,11 @@ const Endpoint = {
     addFcmToken: "/api//add-fcm-token",
   },
   porfolio: {
-    create: "portfolios/create",
-    update: "portfolios/update/:id",
-    delete: "portfolios/delete/:id",
-    get: "portfolios/get/:id",
-    getUserPortfolios: "portfolios/get-user-portfolios/:id",
+    create: "/api/portfolios/create",
+    update: "/api/portfolios/update/:id",
+    delete: "/api/portfolios/delete/:id",
+    get: "/api/portfolios/get/:id",
+    getUserPortfolios: "/api/portfolios/get-user-portfolios/:id",
   },
   project: {
     create: "projects/create",

@@ -63,7 +63,7 @@ const Dashbaord = () => {
             <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 lg:gap-7 sm:gap-5 xs:gap-4 gap-3">
               {[
                 { value: 43, label: "Application Sent", icon: <Icons.Home />, color: "" },
-                { value: 27, label: "Interviews Scheduled", icon: <Icons.Calendar />, color: "#F39C12" },
+                { value: 27, label: "Interviews sheduled", icon: <Icons.Calendar />, color: "#F39C12" },
                 { value: "10k", label: "Profile Viewed", icon: <Icons.Usermain />, color: "#28A745" }
               ].map((stat, index) => (
                 <div key={index} className={classNames(styles.stepItem, "flex items-center")}>
@@ -97,7 +97,7 @@ const Dashbaord = () => {
                   className="flex-shrink-0"
                 />
                 <div className={classNames(styles.text, "flex flex-col gap-3 flex-grow")}>
-                  <h6>{user.first_name} {user.last_name}</h6>
+                  <h6>{user?.first_name} {user?.last_name}</h6>
                   <p className="text-blue">ReactJS Developer</p>
                   <div className="flex gap-1 items-center">
                     <Icons.LocationPin />

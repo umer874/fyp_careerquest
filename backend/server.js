@@ -14,6 +14,10 @@ app.use(express.json());
 const userRoutes= require('./routes/userRoutes');
 app.use('/api/',userRoutes);
 
+
+const portfolioRoutes=require('./routes/portfolio');
+app.use('/api/portfolios', portfolioRoutes);
+
 // Routes
 const authRoutes = require('./routes/auth.routes');
 app.use('/api/', authRoutes);

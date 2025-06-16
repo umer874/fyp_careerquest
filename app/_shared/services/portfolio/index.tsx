@@ -1,7 +1,7 @@
 import { BaseURL, Endpoint } from "utils/endpoints";
 import { HTTP_METHODS } from "utils/enum";
 import { refreshTokenWrapper } from "utils/helper";
-//import { apiCallWithToken } from "utils/server-side-helper";
+import { apiCallWithToken } from "utils/server-side-helper";
 import { ListingInterface } from "_shared/types/pagination";
 
 const CreatePortfolioService = (payload: any) => {
@@ -45,13 +45,13 @@ const GetPortfoliosServerCall = async ({
     Endpoint.porfolio.getUserPortfolios.replace(":id", id) +
     `?page=${page ?? 1}&limit=${limit ?? 10}`;
 
-  // return await apiCallWithToken(url, token ?? "", refreshToken ?? "", {
-  //   headers: {
-  //     Authorization: "Bearer " + token,
-  //     "Content-Type": "application/json",
-  //   },
-  //   cache: "no-store",
-  // });
+  return await apiCallWithToken(url, token ?? "", refreshToken ?? "", {
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
 };
 
 const GetPortfoliosService = async ({
@@ -78,13 +78,13 @@ const GetPortfolioDetailServerCall = async ({
 }) => {
   let url = BaseURL + Endpoint.porfolio.get.replace(":id", id);
 
-  // return await apiCallWithToken(url, token ?? "", refreshToken ?? "", {
-  //   headers: {
-  //     Authorization: "Bearer " + token,
-  //     "Content-Type": "application/json",
-  //   },
-  //   cache: "no-store",
-  // });
+  return await apiCallWithToken(url, token ?? "", refreshToken ?? "", {
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+    cache: "no-store",
+  });
 };
 
 export {

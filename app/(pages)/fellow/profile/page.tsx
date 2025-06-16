@@ -71,7 +71,7 @@ const Profile = () => {
 
             <div className={classNames(styles.itemContent, "flex flex-col gap-4")}>
 
-              <h6>{user.first_name} {user.last_name}</h6>
+              <h6>{user?.first_name} {user?.last_name}</h6>
               <div className="flex gap-4">
                 <div className="flex gap-1" >
                   <Icons.UserProfileIcon />
