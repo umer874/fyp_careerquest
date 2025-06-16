@@ -84,11 +84,11 @@ const BasicSettings = ({ userCookie }: BasicSettingsProps) => {
           dispatch(
             setAuthReducer({
               user: data?.data,
-              token: token,
+              accessToken: token,
               refreshToken: refreshToken,
-              isLoggedIn: isLoggedIn,
             })
           );
+
 
           setCookie(
             "user",
