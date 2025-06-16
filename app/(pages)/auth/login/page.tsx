@@ -53,7 +53,6 @@ const Login = () => {
   if (status === 200) {
     dispatch(
       setAuthReducer({
-        isLoggedIn: true,
         user: data.user,
         accessToken: data.accessToken,
         refreshToken: data.refreshToken,
