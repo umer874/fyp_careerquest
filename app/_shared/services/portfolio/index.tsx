@@ -6,7 +6,7 @@ import { ListingInterface } from "_shared/types/pagination";
 
 const CreatePortfolioService = (payload: any) => {
   return refreshTokenWrapper({
-    url: Endpoint.porfolio.create,
+    url: Endpoint.portfolio.create,
     method: HTTP_METHODS.POST,
     payload,
   });
@@ -14,7 +14,7 @@ const CreatePortfolioService = (payload: any) => {
 
 const UpdatePortfolioService = (id: string, payload: any) => {
   return refreshTokenWrapper({
-    url: Endpoint.porfolio.update.replace(":id", id),
+    url: Endpoint.portfolio.update.replace(":id", id),
     method: HTTP_METHODS.PATCH,
     payload,
   });
@@ -22,7 +22,7 @@ const UpdatePortfolioService = (id: string, payload: any) => {
 
 const DeletePortfolioService = (id: string) => {
   return refreshTokenWrapper({
-    url: Endpoint.porfolio.delete.replace(":id", id),
+    url: Endpoint.portfolio.delete.replace(":id", id),
     method: HTTP_METHODS.DELETE,
   });
 };
@@ -42,7 +42,7 @@ const GetPortfoliosServerCall = async ({
 }: GetPortfoliosServerCallInterface) => {
   let url =
     BaseURL +
-    Endpoint.porfolio.getUserPortfolios.replace(":id", id) +
+    Endpoint.portfolio.getUserPortfolios.replace(":id", id) +
     `?page=${page ?? 1}&limit=${limit ?? 10}`;
 
   return await apiCallWithToken(url, token ?? "", refreshToken ?? "", {
@@ -61,7 +61,7 @@ const GetPortfoliosService = async ({
 }: GetPortfoliosServerCallInterface) => {
   return refreshTokenWrapper({
     url:
-      Endpoint.porfolio.getUserPortfolios.replace(":id", id) +
+      Endpoint.portfolio.getUserPortfolios.replace(":id", id) +
       `?page=${page ?? 1}&limit=${limit ?? 10}`,
     method: HTTP_METHODS.GET,
   });
@@ -76,7 +76,7 @@ const GetPortfolioDetailServerCall = async ({
   token: string;
   id: string;
 }) => {
-  let url = BaseURL + Endpoint.porfolio.get.replace(":id", id);
+  let url = BaseURL + Endpoint.portfolio.get.replace(":id", id);
 
   return await apiCallWithToken(url, token ?? "", refreshToken ?? "", {
     headers: {

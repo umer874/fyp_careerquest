@@ -37,7 +37,7 @@ const Endpoint = {
     getUser: "/api/get-user/:id",
     addFcmToken: "/api//add-fcm-token",
   },
-  porfolio: {
+  portfolio: {
     create: "/api/portfolios/create",
     update: "/api/portfolios/update/:id",
     delete: "/api/portfolios/delete/:id",

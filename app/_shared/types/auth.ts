@@ -59,4 +59,5 @@ export type RefreshWrapperType = {
   url: string;
   method: string;
   payload?: any;
+  headers?: Record<string, string>;
 };

@@ -13,7 +13,7 @@ const protect  = require('../middleware/auth');
 
 // Match exactly with your endpoint definitions
 router.route('/create')
-  .post( protect,controller.createPortfolio);
+  .post( upload,controller.createPortfolio);
 
 router.route('/update/:id')
   .put(auth, controller.updatePortfolio);

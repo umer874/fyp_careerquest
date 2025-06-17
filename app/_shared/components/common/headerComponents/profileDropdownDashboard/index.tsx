@@ -4,6 +4,7 @@ import styles from "./style.module.scss";
 import { Icons, Images } from "assets";
 import classNames from "classnames";
 import { routeConstant } from "routes/constants";
+import { toastMessage } from "components/common/toast";
 import Link from "next/link";
 import { useRouter } from "next13-progressbar";
 import { resetRedux } from "utils/helper";
@@ -30,6 +31,7 @@ const ProfileDropdownDashboard = ({ path }: ProfileDropdownDashboardProps) => {
     setIsOpen(false);
     resetRedux();
     router.push(routeConstant.login.path);
+    toastMessage("success", "Logged out successfully");
   };
 
   const handleOptionSelect = (path: string) => {

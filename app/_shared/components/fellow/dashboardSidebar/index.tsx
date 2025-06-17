@@ -6,9 +6,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next13-progressbar";
 import { resetAuthReducer } from "redux/reducers/authSlice";
 import { routeConstant } from "routes/constants";
 import NavItem from "./navItem";
+import { resetRedux } from "utils/helper";
 import styles from "./style.module.scss";
 import { SideBarItemsType,SideBarItemPathType } from "_shared/types/navigation";
 
@@ -25,12 +27,18 @@ function DashboardSidebar({ sidebarArr }: Props) {
     setOpenConfirmationModal(true);
   };
 
+  
+
   const handleCloseConfirmationModal = () => {
     setOpenConfirmationModal(false);
   };
+  const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const handleLogout = () => {
-    dispatch(resetAuthReducer());
+   setIsOpen(false);
+    resetRedux();
+    router.push(routeConstant.login.path);
     toastMessage("success", "Logged out successfully");
   };
 
