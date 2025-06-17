@@ -6,14 +6,14 @@ import CustomTextArea from "components/common/customTextArea";
 import CustomFileUpload from "components/common/customFileUpload";
 import { useFormik } from "formik";
 import { CreatePortfolioVS, UpdatePortfolioVS } from "utils/validation";
-import { CreatePortfolio } from "_shared/types/portfolio";
 import {
   CreatePortfolioService,
   UpdatePortfolioService,
 } from "services/portfolio";
-import { CreateProjectService, UpdateProjectService } from "services/project";
 import { handleErrors } from "utils/helper";
 import { toastMessage } from "components/common/toast";
+import { CreateProjectService, UpdateProjectService } from "services/project";
+import { CreatePortfolio } from "_shared/types/portfolio";
 
 interface PortfolioModalProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ interface PortfolioModalProps {
   buttonText?: string;
   isProject?: boolean;
   item?: any;
-  lists?: any[];
+  lists?: any;
   setLists?: (val: any[]) => void;
   forceReload?: boolean;
 }
@@ -33,7 +33,7 @@ const PortfolioModal = ({
   title,
   buttonText,
   isProject,
-  lists = [],
+  lists,
   setLists,
   item,
   forceReload,
@@ -66,65 +66,100 @@ const PortfolioModal = ({
 
   const handleCreatePortfolio = () => {
     setSubmitting(true);
+    if (!isProject) {
+      let formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("description", values.description);
+      if (values.file) formData.append("portfolio_asset", values.file);
 
-    const formData = new FormData();
-    formData.append("title", values.title);
-    formData.append("description", values.description);
-    if (values.file) {
-      formData.append(isProject ? "project_asset" : "portfolio_asset", values.file);
-    }
-
-    const updateService = isProject ? UpdateProjectService : UpdatePortfolioService;
-    const createService = isProject ? CreateProjectService : CreatePortfolioService;
-
-    if (item) {
-      updateService(item.id, formData)
-        .then(({ data, status }) => {
-          if (status) {
-            const updatedItem = data?.data;
-            if (lists && setLists) {
-              const temp = [...lists];
-              const index = temp.findIndex((i) => i.id === item.id);
-              if (index !== -1) {
-                temp[index] = updatedItem;
-                setLists(temp);
+      if (item) {
+        UpdatePortfolioService(item.id, formData)
+          .then(({ data, status }) => {
+            if (status) {
+              if (lists) {
+                let temp = [...lists];
+                let index = temp.findIndex((i) => i.id === item.id);
+                temp[index] = data?.data;
+                setLists?.(temp);
               }
-            }
 
-            if (forceReload) {
-              window.location.reload();
-            }
+              if (forceReload) {
+                window.location.reload();
+              }
 
-            toastMessage("success", `${isProject ? "Project" : "Portfolio"} updated successfully`);
-            onClose();
-          }
-        })
-        .catch((err) => {
-          handleErrors(err);
-        })
-        .finally(() => setSubmitting(false));
+              toastMessage("success", "Portfolio updated successfully");
+              onClose();
+            }
+          })
+          .catch((err) => {
+            handleErrors(err);
+          })
+          .finally(() => setSubmitting(false));
+      } else {
+        CreatePortfolioService(formData)
+          .then(({ data, status }) => {
+            if (status) {
+              if (lists) {
+                let temp = [...lists];
+                temp.unshift(data?.data);
+                setLists?.(temp);
+              }
+              resetForm();
+              toastMessage("success", "Portfolio created successfully");
+              onClose();
+            }
+          })
+          .catch((err) => {
+            handleErrors(err);
+          })
+          .finally(() => setSubmitting(false));
+      }
     } else {
-      createService(formData)
-        .then(({ data, status }) => {
-          if (status) {
-            const newItem = data?.data;
-            console.log("New Item Created:", newItem);
+      let formData = new FormData();
+      formData.append("title", values.title);
+      formData.append("description", values.description);
+      if (values.file) formData.append("project_asset", values.file);
+      if (item) {
+        UpdateProjectService(item.id, formData)
+          .then(({ data, status }) => {
+            if (status) {
+              if (lists) {
+                let temp = [...lists];
+                let index = temp.findIndex((i) => i.id === item.id);
+                temp[index] = data?.data;
+                setLists?.(temp);
+              }
+              if (forceReload) {
+                window.location.reload();
+              }
 
-            if (lists && setLists) {
-              const temp = [newItem, ...lists]; // unshift equivalent
-              console.log("Updated List:", temp);
-              setLists(temp);
+              toastMessage("success", "Project updated successfully");
+              onClose();
             }
-
-            resetForm();
-            toastMessage("success", `${isProject ? "Project" : "Portfolio"} created successfully`);
-            onClose();
-          }
-        })
-        .catch((err) => {
-          handleErrors(err);
-        })
-        .finally(() => setSubmitting(false));
+          })
+          .catch((err) => {
+            handleErrors(err);
+          })
+          .finally(() => setSubmitting(false));
+      } else {
+        CreateProjectService(formData)
+          .then(({ data, status }) => {
+            if (status) {
+              if (lists) {
+                let temp = [...lists];
+                temp.unshift(data?.data);
+                setLists?.(temp);
+              }
+              resetForm();
+              toastMessage("success", "Project created successfully");
+              onClose();
+            }
+          })
+          .catch((err) => {
+            handleErrors(err);
+          })
+          .finally(() => setSubmitting(false));
+      }
     }
   };
 

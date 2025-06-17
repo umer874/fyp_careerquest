@@ -1,4 +1,4 @@
-const BaseURL = "https://fyp-careerquest-7.onrender.com";
+const BaseURL = "http://localhost:3001";
 
 
 

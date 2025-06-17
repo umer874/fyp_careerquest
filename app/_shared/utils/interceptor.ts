@@ -7,9 +7,6 @@ import { BaseURL } from "./endpoints";
 export const HTTP_CLIENT = axios.create({
   baseURL: BaseURL,
   timeout: 30000,
-  headers: {
-    "Content-Type": "application/json",
-  },
 });
 
 
@@ -19,16 +16,26 @@ const setupAxios = () => {
   HTTP_CLIENT.interceptors.request.use(
     (config: any) => {
       if (!isServer) {
-        const token = store.getState().root.auth?.token;
+        const token = store.getState().root.auth?.accessToken;
         if (token) {
           config.headers["authorization"] = `Bearer ${token}`;
         }
       }
+
+      // 🔑 Check if request has FormData
+      if (config.data instanceof FormData) {
+        delete config.headers["Content-Type"]; 
+        // Let Axios handle it automatically (it will add multipart/form-data with boundary)
+      } else {
+        config.headers["Content-Type"] = "application/json";
+      }
+
       return config;
     },
     (err) => Promise.reject(err)
   );
 };
+
 
 HTTP_CLIENT.interceptors.response.use(
   (response) => {

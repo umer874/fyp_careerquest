@@ -51,17 +51,36 @@ exports.getPortfolio = asyncHandler(async (req, res, next) => {
 // @desc    Create portfolio
 // @route   POST /api/portfolios
 // @access  Private
-exports.createPortfolio = asyncHandler(async (req, res, next) => {
-  // Add user to req.body
-  req.body.userId = req.user.id;
+exports.createPortfolio = async (req, res) => {
+  try {
+    const { title, description } = req.body;
+    const file = req.file;
 
-  const portfolio = await Portfolio.create(req.body);
+    if (!file) {
+      return res.status(400).json({ success: false, error: "No file uploaded" });
+    }
 
-  res.status(201).json({
-    success: true,
-    data: portfolio
-  });
-});
+    const portfolio = await Portfolio.create({
+      title,
+      description,
+      userId: req.user.id,
+      portfolio_asset: {
+        filename: file.filename,
+        path: file.path,
+        originalname: file.originalname,
+        mimetype: file.mimetype,
+        size: file.size
+      }
+    });
+
+    res.status(201).json({ success: true, data: portfolio });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: "Server Error" });
+  }
+};
+
+
 
 // @desc    Update portfolio
 // @route   PUT /api/portfolios/:id
