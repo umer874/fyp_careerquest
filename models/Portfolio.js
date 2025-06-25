@@ -17,24 +17,11 @@ const portfolioSchema = new mongoose.Schema({
     trim: true
   },
   portfolio_asset: {
-    type: {
-      type: String,
-      enum: ['image', 'video', 'pdf'],
-      required: true
-    },
-    full_thumbnail_path: {
-      type: String,
-      required: true
-    },
-    asset_path: {
-      type: String,
-      required: true
+    path: { 
+      type: String, 
+      required: true 
     }
-  },
-  created_at: {
-    type: Date,
-    default: Date.now
   }
-});
+}, { timestamps: true });
 
 module.exports = mongoose.model('Portfolio', portfolioSchema);

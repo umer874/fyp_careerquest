@@ -83,12 +83,15 @@ exports.submitAssessment = async (req, res) => {
         userId,
         {
           skills: topSkills,
-          lastAssessmentDate: new Date()
+          careerMatch: req.body.careerMatch,
+          careerRole: scoredSkills[0].skill,
+          lastAssessmentDate: new Date(),
+          has_taken_test: true
         },
         {
           new: true,
           session,
-          select: 'skills lastAssessmentDate'
+          select: 'skills lastAssessmentDate has_taken_test'
         }
       );
 
@@ -105,8 +108,10 @@ exports.submitAssessment = async (req, res) => {
         success: true,
         skills: topSkills,
         skillDetails: scoredSkills,
+        careerRole: scoredSkills[0].skill,
         user: {
           skills: updatedUser.skills,
+          has_taken_test: updatedUser.has_taken_test,
           lastAssessed: updatedUser.lastAssessmentDate
         }
       });
