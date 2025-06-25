@@ -6,6 +6,7 @@ import { ListingInterface } from "_shared/types/pagination";
 
 const CreatePortfolioService = (payload: any) => {
   return refreshTokenWrapper({
+    
     url: Endpoint.portfolio.create,
     method: HTTP_METHODS.POST,
     payload,
@@ -54,15 +55,9 @@ const GetPortfoliosServerCall = async ({
   });
 };
 
-const GetPortfoliosService = async ({
-  page,
-  limit,
-  id,
-}: GetPortfoliosServerCallInterface) => {
+ const GetPortfoliosService = async ({ id, page, limit }: GetPortfoliosServerCallInterface) => {
   return refreshTokenWrapper({
-    url:
-      Endpoint.portfolio.getUserPortfolios.replace(":id", id) +
-      `?page=${page ?? 1}&limit=${limit ?? 10}`,
+    url: Endpoint.portfolio.getUserPortfolios.replace(":id", id) + `?page=${page}&limit=${limit}`,
     method: HTTP_METHODS.GET,
   });
 };

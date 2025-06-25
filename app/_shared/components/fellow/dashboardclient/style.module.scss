@@ -1,0 +1,245 @@
+@use "global.scss" as *;
+
+.pageDetailWrapper {
+
+  padding-top: 30px;
+  width: 100%;
+
+  .box {
+
+    //flex-grow: 1;
+
+    .stepItem {
+      background-color: $WHITE;
+      box-shadow: 0px 4px 44px 0px #00162b12;
+      @include RP(("padding-left": 32,
+          "padding-right": 32,
+          "padding-top": 32,
+          "padding-bottom": 32,
+          "border-radius": 16,
+        ));
+
+      .iconContainer {
+
+        align-items: center;
+        justify-content: center;
+        @include RP(("width": 40,
+            "height": 40,
+            "margin-bottom": 60));
+
+        @media screen and (max-width: 640px) {
+          @include RP(("width": 50,
+              "height": 50,
+            ));
+        }
+
+        h2 {
+          font-family: var(--font-red-hat-display);
+          font-weight: 550;
+          @include RP(("font-size": 24,
+            ));
+          color: #0043CE;
+        }
+      }
+
+      .itemContent {
+        h2 {
+          color: #0043CE;
+          @include RP(("font-size": 64,
+            ));
+        }
+
+        p {
+          color: $DESC;
+          margin-top: 10px;
+          display: inline-block;
+          white-space: nowrap;
+
+          @include RP(("font-size": 16,
+            ));
+        }
+      }
+    }
+
+    .chart {
+      margin-top: 30px;
+
+      background-color: $WHITE;
+      box-shadow: 0px 4px 44px 0px #00162b12;
+      @include RP(("padding-left": 32,
+          "padding-right": 32,
+          "padding-top": 32,
+          "padding-bottom": 32,
+          "border-radius": 16,
+        ));
+    }
+  }
+
+  .user {
+
+    //flex-grow: 1;
+
+    background-color: $WHITE;
+    box-shadow: 0px 4px 44px 0px #00162b12;
+    @include RP(("padding-left": 32,
+        "padding-right": 32,
+        "padding-top": 32,
+        "padding-bottom": 32,
+        "border-radius": 16,
+      ));
+
+    .main {
+      .box {}
+
+      .skillSection {
+        padding-top: 60px;
+
+        p {
+          font-size: 12px;
+        }
+
+        .takeTestPrompt {
+          color: #53BE33;
+          font-size: 0.9rem;
+          margin-top: 5px;
+        }
+
+        .skillTag {
+          background: #f0f0f0;
+          border-radius: 15px;
+          padding: 4px 12px;
+          font-size: 0.85rem;
+          display: inline-block;
+          margin: 3px;
+        }
+      }
+
+      .text {
+        padding-top: 30px;
+
+
+      }
+    }
+
+  }
+
+  // Add to style.module.scss
+// style.module.scss
+.historyCard {
+  position: relative;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.historyBadge {
+  background: #edf2f7;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  color: #4a5568;
+}
+
+.skillTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 5px;
+}
+
+.currentSkill {
+  background: #ebf8ff;
+  color: #2b6cb0;
+  border: 1px solid #bee3f8;
+  font-weight: 500;
+}
+
+.pastSkill {
+  background: #f7fafc;
+  color: #718096;
+  border: 1px solid #e2e8f0;
+}
+  .jobs {
+    .stepItem {
+
+      background-color: $WHITE;
+      box-shadow: 0px 4px 44px 0px #00162b12;
+      @include RP(("padding-left": 32,
+          "padding-right": 32,
+          "padding-top": 32,
+          "padding-bottom": 32,
+          "border-radius": 16,
+        ));
+
+      .iconContainer {
+
+        align-items: center;
+        justify-content: center;
+        @include RP(("width": 90,
+            "height": 90,
+
+          ));
+
+        @media screen and (max-width: 640px) {
+          @include RP(("width": 50,
+              "height": 50,
+            ));
+        }
+
+        h2 {
+          font-family: var(--font-red-hat-display);
+          font-weight: 550;
+          @include RP(("font-size": 24,
+            ));
+          color: #0043CE;
+        }
+      }
+
+      .itemContent {
+        h6 {
+
+          @include RP(("font-size": 16,
+            ));
+        }
+
+        p {
+          color: $DESC;
+          margin-top: 10px;
+          display: inline-block;
+          white-space: nowrap;
+
+          @include RP(("font-size": 12,
+            ));
+        }
+      }
+
+      .line {
+        border: 0.1px solid rgba(gray, 0.5);
+        width: 100%;
+        opacity: 0.8;
+      }
+
+      .description {
+        button {
+          border: 1px solid #EEF3F8;
+          background-color: #EEF3F8;
+          border-radius: 24px;
+          color: #0A66C2;
+          font-weight: 500;
+          padding: 10px;
+        }
+      }
+    }
+
+  }
+
+}

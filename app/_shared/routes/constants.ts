@@ -94,7 +94,7 @@ const routeConstant = {
     },
     portfolios: {
       path: "/fellow/portfolio/portfolio",
-      title: "Portfolio",
+      title: "CareerGuide",
     },
     projects: {
       path: "/fellow/portfolio/project",

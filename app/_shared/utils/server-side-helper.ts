@@ -154,7 +154,23 @@ async function GetCookieUser() {
   const nextCookies = await cookies();
   const userCookie = nextCookies.get("user");
   const user = JSON.parse(userCookie?.value ? userCookie.value : "{}");
+
+  console.log("===== Server-Side User Cookie =====");
+  console.log("User Cookie Value:", userCookie?.value);
+  console.log("Parsed User Object:", user);
+  console.log("===================================");
+
   return user;
+}
+
+async function getUserIdFromToken(token: string) {
+  try {
+    //const decoded: any = jwtDecode(token);
+    //return decoded.id; // Ensure your JWT contains user ID
+  } catch (error) {
+    console.error("Token decode error:", error);
+    return null;
+  }
 }
 
 async function GetTokensFromCookies() {
@@ -165,6 +181,11 @@ async function GetTokensFromCookies() {
   const token = tokenCookie?.value ?? "";
   const refreshToken = refreshTokenCookie?.value ?? "";
 
+  console.log("===== Server-Side Cookie Values =====");
+  console.log("Access Token:", token);
+  console.log("Refresh Token:", refreshToken);
+  console.log("=====================================");
+
   return { token, refreshToken };
 }
 
@@ -172,6 +193,7 @@ export {
   redirectBasedOnRole,
   apiCallWithToken,
   refreshServerToken,
-  GetCookieUser,
+  getUserIdFromToken,
+  //GetCookieUser,
   GetTokensFromCookies,
 };

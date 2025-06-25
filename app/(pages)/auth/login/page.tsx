@@ -46,56 +46,62 @@ const Login = () => {
     setSubmitting,
   } = formik;
 
- const handleLogin = (values: LoginType) => {
-  setSubmitting(true);
-  LoginService(values)
-    .then(({ data, status }) => {
-  if (status === 200) {
-    dispatch(
-      setAuthReducer({
-        user: data.user,
-        accessToken: data.accessToken,
-        refreshToken: data.refreshToken,
-      })
-    );
+  const handleLogin = (values: LoginType) => {
+    setSubmitting(true);
+    LoginService(values)
+      .then(({ data, status }) => {
+        if (status === 200) {
+          dispatch(
+            setAuthReducer({
+              user: data.user,
+              //has_taken_test: data.user.has_taken_test,
+              accessToken: data.accessToken,
+              refreshToken: data.refreshToken,
+            })
+          );
 
-        setCookie(
-          "user",
-          JSON.stringify({
-            isLoggedIn: true,
-            id: data?.user?.id,
-            first_name: data?.user?.first_name,
-            last_name: data?.user?.last_name,
-            email: data?.user?.email,
-      
-          }),
-          {
+          setCookie(
+            "user",
+            JSON.stringify({
+              isLoggedIn: true,
+              id: data?.user?.id,
+              first_name: data?.user?.first_name,
+              last_name: data?.user?.last_name,
+              email: data?.user?.email,
+               has_taken_test: data.user.has_taken_test
+
+            }),
+            {
+              path: "/fellow/test",
+              maxAge: 3600 * 24 * 30,
+              sameSite: true,
+            }
+          );
+
+          setCookie("token", data?.accessToken, {
             path: "/fellow/test",
             maxAge: 3600 * 24 * 30,
             sameSite: true,
+          });
+
+          setCookie("refreshToken", data?.refreshToken, {
+            path: "/fellow/test",
+            maxAge: 3600 * 24 * 30,
+            sameSite: true,
+          });
+
+          if (data.user.has_taken_test) {
+            router.push(routeConstant.fellow.dashboard.path); // Go to dashboard
+          } else {
+            router.push(routeConstant.test.path); // Go to test
           }
-        );
-
-        setCookie("token", data?.accessToken, {
-          path: "/fellow/test",
-          maxAge: 3600 * 24 * 30,
-          sameSite: true,
-        });
-
-        setCookie("refreshToken", data?.refreshToken, {
-          path: "/fellow/test",
-          maxAge: 3600 * 24 * 30,
-          sameSite: true,
-        });
-
-        router.push(routeConstant.test.path);
-      }
-    })
-    .catch((err) => {
-      handleErrors(err);
-      setSubmitting(false);
-    });
-};
+        }
+      })
+      .catch((err) => {
+        handleErrors(err);
+        setSubmitting(false);
+      });
+  };
 
   return (
     <div className={classNames(styles.auth_page_container, "h-full")}>

@@ -9,8 +9,10 @@ const initSocket = (userId: number) => {
     transports: ["websocket"],
     query: { userId: userId },
   });
-  socket = socket.on("connect", () => {
+
+  socket.on("connect", () => {
     console.log("Socket Connected");
   });
 };
+
 export { initSocket, socket };

@@ -111,7 +111,7 @@ function DashboardHeader({ openMobile, userCookie }: Props) {
 
   useEffect(() => {
     handleGetUpdatedUser();
-     initSocket(userCookie.id);
+    //  initSocket(userCookie.id);
   }, []);
 
   return (

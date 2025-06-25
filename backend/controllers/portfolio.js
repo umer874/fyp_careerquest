@@ -5,30 +5,38 @@ const asyncHandler = require('../middleware/async');
 // @desc    Get user portfolios
 // @route   GET /api/portfolios/user/:userId
 // @access  Private
-exports.getUserPortfolios = asyncHandler(async (req, res, next) => {
-  const { page = 1, limit = 9 } = req.query;
-  const userId = req.params.id;
+exports.getAllUserPortfolios = asyncHandler(async (req, res, next) => {
+  try {
+    const userId = req.params.id;
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 9;
+    const skip = (page - 1) * limit;
 
-  const startIndex = (page - 1) * limit;
-  const total = await Portfolio.countDocuments({ userId });
-
-  const portfolios = await Portfolio.find({ userId })
-    .skip(startIndex)
-    .limit(parseInt(limit))
-    .sort('-created_at');
-
-  res.status(200).json({
-    success: true,
-    count: portfolios.length,
-    data: portfolios,
-    meta: {
-      total,
-      totalPages: Math.ceil(total / limit),
-      currentPage: parseInt(page),
-      pageSize: parseInt(limit)
+    if (!userId) {
+      return res.status(400).json({ success: false, message: "User ID is required" });
     }
-  });
+
+    const total = await Portfolio.countDocuments({ userId });
+    const portfolios = await Portfolio.find({ userId })
+      .sort('-created_at')
+      .skip(skip)
+      .limit(limit);
+
+    return res.status(200).json({
+      success: true,
+      data: portfolios,
+      meta: {
+        currentPage: page,
+        totalPages: Math.ceil(total / limit),
+        totalItems: total
+      }
+    });
+  } catch (error) {
+    console.error("Error getting portfolios", error);
+    return res.status(500).json({ success: false, message: "Server Error" });
+  }
 });
+
 
 // @desc    Get single portfolio
 // @route   GET /api/portfolios/:id
@@ -51,89 +59,119 @@ exports.getPortfolio = asyncHandler(async (req, res, next) => {
 // @desc    Create portfolio
 // @route   POST /api/portfolios
 // @access  Private
+// exports.createPortfolio = asyncHandler(async (req, res) => {
+//   try{
+//   console.log('Raw request headers:', req.headers);
+//   console.log('Content-Type header:', req.headers['content-type']);
+
+//   if (!req.file) {
+//     console.error('File upload details:');
+//     console.error('- Field name expected:', 'portfolio_asset');
+//     console.error('- Received files:', req.files);
+//     console.error('- Request body:', req.body);
+
+//     return res.status(400).json({
+//       success: false,
+//       error: "File upload failed",
+//       details: {
+//         expected: "multipart/form-data with 'portfolio_asset' field",
+//         received: {
+//           contentType: req.headers['content-type'],
+//           bodyKeys: Object.keys(req.body)
+//         }
+//       }
+//     });
+//   }
+
+//   const { title, description } = req.body;
+
+//   if (!title || !description) {
+//     console.error('[CreatePortfolio] Missing required fields');
+//     return res.status(400).json({
+//       success: false,
+//       error: "Missing required fields",
+//       required: ["title", "description"]
+//     });
+//   }
+
+//   console.log('[CreatePortfolio] Creating portfolio entry...');
+//   const portfolio = await Portfolio.create({
+//     title,
+//     description,
+//     userId: req.user.id,
+//     portfolio_asset: {
+//       filename: req.file.filename,
+//       path: req.file.path,
+//       originalname: req.file.originalname,
+//       mimetype: req.file.mimetype,
+//       size: req.file.size
+//     }
+//   });
+
+//   console.log('[CreatePortfolio] Portfolio created successfully:', portfolio.id);
+//   res.status(201).json({
+//     success: true,
+//     data: portfolio
+//   });
+
+// } catch (err) {
+//   console.error('[CreatePortfolio] Error:', err.message);
+//   console.error(err.stack);
+
+//   // Handle specific errors
+//   if (err.name === 'ValidationError') {
+//     return res.status(400).json({
+//       success: false,
+//       error: "Validation Error",
+//       details: err.message
+//     });
+//   }
+
+//   if (err.code === 'LIMIT_FILE_SIZE') {
+//     return res.status(413).json({
+//       success: false,
+//       error: "File too large",
+//       details: "Maximum file size is 50MB"
+//     });
+//   }
+
+//   res.status(500).json({
+//     success: false,
+//     error: "Server Error",
+//     details: process.env.NODE_ENV === 'development' ? err.message : undefined
+//   });
+// }
+// });
+
+
+// In createPortfolio:
 exports.createPortfolio = asyncHandler(async (req, res) => {
-  try{
-  console.log('Raw request headers:', req.headers);
-  console.log('Content-Type header:', req.headers['content-type']);
-
+  // Get user ID from authenticated request
+  const userId = req.user.id; 
+  
   if (!req.file) {
-    console.error('File upload details:');
-    console.error('- Field name expected:', 'portfolio_asset');
-    console.error('- Received files:', req.files);
-    console.error('- Request body:', req.body);
-
-    return res.status(400).json({
+    return res.status(400).json({ 
       success: false,
-      error: "File upload failed",
-      details: {
-        expected: "multipart/form-data with 'portfolio_asset' field",
-        received: {
-          contentType: req.headers['content-type'],
-          bodyKeys: Object.keys(req.body)
-        }
-      }
+      error: "File upload required" 
     });
   }
 
-  const { title, description } = req.body;
-
-  if (!title || !description) {
-    console.error('[CreatePortfolio] Missing required fields');
-    return res.status(400).json({
-      success: false,
-      error: "Missing required fields",
-      required: ["title", "description"]
-    });
-  }
-
-  console.log('[CreatePortfolio] Creating portfolio entry...');
   const portfolio = await Portfolio.create({
-    title,
-    description,
-    userId: req.user.id,
+    title: req.body.title,
+    description: req.body.description,
     portfolio_asset: {
-      filename: req.file.filename,
       path: req.file.path,
-      originalname: req.file.originalname,
-      mimetype: req.file.mimetype,
-      size: req.file.size
-    }
+      // Add other necessary file properties
+    },
+    userId // Use authenticated user ID
   });
 
-  console.log('[CreatePortfolio] Portfolio created successfully:', portfolio.id);
-  res.status(201).json({
-    success: true,
-    data: portfolio
-  });
-
-} catch (err) {
-  console.error('[CreatePortfolio] Error:', err.message);
-  console.error(err.stack);
-
-  // Handle specific errors
-  if (err.name === 'ValidationError') {
-    return res.status(400).json({
-      success: false,
-      error: "Validation Error",
-      details: err.message
-    });
-  }
-
-  if (err.code === 'LIMIT_FILE_SIZE') {
-    return res.status(413).json({
-      success: false,
-      error: "File too large",
-      details: "Maximum file size is 50MB"
-    });
-  }
-
-  res.status(500).json({
-    success: false,
-    error: "Server Error",
-    details: process.env.NODE_ENV === 'development' ? err.message : undefined
-  });
-}
+  res.status(201).json({ success: true, data: portfolio });
 });
+
+
+
+
 
 
 

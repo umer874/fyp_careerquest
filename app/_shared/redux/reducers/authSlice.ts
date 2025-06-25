@@ -7,7 +7,9 @@ interface User {
   last_name?: string;
   email?: string;
   profile_asset?: string | null;
-  skills?: string[]; // Add skills array to user interface
+  skills?: string[];
+  has_taken_test?: boolean;
+  careerMatch?: string;
 }
 
 interface AuthState {
@@ -41,30 +43,28 @@ export const authSlice = createSlice({
       state.refreshToken = refreshToken;
       state.isLoggedIn = true;
     },
-    
-    updateUserSkills: (state, action: PayloadAction<{
-      skills: string[];
-    }>) => {
+
+    updateUserSkills: (state, action: PayloadAction<{ skills: string[] }>) => {
       if (state.user) {
         state.user.skills = action.payload.skills;
       }
     },
-    
+
     updateUserProfile: (state, action: PayloadAction<Partial<User>>) => {
       if (state.user) {
         state.user = { ...state.user, ...action.payload };
       }
     },
-    
+
     resetAuthReducer: () => initialState,
   },
 });
 
-export const { 
-  setAuthReducer, 
+export const {
+  setAuthReducer,
   resetAuthReducer,
-  updateUserSkills, // Export the new action
-  updateUserProfile 
+  updateUserSkills,
+  updateUserProfile
 } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -5,9 +5,8 @@ import classNames from "classnames";
 import dynamic from "next/dynamic";
 
 const BreadCrumb = () => {
-  const { breadcrumb: { crumbs } = { crumbs: [] } } = useSelector(
-    (state: any) => state.root
-  );
+  const crumbs = useSelector((state: any) => state.breadcrumb?.crumbs || []);
+
 
   return (
     <div className="flex items-center">

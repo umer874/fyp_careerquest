@@ -13,7 +13,7 @@ const protect  = require('../middleware/auth');
 
 // Match exactly with your endpoint definitions
 router.route('/create')
-  .post( upload,controller.createPortfolio);
+  .post(controller.createPortfolio);
 
 router.route('/update/:id')
   .put(auth, controller.updatePortfolio);
@@ -25,6 +25,6 @@ router.route('/get/:id')
   .get(auth, controller.getPortfolio);
 
 router.route('/get-user-portfolios/:id')
-  .get(auth, controller.getUserPortfolios);
+  .get(auth, controller.getAllUserPortfolios);
 
 module.exports = router;

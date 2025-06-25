@@ -9,5 +9,6 @@ export const submitAssessmentService = async (data: {
     optionId: string;
   }>;
 }) => {
-  return axios.post(`${BaseURL}${Endpoint.assessment.submit}`, data);
+  const response = await axios.post(`${BaseURL}${Endpoint.assessment.submit}`, data);
+  return response.data; // Return the actual response data
 };

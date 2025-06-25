@@ -4,15 +4,24 @@ const http = require("http");
 const { Server } = require("socket.io");
 const mongoose = require('mongoose');
 const cors = require('cors');
+const jobRoutes = require('./routes/jobRoutes');
 
 const app = express();
 
 // Enable CORS for Express
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:3000",
+  credentials: true,
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use(express.json());
 
 const userRoutes= require('./routes/userRoutes');
 app.use('/api/',userRoutes);
+
+
+app.use('/api/jobs', jobRoutes);
 
 
 const portfolioRoutes=require('./routes/portfolio');

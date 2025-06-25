@@ -6,8 +6,10 @@ import styles from "./style.module.scss";
 import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { updateUserProfile } from 'redux/reducers/authSlice';
 import { submitAssessmentService } from "services/assessment";
 import axios from 'axios';
+import { setAuthReducer } from 'redux/reducers/authSlice';
 import { Endpoint, BaseURL } from 'utils/endpoints';
 import { useDispatch } from "react-redux";
 import { GetUserWithSkills } from 'services/user';
@@ -16,29 +18,21 @@ import Toast from 'components/common/toast';
 
 
 
-type Option = {
+
+
+interface Option {
     id: string;
     text: string;
-};
-interface Question {
-    _id: string;
-    questionId: number; // Add this
-    question: string;
-    options: {
-        id: string;
-        text: string;
-        tags?: string[]; // Add for debugging
-        weight?: number; // Add for debugging
-    }[];
+    tags: string[];
+    weight: number;
 }
 
-type CareerKey =
-    | 'dataScientist'
-    | 'frontendDeveloper'
-    | 'backendDeveloper'
-    | 'fullstackDeveloper'
-    | 'devopsEngineer'
-    | 'uiUxDesigner';
+interface Question {
+    questionId: number;
+    category: string;
+    question: string;
+    options: Option[];
+}
 
 type CareerMatch = {
     title: string;
@@ -46,16 +40,57 @@ type CareerMatch = {
     icon: string;
 };
 
+type CareerKey =
+    | 'frontend'
+    | 'backend'
+    | 'fullstack'
+    | 'devops'
+    | 'dataScientist'
+    | 'aiEngineer'
+    | 'cloudArchitect'
+    | 'securityEngineer'
+    | 'mobileDeveloper'
+    | 'qaEngineer'
+    | 'databaseAdmin'
+    | 'technicalManager';
+
+const categoryCareerMap: Record<string, CareerKey[]> = {
+    fundamentals: ['backend', 'fullstack', 'technicalManager'],
+    frontend: ['frontend', 'fullstack'],
+    backend: ['backend', 'fullstack', 'databaseAdmin'],
+    devops: ['devops', 'cloudArchitect', 'securityEngineer'],
+    database: ['databaseAdmin', 'backend'],
+    security: ['securityEngineer', 'devops'],
+    testing: ['qaEngineer'],
+    architecture: ['cloudArchitect', 'technicalManager', 'fullstack'],
+    ai: ['aiEngineer', 'dataScientist'],
+    mobile: ['mobileDeveloper'],
+    'soft-skills': ['technicalManager', 'fullstack'],
+    tools: ['technicalManager', 'devops'],
+};
+
+
+
+
+
 const Test = () => {
+
+
 
 
     const [step, setStep] = useState<'quiz' | 'result'>('quiz');
     const [currentQuestion, setCurrentQuestion] = useState<number>(0);
-    const [selectedOptions, setSelectedOptions] = useState<(string | null)[]>(Array(5).fill(null));
+    // Change selectedOptions state to store both questionId & optionId
+    const [selectedOptions, setSelectedOptions] = useState<{ questionId: number, selectedOptionId: string }[]>([]);
+
     const [progress, setProgress] = useState<number>(0);
     const [careerMatch, setCareerMatch] = useState<CareerKey | null>(null);
 
     const [questions, setQuestions] = useState<Question[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const router = useRouter();
+    const { isLoggedIn, user } = useSelector((state: any) => state.root.auth); // ✅ fixed
 
     const dispatch = useDispatch();
 
@@ -69,88 +104,206 @@ const Test = () => {
             });
     }, []);
 
+    useEffect(() => {
+        if (!isLoggedIn) {
+            router.replace("/auth/login"); // Redirect if not logged in
+        }
+    }, [isLoggedIn]);
+
+    // useEffect(() => {
+    //     if (!user) return;
+
+    //     if (user.has_taken_test) {
+    //         router.push('/fellow/dashboard');
+    //     } else {
+    //         setLoading(false);
+    //     }
+    // }, [user]);
+
+    type CareerKey =
+        | 'frontend'
+        | 'backend'
+        | 'fullstack'
+        | 'devops'
+        | 'dataScientist'
+        | 'aiEngineer'
+        | 'cloudArchitect'
+        | 'securityEngineer'
+        | 'mobileDeveloper'
+        | 'qaEngineer'
+        | 'databaseAdmin'
+        | 'technicalManager';
+
+    interface CareerMatch {
+        title: string;
+        description: string;
+        icon: string;
+        coreSkills: string[];
+        relatedCategories: string[];
+    }
+
+
+
 
 
     const careerMatches: Record<CareerKey, CareerMatch> = {
+        frontend: {
+            title: "Frontend Specialist",
+            description: "You excel at creating intuitive user interfaces with modern frameworks like React, Angular, or Vue.",
+            icon: "💻",
+            coreSkills: ['react', 'javascript', 'ui', 'css', 'responsive'],
+            relatedCategories: ['ui', 'tools']
+        },
+        backend: {
+            title: "Backend Engineer",
+            description: "You specialize in server-side logic, databases, and API development.",
+            icon: "🔌",
+            coreSkills: ['node', 'java', 'api', 'microservices', 'rest'],
+            relatedCategories: ['backend', 'database', 'architecture']
+        },
+        fullstack: {
+            title: "Full Stack Developer",
+            description: "You're proficient in both frontend and backend technologies, capable of building complete web applications.",
+            icon: "🔄",
+            coreSkills: ['javascript', 'node'],
+            relatedCategories: ['ui', 'backend', 'database']
+        },
+        devops: {
+            title: "DevOps Engineer",
+            description: "You focus on automation, CI/CD pipelines, and infrastructure management using tools like Docker, Kubernetes, and cloud platforms.",
+            icon: "⚙️",
+            coreSkills: ['docker', 'kubernetes', 'ci-cd', 'automation', 'cloud'],
+            relatedCategories: ['devops', 'cloud', 'tools']
+        },
         dataScientist: {
             title: "Data Scientist",
-            description: "With your analytical skills and interest in AI, a career as a Data Scientist could be a perfect fit for you!",
+            description: "You extract insights from complex datasets using statistical analysis, machine learning, and data visualization techniques.",
             icon: "📊",
+            coreSkills: ['python', 'machine-learning', 'statistics', 'data-analysis', 'pandas'],
+            relatedCategories: ['ai', 'database', 'analytics']
         },
-        frontendDeveloper: {
-            title: "Frontend Developer",
-            description: "Your passion for UI/UX and modern frameworks makes you an ideal candidate for a Frontend Developer role!",
-            icon: "💻",
+        aiEngineer: {
+            title: "AI Engineer",
+            description: "You build intelligent systems using deep learning, natural language processing, and computer vision technologies.",
+            icon: "🤖",
+            coreSkills: ['neural-networks', 'tensorflow', 'nlp', 'deep-learning', 'python'],
+            relatedCategories: ['ai', 'ml', 'deep-learning']
         },
-        backendDeveloper: {
-            title: "Backend Developer",
-            description: "With your strong server-side skills and database knowledge, you'd excel as a Backend Developer!",
-            icon: "🔌",
+        cloudArchitect: {
+            title: "Cloud Architect",
+            description: "You design and implement scalable cloud infrastructure solutions on platforms like AWS, Azure, or GCP.",
+            icon: "☁️",
+            coreSkills: ['aws', 'azure', 'gcp', 'cloud', 'scalability'],
+            relatedCategories: ['cloud', 'devops', 'architecture']
         },
-        fullstackDeveloper: {
-            title: "Full Stack Developer",
-            description: "Your diverse skills across the tech stack make you a perfect candidate for Full Stack Development!",
-            icon: "🔄",
+        securityEngineer: {
+            title: "Security Engineer",
+            description: "You protect systems and data from cyber threats through encryption, authentication, and security protocols.",
+            icon: "🔒",
+            coreSkills: ['encryption', 'security', 'oauth', 'jwt', 'cybersecurity'],
+            relatedCategories: ['security', 'authentication', 'encryption']
         },
-        devopsEngineer: {
-            title: "DevOps Engineer",
-            description: "Your interest in cloud technologies and deployment pipelines is ideal for a DevOps career!",
-            icon: "⚙️",
+        mobileDeveloper: {
+            title: "Mobile Developer",
+            description: "You create native or cross-platform mobile applications for iOS and Android using technologies like React Native or Flutter.",
+            icon: "📱",
+            coreSkills: ['react-native', 'flutter', 'ios', 'android', 'mobile'],
+            relatedCategories: ['mobile', 'cross-platform', 'ui']
         },
-        uiUxDesigner: {
-            title: "UI/UX Designer",
-            description: "Your design sensibility and tool expertise would make you a great UI/UX Designer!",
-            icon: "🎨",
+        qaEngineer: {
+            title: "QA Engineer",
+            description: "You ensure software quality through automated testing, manual testing, and quality assurance processes.",
+            icon: "🧪",
+            coreSkills: ['testing', 'automation', 'qa', 'tdd', 'quality'],
+            relatedCategories: ['testing', 'automation', 'quality']
         },
+        databaseAdmin: {
+            title: "Database Administrator",
+            description: "You specialize in database design, optimization, and management for SQL, NoSQL, and NewSQL systems.",
+            icon: "💾",
+            coreSkills: ['sql', 'nosql', 'database', 'optimization', 'data-modeling'],
+            relatedCategories: ['database', 'data-modeling', 'optimization']
+        },
+        technicalManager: {
+            title: "Technical Manager",
+            description: "You lead technical teams, manage projects, and bridge the gap between technical and business requirements.",
+            icon: "👔",
+            coreSkills: ['leadership', 'communication', 'project-management', 'agile', 'strategy'],
+            relatedCategories: ['soft-skills', 'management', 'communication']
+        }
     };
+
+
 
     const handleOptionSelect = (optionId: string) => {
-        const newSelectedOptions = [...selectedOptions];
-        newSelectedOptions[currentQuestion] = optionId;
-        setSelectedOptions(newSelectedOptions);
-    };
+        const questionId = questions[currentQuestion].questionId;
 
-    const calculateCareerMatch = (): CareerKey => {
-        const scores: Record<CareerKey, number> = {
-            dataScientist: 0,
-            frontendDeveloper: 0,
-            backendDeveloper: 0,
-            fullstackDeveloper: 0,
-            devopsEngineer: 0,
-            uiUxDesigner: 0,
-        };
+        // Check if already answered:
+        const existing = selectedOptions.find(opt => opt.questionId === questionId);
+        let updatedOptions;
 
-        if (selectedOptions[0] === 'B') scores.dataScientist += 3;
-        if (selectedOptions[0] === 'D') scores.frontendDeveloper += 2;
-
-        if (selectedOptions[1] === 'A') scores.frontendDeveloper += 4;
-        if (selectedOptions[1] === 'B') scores.backendDeveloper += 4;
-        if (selectedOptions[1] === 'D') scores.dataScientist += 4;
-        if (selectedOptions[1] === 'E') scores.devopsEngineer += 4;
-
-        if (selectedOptions[2] !== null) scores.uiUxDesigner += 3;
-
-        if (selectedOptions[3] === 'A') scores.backendDeveloper += 2;
-        if (selectedOptions[3] === 'B') scores.dataScientist += 1;
-        if (selectedOptions[3] === 'C') scores.dataScientist += 2;
-
-        if (selectedOptions[4] === 'A') scores.devopsEngineer += 2;
-
-        if (scores.frontendDeveloper > 2 && scores.backendDeveloper > 2) {
-            scores.fullstackDeveloper = scores.frontendDeveloper + scores.backendDeveloper;
+        if (existing) {
+            updatedOptions = selectedOptions.map(opt =>
+                opt.questionId === questionId ? { questionId, selectedOptionId: optionId } : opt
+            );
+        } else {
+            updatedOptions = [...selectedOptions, { questionId, selectedOptionId: optionId }];
         }
 
-        let maxScore = 0;
-        let match: CareerKey = 'dataScientist';
+        setSelectedOptions(updatedOptions);
+    };
 
-        (Object.entries(scores) as [CareerKey, number][]).forEach(([career, score]) => {
-            if (score > maxScore) {
-                maxScore = score;
-                match = career;
-            }
+
+    // Update the calculateCareerMatch function
+    const calculateCareerMatch = (
+        questions: Question[],
+        selectedOptions: { questionId: number; selectedOptionId: string }[]
+    ): CareerKey => {
+        // Initialize career scores
+        const careerScores: Record<CareerKey, number> = {
+            frontend: 0,
+            backend: 0,
+            fullstack: 0,
+            devops: 0,
+            dataScientist: 0,
+            aiEngineer: 0,
+            cloudArchitect: 0,
+            securityEngineer: 0,
+            mobileDeveloper: 0,
+            qaEngineer: 0,
+            databaseAdmin: 0,
+            technicalManager: 0,
+        };
+
+        // Process each answer
+        selectedOptions.forEach(({ questionId, selectedOptionId }) => {
+            const question = questions.find(q => q.questionId === questionId);
+            if (!question) return;
+
+            const selectedOption = question.options.find(opt => opt.id === selectedOptionId);
+            if (!selectedOption) return;
+
+            // Apply scores to relevant careers
+            selectedOption.tags?.forEach(tag => {
+                Object.entries(careerMatches).forEach(([careerKey, career]) => {
+                    if (
+                        career.coreSkills.includes(tag) ||
+                        career.relatedCategories.includes(question.category)
+                    ) {
+                        careerScores[careerKey as CareerKey] += selectedOption.weight;
+                    }
+                });
+            });
         });
 
-        return match;
+        // Find best match
+        const bestCareer = Object.entries(careerScores).reduce(
+            (best, [career, score]) => score > best.score ?
+                { career: career as CareerKey, score } : best,
+            { career: 'fullstack' as CareerKey, score: -1 }
+        );
+
+        return bestCareer.career;
     };
 
 
@@ -160,47 +313,33 @@ const Test = () => {
             setCurrentQuestion(currentQuestion + 1);
             setProgress(((currentQuestion + 1) / questions.length) * 100);
         } else {
-            const match = calculateCareerMatch();
+            if (selectedOptions.length < questions.length) {
+                console.error("Please answer all questions before submitting.");
+                return;
+            }
+
+            const match = calculateCareerMatch(questions, selectedOptions);
             setCareerMatch(match);
             setStep('result');
             setProgress(100);
 
-            if (selectedOptions.some(option => option === null)) {
-                console.error("Some questions are not answered");
-                // Toast.error("Please answer all questions before submitting.");
-                return;
-            }
-            // Before submission:
-            console.log("Submitting:", {
-                userId: user._id,
-                answers: questions.map((q, i) => ({
-                    questionId: q.questionId,
-                    questionText: q.question,
-                    optionId: selectedOptions[i],
-                    optionText: q.options.find(o => o.id === selectedOptions[i])?.text
-                }))
-            });
-
-
-            // ✅ Send match to backend
             try {
-                // In handleContinue():
                 await submitAssessmentService({
-                    userId: user._id,
-                    answers: questions.map((q, i) => ({
-                        questionId: q.questionId, // Changed from _id to questionId
-                        optionId: selectedOptions[i] as string,
+                    userId: user.id,
+                    answers: selectedOptions.map(opt => ({
+                        questionId: opt.questionId,
+                        optionId: opt.selectedOptionId
                     })),
                 });
 
-    
+                dispatch(updateUserProfile({ has_taken_test: true }));
+
             } catch (error: any) {
                 console.error(" Submit error:", error?.response?.data || error.message);
-                console.error("Failed to submit assessment. Please try again later.");
             }
-
         }
     };
+
 
 
     const handleRestart = () => {
@@ -211,14 +350,9 @@ const Test = () => {
         setCareerMatch(null);
     };
 
-    const router = useRouter();
-    const { isLoggedIn, user } = useSelector((state: any) => state.root.auth); // ✅ fixed
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-            router.replace("/auth/login"); // Redirect if not logged in
-        }
-    }, [isLoggedIn]);
+
+
 
     //     const navigate = useNavigate();
 
@@ -226,7 +360,8 @@ const Test = () => {
     //     navigate('fellow/dashboard'); 
     // };
 
-    const isContinueDisabled = selectedOptions[currentQuestion] === null;
+    const isContinueDisabled = !selectedOptions.find(opt => opt.questionId === questions[currentQuestion]?.questionId);
+
 
     if (step === 'result' && careerMatch) {
         return (
@@ -306,7 +441,13 @@ const Test = () => {
                                                 key={option.id}
                                                 className={classNames(
                                                     styles.option,
-                                                    { [styles.selected]: selectedOptions[currentQuestion] === option.id }
+                                                    {
+                                                        [styles.selected]: selectedOptions.find(
+                                                            (opt) =>
+                                                                opt.questionId === questions[currentQuestion].questionId &&
+                                                                opt.selectedOptionId === option.id
+                                                        ),
+                                                    }
                                                 )}
                                                 onClick={() => handleOptionSelect(option.id)}
                                             >
@@ -315,6 +456,7 @@ const Test = () => {
                                             </div>
                                         ))}
                                     </div>
+
 
                                     <div className={classNames(styles.buttonContainer)}>
                                         <button

@@ -4,9 +4,10 @@ require('dotenv').config();
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/assessment.controller');
+const auth = require('../middleware/auth');
 
 router.get('/questions', controller.getQuestions);
-router.post('/submit', controller.submitAssessment);
+router.post('/submit',controller.submitAssessment);
 
 
 // Add this temporary route

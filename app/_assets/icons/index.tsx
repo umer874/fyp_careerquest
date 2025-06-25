@@ -117,7 +117,21 @@ import Youtube from "./youtube.svg";
 import Attach from "./attach.svg";
 import Profile from "./person.svg";
 
+export const Experience = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+);
+
+export const Bookmark = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+  </svg>
+);
+
 const Icons = {
+  Experience,
+  Bookmark,
   ArrowRight,
   ArrowLeft,
   ArrowUp,
@@ -237,5 +251,8 @@ const Icons = {
   Attach,
   Profile,
 };
+
+// assets/Icons.tsx
+
 
 export { Icons };

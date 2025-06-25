@@ -19,6 +19,7 @@ const Endpoint = {
 
   },
   job: {
+     recommended: '/api/jobs/recommended',
     get: "jobs/get",
     getJobDetail: "jobs/get/:id",
     applyJob: "applications/apply-job/:id",

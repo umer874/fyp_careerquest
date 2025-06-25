@@ -5,10 +5,10 @@ import HowItWorks from "components/home/howItWorks";
 import Jobs from "components/home/jobs";
 import WorkSteps from "components/home/workSteps";
 import { HomePageServerCall } from "services/general";
-import { GetCookieUser } from "utils/server-side-helper";
+import { GetTokensFromCookies } from "utils/server-side-helper";
 
 export default async function Home() {
-  const user = await GetCookieUser();
+  const user = await GetTokensFromCookies();
   const { jobs, events } = await HomePageServerCall();
 
   return (

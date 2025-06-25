@@ -88,13 +88,10 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ message: 'Invalid email or password' });
-
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid)
+    if (!user || !(await bcrypt.compare(password, user.password))) {
       return res.status(400).json({ message: 'Invalid email or password' });
+    }
 
-    // Generate access and refresh tokens
     const accessToken = jwt.sign(
       { id: user._id },
       process.env.JWT_ACCESS_SECRET,
@@ -107,26 +104,25 @@ exports.login = async (req, res) => {
       { expiresIn: '7d' }
     );
 
-    // Optionally: Save refresh token in DB or cache (for verification later)
-
     res.status(200).json({
       message: 'Login successful',
       user: {
-        _id: user._id, // ✅ Add this line
+        id: user._id,  // ✅ changed _id to id for frontend consistency
         first_name: user.firstName,
         last_name: user.lastName,
         email: user.email,
+         has_taken_test: user.has_taken_test,
       },
       accessToken,
       refreshToken
     });
-
 
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Server error' });
   }
 };
+
 
 
 exports.refreshToken = (req, res) => {
