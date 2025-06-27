@@ -9,14 +9,23 @@ const jobRoutes = require('./routes/jobRoutes');
 const app = express();
 
 // Enable CORS for Express
+const allowedOrigins = [
+  "https://careerquestx.vercel.app",
+  "http://localhost:3000"
+];
+
 app.use(cors({
-  origin: [
-    "https://fyp-careerquest-lch1.onrender.com",  // Backend URL
-    "https://careerquestx.vercel.app"             // Frontend URL
-  ],
-  credentials: true, // Allows cookies or authorization headers
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 app.use(express.json());
 
