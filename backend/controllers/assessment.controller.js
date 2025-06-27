@@ -86,6 +86,7 @@ exports.submitAssessment = async (req, res) => {
           careerMatch: req.body.careerMatch,
           careerRole: scoredSkills[0].skill,
           lastAssessmentDate: new Date(),
+           $inc: { assessmentsTaken: 1 },
           has_taken_test: true
         },
         {

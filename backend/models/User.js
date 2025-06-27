@@ -16,6 +16,7 @@ const userSchema = new mongoose.Schema({
   has_taken_test: { type: Boolean, default: false },
   careerRole: { type: String },
   careerMatch: { type: String },
+  assessmentsTaken: { type: Number, default: 0 },
 });
 
 module.exports = mongoose.model('User', userSchema);

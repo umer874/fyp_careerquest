@@ -24,6 +24,32 @@ const Profile = () => {
     console.log("User object:", user); // Add this to inspect the user object
   }, [user]);
 
+
+   const calculateSkillProgress = (skill: string) => {
+    const skillWeights: Record<string, number> = {
+      "Programming & Development": 90,
+      "Data Science & AI": 73,
+      "UI/UX Design": 45,
+      "Frontend Development": 85,
+      "Backend Development": 75,
+      "DevOps": 65
+    };
+    return skillWeights[skill] || 70;
+  };
+
+  // Calculate metrics
+  const totalSkills = user?.skills?.length || 0;
+
+  const highestProficiency = user?.skills?.length
+    ? Math.max(
+      ...user.skills.map((skill: string) => calculateSkillProgress(skill))
+    )
+    : 0;
+
+  // Assuming assessments taken is tracked separately in backend
+  // This would need to be added to your user model
+  const assessmentsTaken = user?.assessmentsTaken || 0;
+
   useEffect(() => {
     const loadUserSkills = async () => {
       if (!user?._id) return;
@@ -41,17 +67,7 @@ const Profile = () => {
     loadUserSkills();
   }, [user?._id, dispatch]);
 
-  const calculateSkillProgress = (skill: string) => {
-    const skillWeights: Record<string, number> = {
-      "Programming & Development": 90,
-      "Data Science & AI": 73,
-      "UI/UX Design": 45,
-      "Frontend Development": 85,
-      "Backend Development": 75,
-      "DevOps": 65
-    };
-    return skillWeights[skill] || 70;
-  };
+ 
 
 
 
@@ -88,51 +104,31 @@ const Profile = () => {
               </div>
 
               <div className="flex gap-6">
-
                 <div className={classNames(styles.stepItem, "flex items-center gap-6")}>
-
-
                   <Icons.Reward />
-
-
                   <div className={classNames(styles.itemContent, "flex flex-col gap-4")}>
-
-                    <h3>10</h3>
+                    <h3>{totalSkills}</h3>
                     <span>Total Skills Aquired</span>
                   </div>
-
                 </div>
 
                 <div className={classNames(styles.stepItem, "flex items-center gap-6")}>
-
-
                   <Icons.Star />
-
-
                   <div className={classNames(styles.itemContent, "flex flex-col gap-4")}>
-
-                    <h3>90%</h3>
+                    <h3>{highestProficiency}%</h3>
                     <span>Highest Proficiency</span>
                   </div>
-
                 </div>
 
                 <div className={classNames(styles.stepItem, "flex items-center gap-6")}>
-
-
                   <Icons.Bar />
-
-
                   <div className={classNames(styles.itemContent, "flex flex-col gap-4")}>
-
-                    <h3>5</h3>
+                    <h3>{assessmentsTaken}</h3>
                     <span>Assessments Taken</span>
                   </div>
-
                 </div>
-
-
               </div>
+
 
             </div>
 
@@ -267,7 +263,7 @@ const Profile = () => {
 
                   <div>
                     <span style={{ background: "rgba(221, 230, 252, 0.6)" }}
-                      className={classNames(styles.link, "")}>/anas.hamid.165</span>
+                      className={classNames(styles.link, "")}>www.facebook.com</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -279,7 +275,7 @@ const Profile = () => {
 
                   <div>
                     <span style={{ background: "rgba(201, 191, 255, 0.3)" }}
-                      className={classNames(styles.link)}>/anas.hamid.380</span>
+                      className={classNames(styles.link)}>www.linkedin.com</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -290,7 +286,7 @@ const Profile = () => {
 
                   <div>
                     <span style={{ background: "rgba(78, 49, 69, 0.15)" }}
-                      className={classNames(styles.link)}>/anas.hamid.559</span>
+                      className={classNames(styles.link)}>www.github.com</span>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -302,7 +298,7 @@ const Profile = () => {
 
                   <div>
                     <span style={{ background: "rgba(252, 186, 190, 0.4)" }}
-                      className={classNames(styles.link)}>/anas.hamid.862</span>
+                      className={classNames(styles.link)}>www.youtube.com</span>
                   </div>
                 </div>
               </div>
