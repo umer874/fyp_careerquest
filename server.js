@@ -10,28 +10,29 @@ const app = express();
 
 // Enable CORS for Express
 app.use(cors({
-  origin: "https://fyp-careerquest-lch1.onrender.com",
-  credentials: true,
+  origin: [
+    "https://fyp-careerquest-lch1.onrender.com",  // Backend URL
+    "https://careerquestx.vercel.app"             // Frontend URL
+  ],
+  credentials: true, // Allows cookies or authorization headers
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json());
 
-const userRoutes= require('./routes/userRoutes');
-app.use('/api/',userRoutes);
-
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/', userRoutes);
 
 app.use('/api/jobs', jobRoutes);
 
-
-const portfolioRoutes=require('./routes/portfolio');
+const portfolioRoutes = require('./routes/portfolio');
 app.use('/api/portfolios', portfolioRoutes);
 
 // Routes
 const authRoutes = require('./routes/auth.routes');
 app.use('/api/', authRoutes);
 
-const assessmentRoutes=require('./routes/assessment.routes');
+const assessmentRoutes = require('./routes/assessment.routes');
 app.use('/api/assessment', assessmentRoutes);
 
 // Create HTTP server
@@ -40,8 +41,9 @@ const server = http.createServer(app);
 // Configure Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: "*", // Allow all origins (update in production)
+    origin: "https://careerquestx.vercel.app", // Allow frontend URL only
     methods: ["GET", "POST"],
+    credentials: true, // Allows sending cookies with Socket.IO
   },
 });
 
