@@ -10,7 +10,7 @@ const app = express();
 
 // Enable CORS for Express
 app.use(cors({
-  origin: "http://localhost:3000",
+  origin: "https://fyp-careerquest-lch1.onrender.com",
   credentials: true,
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
