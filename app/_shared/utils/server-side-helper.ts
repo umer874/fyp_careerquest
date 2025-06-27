@@ -150,18 +150,18 @@ const refreshServerToken = async (token: string, refreshToken: string) => {
   }
 };
 
-async function GetCookieUser() {
-  const nextCookies = await cookies();
-  const userCookie = nextCookies.get("user");
-  const user = JSON.parse(userCookie?.value ? userCookie.value : "{}");
+// async function GetCookieUser() {
+//   const nextCookies = await cookies();
+//   const userCookie = nextCookies.get("user");
+//   const user = JSON.parse(userCookie?.value ? userCookie.value : "{}");
 
-  console.log("===== Server-Side User Cookie =====");
-  console.log("User Cookie Value:", userCookie?.value);
-  console.log("Parsed User Object:", user);
-  console.log("===================================");
+//   console.log("===== Server-Side User Cookie =====");
+//   console.log("User Cookie Value:", userCookie?.value);
+//   console.log("Parsed User Object:", user);
+//   console.log("===================================");
 
-  return user;
-}
+//   return user;
+// }
 
 async function getUserIdFromToken(token: string) {
   try {
