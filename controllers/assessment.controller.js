@@ -113,7 +113,8 @@ exports.submitAssessment = async (req, res) => {
         user: {
           skills: updatedUser.skills,
           has_taken_test: updatedUser.has_taken_test,
-          lastAssessed: updatedUser.lastAssessmentDate
+          lastAssessed: updatedUser.lastAssessmentDate,
+          assessmentsTaken: updatedUser.assessmentsTaken
         }
       });
     } catch (updateError) {
