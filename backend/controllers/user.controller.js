@@ -12,7 +12,7 @@ exports.getUser = async (req, res) => {
     }
 
     // Use `let` instead of `const` if you're modifying the value
-    let selectFields = '_id first_name last_name email profile_asset';
+    let selectFields = '_id first_name last_name email phone profile_asset';
 
     if (includeSkills === 'true') {
       selectFields += ' skills';
@@ -57,6 +57,7 @@ exports.getUpdatedUser = async (req, res) => {
       first_name: req.user.first_name,
       last_name: req.user.last_name,
       email: req.user.email,
+      phone: req.user.phone,
       skills: req.user.skills || []
     };
 
@@ -72,7 +73,7 @@ exports.updateProfile = async (req, res) => {
     const userId = req.user._id;
     const updates = req.body;
 
-    const allowedUpdates = ['first_name', 'last_name', 'email', 'profile_asset'];
+    const allowedUpdates = ['first_name', 'last_name', 'email','phone','profile_asset'];
     const isValidOperation = Object.keys(updates).every(update => 
       allowedUpdates.includes(update)
     );

@@ -1,85 +1,113 @@
+// app/(fellow)/jobs/listing.tsx
 "use client";
 
-import JobCard from "components/common/jobCard";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState,useEffect } from "react";
 import JobsCTA from "../cta";
 import CustomButton from "components/common/customButton";
 import classNames from "classnames";
 import styles from "./style.module.scss";
-import { GetJobsService } from "services/job";
-import { useRouter } from "next13-progressbar";
-import { routeConstant } from "routes/constants";
+import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
-import { jobs } from "utils/constants";
-import { Meta } from "_shared/types/pagination";
-//import { UserType } from "utils/enum";
+import { Images } from "assets";
+import { routeConstant } from "routes/constants";
+import JobCard from "components/common/jobCard";
+import { getRecommendedJobs } from "services/jobRecommendation";
+import { jobData } from "utils/jobData";
 
-interface JobsListingProps {
-  data: any[];
-  meta: Meta;
+
+type CareerKey =
+  | 'frontend'
+  | 'backend'
+  | 'fullstack'
+  | 'devops'
+  | 'dataScientist'
+  | 'aiEngineer'
+  | 'cloudArchitect'
+  | 'securityEngineer'
+  | 'mobileDeveloper'
+  | 'qaEngineer'
+  | 'databaseAdmin'
+  | 'technicalManager';
+
+interface Job {
+  _id: string;
+  title: string;
+  company: string;
+  description: string;
+  salaryRange: string;
+  location: string;
+  jobType: string[];
+  experience: string[];
+  workMode: string[];
+  requiredSkills: string[];
+  isRemote: boolean;
+  careerRoles?: string[];
+  matchPercentage?: number;
+  preferredCareer?: CareerKey;
+  relatedCareers?: CareerKey[];
+  matchedSkills?: string[];
+  experienceLevel?: 'entry' | 'mid' | 'senior';
 }
 
-const JobsListing = ({ data = [], meta }: JobsListingProps) => {
+const JobsListing = () => {
+  const router = useRouter();
   const {
     auth: { user, isLoggedIn },
   } = useSelector((state: any) => state.root);
-  // const [jobs, setJobs] = useState<any[]>(data);
-  const [page, setPage] = useState<number>(meta?.currentPage);
-  const [totalPages, setTotalPages] = useState<number>(meta?.totalPages);
-  const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
+  const [recommendedJobs, setRecommendedJobs] = useState<Job[]>([]);
 
-  // const handleGetMoreJobs = async (page: number) => {
-  //   setLoading(true);
-  //   GetJobsService({ page: page })
-  //     .then(({ data: { data }, status }) => {
-  //       if (status) {
-  //         setJobs([...jobs, ...data?.data]);
-  //         setPage(data?.meta?.currentPage);
-  //         setTotalPages(data?.meta?.totalPages);
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     })
-  //     .finally(() => {
-  //       setLoading(false);
-  //     });
-  // };
+
+  useEffect(() => {
+    if (user?.skills?.length > 0) {
+      const recommended = getRecommendedJobs(
+        user.careerMatch, // Can be undefined
+        user.skills,
+        jobData
+      );
+      setRecommendedJobs(recommended);
+    }
+  }, [user?.careerMatch, user?.skills]);
+
 
   return (
     <>
-      {jobs?.map((item: any, index) => (
-        <Fragment key={item?.id}>
-          <div className="md:mb-4 mb-3">
-            <JobCard
-              id={item.id}
-              icon={item?.company?.company_asset?.icon}
-              timeStamp={item.created_at}
-              title={item.title}
-              company={item.company?.title}
-              desc={item.position_overview}
-              onButtonClick={() => {
-                if (!isLoggedIn) {
-                  router.push(routeConstant.login.path);
-                } 
-              }}
-            />
-          </div>
-          {/* {(index + 1) % 3 === 0 && <JobsCTA index={(index + 1) / 3} />} */}
-        </Fragment>
-      ))}
-      {page < totalPages ? (
-        <CustomButton
-          title="+ Show More Results"
-          containerStyle={classNames(styles.buttonContainer)}
-          onClick={() => {
-           
-          }}
-          loading={loading}
-          disabled={loading}
-        />
-      ) : null}
+
+      {recommendedJobs.length > 0 ? (
+        recommendedJobs.map((job: any, index: number) => (
+          <Fragment key={job?.id}>
+            <div className="md:mb-4 mb-3">
+              <JobCard
+                id={job.id}
+                icon={job?.company?.company_asset?.icon || Images.DefaultAvatar}
+                timeStamp={job.created_at}
+                title={job.title}
+                company={job.company?.title}
+                desc={job.position_overview}
+                onButtonClick={() => {
+                  if (!isLoggedIn) {
+                    router.push(routeConstant.login.path);
+                  }
+                }}
+                matchPercentage={job.matchPercentage}
+                requiredSkills={job.requiredSkills}
+                userSkills={user?.skills || []}
+              />
+            </div>
+            {/* {(index + 1) % 3 === 0 && <JobsCTA />} */}
+          </Fragment>
+        ))
+      ) : (
+        <div className="text-center py-8">
+          <p className="text-gray-600 mb-4">
+            No jobs found matching your skills
+          </p>
+          <CustomButton
+            title="Take Skills Assessment"
+            containerStyle="mt-2 bg-blue"
+            onClick={() => router.push('/test')}
+          />
+        </div>
+      )}
     </>
   );
 };

@@ -40,8 +40,8 @@ interface Question {
     category: "frontend",
     question: "Which frontend framework do you prefer for complex applications?",
     options: [
-      { id: 'A', text: 'React', tags: ['react', 'next.js', 'ui'], weight: 4 },
-      { id: 'B', text: 'Angular', tags: ['angular', 'typescript', 'enterprise'], weight: 4 },
+      { id: 'A', text: 'React', tags: ['react', 'next.js'], weight: 4 },
+      { id: 'B', text: 'Angular', tags: ['typescript', 'enterprise'], weight: 4 },
       { id: 'C', text: 'Vue.js', tags: ['vue', 'progressive'], weight: 3 },
       { id: 'D', text: 'Svelte', tags: ['svelte', 'compiler'], weight: 3 },
       { id: 'E', text: 'None of these', tags: ['generalist'], weight: 1 }
@@ -203,11 +203,7 @@ const seed = async () => {
 
     console.log('✅ Connected to MongoDB Atlas');
 
-    // Verify connection is ready
-    // await mongoose.connection.db.admin().ping();
-    // console.log('✅ Database ping successful');
-
-    // Clear existing data with timeout handling
+    
     console.log('⏳ Clearing existing questions...');
     await Question.deleteMany({}).maxTimeMS(30000); // 30s timeout
     console.log('✅ Existing questions cleared');

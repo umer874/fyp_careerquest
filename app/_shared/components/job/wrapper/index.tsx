@@ -16,8 +16,8 @@ function JobsWrapper({ response, noPadding }: JobsWrapperProps) {
         <JobsCTA />
         <div className={classNames(styles.jobsContainer)}>
           <JobsListing
-            data={response?.data?.data}
-            meta={response?.data?.meta}
+            //data={response?.data?.data}
+            //meta={response?.data?.meta}
           />
         </div>
       </div>

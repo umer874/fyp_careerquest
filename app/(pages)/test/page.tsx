@@ -330,6 +330,7 @@ const Test = () => {
                         questionId: opt.questionId,
                         optionId: opt.selectedOptionId
                     })),
+                     
                 });
 
                 dispatch(updateUserProfile({ has_taken_test: true }));

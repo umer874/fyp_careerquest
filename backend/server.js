@@ -9,29 +9,44 @@ const jobRoutes = require('./routes/jobRoutes');
 const app = express();
 
 // Enable CORS for Express
-app.use(cors({
-  origin: "http://localhost:3000",
-  credentials: true,
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
+const allowedOrigins = [
+  "https://careerquestx.vercel.app",
+  "http://localhost:3000"
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests with no origin (e.g., mobile apps, curl)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
 
 app.use(express.json());
 
-const userRoutes= require('./routes/userRoutes');
-app.use('/api/',userRoutes);
-
+const userRoutes = require('./routes/userRoutes');
+app.use('/api/', userRoutes);
 
 app.use('/api/jobs', jobRoutes);
 
-
-const portfolioRoutes=require('./routes/portfolio');
+const portfolioRoutes = require('./routes/portfolio');
 app.use('/api/portfolios', portfolioRoutes);
 
 // Routes
 const authRoutes = require('./routes/auth.routes');
 app.use('/api/', authRoutes);
 
-const assessmentRoutes=require('./routes/assessment.routes');
+const assessmentRoutes = require('./routes/assessment.routes');
 app.use('/api/assessment', assessmentRoutes);
 
 // Create HTTP server
@@ -40,8 +55,9 @@ const server = http.createServer(app);
 // Configure Socket.IO
 const io = new Server(server, {
   cors: {
-    origin: "*", // Allow all origins (update in production)
+    origin: "https://careerquestx.vercel.app", // Allow frontend URL only
     methods: ["GET", "POST"],
+    credentials: true, // Allows sending cookies with Socket.IO
   },
 });
 
